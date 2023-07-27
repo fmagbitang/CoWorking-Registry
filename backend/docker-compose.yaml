@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  nodejs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodejs-app
+    ports:
+      - "3000:3000"
+    environment:
+      - SECRET_KEY=dcHm113zL4lwUaKQ772/cQkdMc5xVkKSUs5KRsC++CONwxSs0ZWGVSNxF40dzQvV8A7IunoHW6RZJHjJEEndjxSVsmJ8TYPCbkSfSEzNzpM8MEKozA+uhpBsaEIQ/wccNWdLro4BltLqrL7rhZYE9ez6G8wbnBCbrtZpCjPW1d75noNLjXyQ476MojWsLfTaDmGN/bUHOQZcdSMODoa0uqwYo+vXtQrnQMdsOD6X2Bju1D1pGpnO9tG6hF5K0qOFGkcntZknnOv3YIRbfBIcsIYf76bDbVJsC9hF6EH+kJIMcQ0CKeiXfADLKReTUJ8LtH4Ncj6YifyD609yWofpqQ==
+    networks:
+      - custom
+
+networks:
+  custom:
+    external: true
