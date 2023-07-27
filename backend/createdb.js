@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 // Create a new database (if it doesn't exist) or open an existing one
-const db = new sqlite3.Database('./your_sqlite_db_file.db');
+const db = new sqlite3.Database('./coworking_registry.db');
 
 // Run the SQL query to create the 'users' table
 db.run(`
@@ -10,7 +10,8 @@ db.run(`
     name TEXT NOT NULL,
     email TEXT NOT NULL,
     mobile TEXT NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT coworker
   )
 `, (err) => {
   if (err) {
