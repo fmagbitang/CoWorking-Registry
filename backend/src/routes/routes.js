@@ -41,7 +41,10 @@ router.put('/users/:id', userController.updateUser);
 router.delete('/users/:id', userController.deleteUser);
 
 // Route for workspace
-router.post('/workspace/', workspaceController.createWorkspace);
+// create/add workspace
+router.post('/workspace/create', workspaceController.createWorkspace);
+// get all workspaces
+router.post('/workspace/', workspaceController.getAllWorkspace);
 
 // Protected route for getting user data
 router.get('/', (req, res) => {
