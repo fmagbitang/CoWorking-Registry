@@ -20,6 +20,18 @@ db.run(`
     console.log('Users table created (or already exists)');
   }
 });
+db.run(`
+  CREATE TABLE IF NOT EXISTS workspace (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+  )
+`, (err) => {
+  if (err) {
+    console.error('Error creating the workspace table:', err.message);
+  } else {
+    console.log('Users table created (or already exists)');
+  }
+});
 
 // Close the database connection after creating the table
 db.close((err) => {
