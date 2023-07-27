@@ -1,4 +1,4 @@
-const User = require('../models/workspaceModel');
+const Workspace = require('../models/workspaceModel');
 
 const timeElapsed = Date.now(); // get the date now
 const today = new Date(timeElapsed); // formated a date today.
@@ -18,6 +18,17 @@ const createWorkspace = async (req, res, next) => {
   }
 };
 
+// Get all users
+const getAllWorkspace = async (req, res, next) => {
+    try {
+      const workspaces = await Workspace.findAll();
+      res.status(200).json(workspaces);
+    } catch (err) {
+      next(err);
+    }
+  };
+
 module.exports =  {
   createWorkspace,
+  getAllWorkspace,
 }
