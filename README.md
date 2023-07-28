@@ -10,16 +10,18 @@ crud/
   ├── Dockerfile
   ├── docker-compose.yaml
   ├── createdb.js
-  ├── crud.db
+  ├── coworking_registry.db
   ├── src/
   │    ├── app.js
   │    ├── routes/
-  │    │    ├── userRoutes.js
+  │    │    ├── routes.js
   │    ├── controllers/
   │    │    ├── authController.js
   │    │    ├── userController.js
+  │    │    ├── workspaceController.js
   │    ├── models/
   │    │    ├── userModel.js
+  │    │    ├── workspaceModel.js
   │    ├── config/
   │    │    ├── dbConfig.js
 ```
@@ -27,14 +29,16 @@ crud/
 ## API Endpoints
 
 
-| Methods     | Urls             | Description             |
-| ----------- | -----------      | -----------             |
-| POST        | api/signup       | Signup a User           |
-| POST        | api/login        | Login a User            |
-| GET         | api/users/       | Get all Users           |
-| GET         | api/users/id     | Get specific User       |
-| PUT         | api/users/id     | Update a User           |
-| DELETE      | api/users/id     | Delete an existing user |
+| Methods     | Urls                 | Description             |
+| ----------- | -----------          | -----------             |
+| POST        | api/signup           | Signup a User           |
+| POST        | api/login            | Login a User            |
+| GET         | api/users/           | Get all Users           |
+| GET         | api/users/id         | Get specific User       |
+| PUT         | api/users/id         | Update a User           |
+| DELETE      | api/users/id         | Delete an existing user |
+| POST        | api/workspace/create | Create a workspace      |
+| GET         | api/workspace/       | Get all workspace       |
 
 
 **1. Signup a User**
@@ -233,6 +237,75 @@ crud/
  **response**
 
  ### The response will be status code 204 No Content.
+
+
+**7. Create Workspace**
+
+ **request params**
+ ```javascript
+    var settings = {
+        "url": "http://localhost:3000/api/workspace/create",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDUwMTUzMiwiZXhwIjoxNjkwNTA1MTMyfQ.UE7XO9B-D4jGm02NUlC7P6wmpmkfah8qDI2_6RGWnNs"
+        },
+        "data": JSON.stringify({
+            "name": "Study pod 21"
+        }),
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+ ```
+
+ **response**
+
+ ```json
+ {
+    "id": 1,
+    "name": "Study pod 21",
+    "created_at": "2023-07-27T23:44:08.931Z",
+    "updated_at": "2023-07-27T23:44:08.931Z"
+}
+```
+
+**8. Get all workspace**
+
+ **request params**
+ ```javascript
+    var settings = {
+        "url": "http://localhost:3000/api/workspace/",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDUwMTUzMiwiZXhwIjoxNjkwNTA1MTMyfQ.UE7XO9B-D4jGm02NUlC7P6wmpmkfah8qDI2_6RGWnNs"
+        },
+    };
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+ ```
+
+ **response**
+
+ ```json
+ {
+    "id": 1,
+    "name": "Study pod 21",
+    "created_at": "2023-07-27T23:44:08.931Z",
+    "updated_at": "2023-07-27T23:44:08.931Z"
+},
+{
+    "id": 2,
+    "name": "Study pod 22",
+    "created_at": "2023-07-27T23:44:08.931Z",
+    "updated_at": "2023-07-27T23:44:08.931Z"
+}
+```
 
 
 </details>

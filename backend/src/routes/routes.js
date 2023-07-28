@@ -1,7 +1,8 @@
 const express = require('express');
 const jwt = require('jsonwebtoken'); // Import jsonwebtoken library
 const router = express.Router();
-const userController = require('../controllers/userController');
+const userController = require('../controllers/userController');  //  user controller
+const workspaceController = require('../controllers/workspaceController');  //  workspace controller
 const { login } = require('../controllers/authController');
 
 // Routes for create user 
@@ -39,6 +40,11 @@ router.put('/users/:id', userController.updateUser);
 // Route for delete user
 router.delete('/users/:id', userController.deleteUser);
 
+// Route for workspace
+// create/add workspace
+router.post('/workspace/create', workspaceController.createWorkspace);
+// get all workspaces
+router.post('/workspace/', workspaceController.getAllWorkspace);
 
 // Protected route for getting user data
 router.get('/', (req, res) => {
