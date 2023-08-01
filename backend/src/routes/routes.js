@@ -3,12 +3,20 @@ const jwt = require('jsonwebtoken'); // Import jsonwebtoken library
 const router = express.Router();
 const userController = require('../controllers/userController');  //  user controller
 const workspaceController = require('../controllers/workspaceController');  //  workspace controller
+const propertyController = require('../controllers/propertyController');  //  property controller
+const leaseController = require('../controllers/leaseController');  //  lease controller
 const { login } = require('../controllers/authController');
 
 // Routes for create user 
 router.post('/signup', userController.createUser);
+// get all workspaces
+router.get('/workspace/', workspaceController.getAllWorkspace);
+// get all property
+router.get('/property/', propertyController.getAllProperty);
+
 // Route for user login
 router.post('/login', login);
+
 
 // Middleware for protecting routes
 const authenticateToken = (req, res, next) => {
@@ -43,8 +51,16 @@ router.delete('/users/:id', userController.deleteUser);
 // Route for workspace
 // create/add workspace
 router.post('/workspace/create', workspaceController.createWorkspace);
-// get all workspaces
-router.post('/workspace/', workspaceController.getAllWorkspace);
+// update workspace
+router.post('/workspace/update/:id', workspaceController.updateWorkspace);
+// Route for property
+// create/add property
+router.post('/property/create', propertyController.createProperty);
+// Route for lease
+// create/add lease
+router.post('/lease/create', leaseController.createLease);
+// get all lease
+router.post('/lease/', leaseController.getAllLease);
 
 // Protected route for getting user data
 router.get('/', (req, res) => {

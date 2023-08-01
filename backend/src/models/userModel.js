@@ -34,6 +34,22 @@ const User = sequelize.define(
         },
       },
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true, // Add unique constraint to the username field
+      validate: {
+        notNull: { msg: 'Username cannot be null.' },
+        notEmpty: { msg: 'Username cannot be empty.' },
+        isUniqueUsername: async (value) => {
+          // Custom validation to check if the username is unique in the database
+          const existingUser = await User.findOne({ where: { username: value } });
+          if (existingUser) {
+            throw new Error('Username already exists in the database.');
+          }
+        },
+      },
+    },
     mobile: {
       type: DataTypes.STRING,
       allowNull: false,
