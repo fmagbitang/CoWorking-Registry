@@ -4,31 +4,23 @@ const dbConfig = require('../config/dbConfig');
 // Connect to the SQLite database
 const sequelize = dbConfig.connect();
 
-// Define the Workspace model
-const Workspace = sequelize.define(
-  'Workspace',
+// Define the Lease model
+const Lease = sequelize.define(
+  'Lease',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true, // Use auto-incrementing ID
     },
-    name: {
+    lease_term: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    capacity: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.DECIMAL,
       allowNull: true,
-    },
-    photos: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    availability: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+      defaultValue: 0.00
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -48,9 +40,9 @@ const Workspace = sequelize.define(
     },
   },
   {
-    tableName: 'workspace',
+    tableName: 'lease',
     timestamps: false, // Set to true to include timestamps
   }
 );
 
-module.exports = Workspace;
+module.exports = Lease;

@@ -1,15 +1,27 @@
 const jwt = require('jsonwebtoken');
+const { Sequelize } = require('sequelize');
 const User = require('../models/userModel');
 
 const SECRET_KEY = process.env.SECRET_KEY; // Replace with your actual secret key for JWT
 
 const login = async (req, res, next) => {
-  const { email, password } = req.body;
-
   try {
-    const user = await User.findOne({ where: { email } });
+    const { identifier, password } = req.body;
+
+    if (!identifier) {
+      return res.status(400).json({ message: 'Username or email is required.' });
+    }
+
+    // Find the user by checking both username and email
+    const user = await User.findOne({
+      where: Sequelize.or(
+        { username: identifier }, // Check if the identifier matches the username field
+        { email: identifier } // Check if the identifier matches the email field
+      ),
+    });
+
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Invalid username or email.' });
     }
 
     const isPasswordValid = await user.verifyPassword(password);
@@ -18,11 +30,11 @@ const login = async (req, res, next) => {
     }
 
     // Generate and send the JWT token on successful login
-    const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '5h' });
     res.json({ token });
   } catch (err) {
-    console.error('Error during login:', err.message);
-    next(err);
+    console.error('Error logging in:', err);
+    res.status(500).json({ message: 'An error occurred while logging in.' });
   }
 };
 

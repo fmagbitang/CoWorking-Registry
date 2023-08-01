@@ -29,12 +29,22 @@ const getUserById = async (req, res, next) => {
 
 // Create a new 
 const createUser = async (req, res, next) => {
-  const { name, email, mobile, password } = req.body;
+  const { name, email, username, role, mobile, password } = req.body;
   try {
     created_at = today.toISOString();
     updated_at = today.toISOString();
+    const userRole = role || 'coworker';
 
-    const user = await User.create({ name, email, mobile, password, created_at, updated_at });
+    const user = await User.create({ 
+      name,
+      email,
+      username,
+      mobile,
+      role: userRole,
+      password,
+      created_at, 
+      updated_at
+    });
     res.status(201).json(user);
   } catch (err) {
     next(err);
@@ -45,7 +55,7 @@ const createUser = async (req, res, next) => {
 // Update a user by ID
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, mobile, password } = req.body;
+  const { name, username, role, email, mobile, password } = req.body;
   try {
     const user = await User.findByPk(id);
     if (!user) {
@@ -53,7 +63,15 @@ const updateUser = async (req, res, next) => {
     }
 
     user.name = name;
-    user.email = email;
+    if (email){
+      user.email = email;
+    }
+    if (username){
+      user.username = username;
+    }
+    if (role){
+      user.role = role;
+    }
     user.mobile = mobile;
     user.password = password;
     user.updated_at = today.toISOString();
