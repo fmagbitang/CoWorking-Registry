@@ -1,10 +1,11 @@
 const express = require('express');
-const jwt = require('jsonwebtoken'); // Import jsonwebtoken library
 const router = express.Router();
 const userController = require('../controllers/userController');  //  user controller
 const workspaceController = require('../controllers/workspaceController');  //  workspace controller
 const propertyController = require('../controllers/propertyController');  //  property controller
 const leaseController = require('../controllers/leaseController');  //  lease controller
+const authenticateToken = require('../middleware/authenticateToken'); // import authenticateToken in middleware
+const isOwner = require('../middleware/isOwner'); // import isOwner role in middleware
 const { login } = require('../controllers/authController');
 
 // Routes for create user 
@@ -18,23 +19,7 @@ router.get('/property/', propertyController.getAllProperty);
 router.post('/login', login);
 
 
-// Middleware for protecting routes
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) {
-    return res.status(401).json({ message: 'Missing token. Please log in.' });
-  }
-  console.log(process.env.SECRET_KEY);
-  jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-    if (err) {
-      return res.status(401).json({ message: 'Invalid token. Please log in again.' });
-    }
-    req.user = user;
-    next();
-  });
-};
 
 // Protected routes
 router.use(authenticateToken);
@@ -50,17 +35,23 @@ router.delete('/users/:id', userController.deleteUser);
 
 // Route for workspace
 // create/add workspace
-router.post('/workspace/create', workspaceController.createWorkspace);
+router.post('/workspace/create', isOwner, workspaceController.createWorkspace);
 // update workspace
-router.post('/workspace/update/:id', workspaceController.updateWorkspace);
+router.put('/workspace/update/:id', workspaceController.updateWorkspace);
+// get workspace with user and property by ID
+router.get('/workspace/:id', workspaceController.getWorkspaceByPropertyId);
 // Route for property
 // create/add property
-router.post('/property/create', propertyController.createProperty);
+router.post('/property/create', isOwner, propertyController.createProperty);
+// list all property of owner
+router.post('/property/:id', propertyController.getAllPropertyByOwner);
 // Route for lease
 // create/add lease
 router.post('/lease/create', leaseController.createLease);
 // get all lease
-router.post('/lease/', leaseController.getAllLease);
+router.get('/lease/', leaseController.getAllLease);
+// update a lease
+router.post('/lease/:id', leaseController.updateLease);
 
 // Protected route for getting user data
 router.get('/', (req, res) => {

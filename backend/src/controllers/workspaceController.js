@@ -1,4 +1,6 @@
 const Workspace = require('../models/workspaceModel');
+const Property = require('../models/propertyModel');
+const User = require('../models/userModel');
 
 const timeElapsed = Date.now(); // get the date now
 const today = new Date(timeElapsed); // formated a date today.
@@ -37,6 +39,35 @@ const getAllWorkspace = async (req, res, next) => {
   }
 };
 
+Workspace.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Workspace, { foreignKey: 'user_id' });
+
+Workspace.belongsTo(Property, { foreignKey: 'property_id' });
+Property.hasMany(Workspace, { foreignKey: 'property_id' });
+
+// Get a workspace and property by ID
+const getWorkspaceByPropertyId = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const workspacebyPropertyID = await Workspace.findByPk(id, {
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Property,
+        },
+      ],
+    });
+    if (!workspacebyPropertyID) {
+      return res.status(404).json({ message: 'Property ID in workspace not found' });
+    }
+    res.status(200).json(workspacebyPropertyID);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // update workspace availability// Update a user by ID
 const updateWorkspace = async (req, res, next) => {
   const { id } = req.params;
@@ -70,4 +101,5 @@ module.exports =  {
   createWorkspace,
   getAllWorkspace,
   updateWorkspace,
+  getWorkspaceByPropertyId,
 }
