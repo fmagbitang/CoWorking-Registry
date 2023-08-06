@@ -8,6 +8,7 @@ const today = new Date(timeElapsed); // formated a date today.
 // Create a new workspace
 const createWorkspace = async (req, res, next) => {
   const { name, photos, capacity, availability, user_id, property_id } = req.body;
+  const userId = req.user.userId;
   try {
     created_at = today.toISOString();
     updated_at = today.toISOString();
@@ -17,7 +18,7 @@ const createWorkspace = async (req, res, next) => {
         capacity,
         photos,
         availability,
-        user_id,
+        user_id: userId,
         property_id,
         created_at,
         updated_at
@@ -68,7 +69,7 @@ const getWorkspaceByPropertyId = async (req, res, next) => {
   }
 };
 
-// update workspace availability// Update a user by ID
+// update workspace availability
 const updateWorkspace = async (req, res, next) => {
   const { id } = req.params;
   const { name, capacity, photos, availability, user_id, property_id } = req.body;
@@ -77,21 +78,25 @@ const updateWorkspace = async (req, res, next) => {
     if (!workspace) {
       return res.status(404).json({ message: 'Workspace not found' });
     }
-    if (name){
-      workspace.name = name;
+    if (workspace.availability === 0) {
+      return res.status(200).json({ message: 'Workspace is not available for rent.' });
+    } else {
+      if (name){
+        workspace.name = name;
+      }
+      if (capacity){
+        workspace.capacity = capacity;
+      }
+      if (photos){
+        workspace.photos = photos;
+      }
+      workspace.availability = availability;
+      workspace.user_id = user_id;
+      workspace.property_id = property_id;
+      workspace.updated_at = today.toISOString();
+      await workspace.save();
+      res.status(200).json(workspace);
     }
-    if (capacity){
-      workspace.capacity = capacity;
-    }
-    if (photos){
-      workspace.photos = photos;
-    }
-    workspace.availability = availability;
-    workspace.user_id = user_id;
-    workspace.property_id = property_id;
-    workspace.updated_at = today.toISOString();
-    await workspace.save();
-    res.status(200).json(workspace);
   } catch (err) {
     next(err);
   }
