@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
 const User = require('../models/userModel');
-
+require('dotenv').config();
 const SECRET_KEY = process.env.SECRET_KEY; // Replace with your actual secret key for JWT
 
 const login = async (req, res, next) => {
@@ -30,7 +30,11 @@ const login = async (req, res, next) => {
     }
 
     // Generate and send the JWT token on successful login
-    const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '5h' });
+    const token = jwt.sign({ 
+      userId: user.id,
+      UserOrEmail: identifier,
+      role: user.role 
+    }, SECRET_KEY, { expiresIn: '5h' });
     res.json({ token });
   } catch (err) {
     console.error('Error logging in:', err);
