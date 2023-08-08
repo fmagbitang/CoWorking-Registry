@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/routes');
+const indexRoutes = require('./routes/index');
 
 // Load environment variables from .env file
 require('dotenv').config();
@@ -11,7 +12,9 @@ const app = express();
 app.use(bodyParser.json());
 
 // Routes
+app.use('/', indexRoutes);
 app.use('/api', userRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

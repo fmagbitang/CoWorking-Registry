@@ -18,7 +18,7 @@ router.get('/property/', propertyController.getAllProperty);
 // Route for user login
 router.post('/login', login);
 
-// Protected routes
+// Protected routes w
 router.use(authenticateToken);
 
 // Routes for get all users
