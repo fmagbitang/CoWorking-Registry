@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/routes');
-// const indexRoutes = require('./routes/index');
 const cors = require('cors');
 // Load environment variables from .env file
 require('dotenv').config();
@@ -21,7 +20,6 @@ const corsOptions = {
 app.use(cors(corsOptions)); 
 
 // Routes
-// app.use('/', indexRoutes);
 app.use('/api', userRoutes);
 
 

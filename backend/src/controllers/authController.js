@@ -42,6 +42,37 @@ const login = async (req, res, next) => {
   }
 };
 
+async function checkLogin(token) {
+  try {
+    // Decode JWT payload
+    const jwtParts = token.split('.');
+    const base64Payload = jwtParts[1];
+    const decodedPayload = atob(base64Payload);
+    const payload = JSON.parse(decodedPayload);
+
+    // Check if the token is still valid (optional)
+    const currentTime = Math.floor(Date.now() / 1000);
+    const tokenExpiry = payload.exp; // Expiry time from the payload
+
+    if (currentTime < tokenExpiry) {
+      return {
+        loggedIn: true,
+        userId: payload.sub,
+        username: payload.name
+      };
+    } else {
+      return {
+        loggedIn: false
+      };
+    }
+  } catch (error) {
+    return {
+      loggedIn: false
+    };
+  }
+}
+
 module.exports = {
   login,
+  checkLogin,
 };
