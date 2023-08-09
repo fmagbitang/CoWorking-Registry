@@ -6,7 +6,7 @@ const propertyController = require('../controllers/propertyController');  //  pr
 const leaseController = require('../controllers/leaseController');  //  lease controller
 const authenticateToken = require('../middleware/authenticateToken'); // import authenticateToken in middleware
 const isOwner = require('../middleware/isOwner'); // import isOwner role in middleware
-const { login } = require('../controllers/authController');
+const { login, checkLogin } = require('../controllers/authController');
 
 // Routes for create user 
 router.post('/signup', userController.createUser);
@@ -17,6 +17,27 @@ router.get('/property/', propertyController.getAllProperty);
 
 // Route for user login
 router.post('/login', login);
+
+// verify token of user
+router.get('/verify', async (req, res) => {
+  const jwtToken = req.headers.authorization; // Extract the JWT token from the headers
+
+  try {
+    const result = await checkLogin(jwtToken);
+
+    if (result.loggedIn) {
+      console.log('User is still logged in');
+      res.json({ message: 'User is still logged in.' });
+    } else {
+      console.log('User session has expired');
+      res.json({ message: 'User session has expired.' });
+    }
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.json({ message: error.message });
+  }
+
+});
 
 // Protected routes w
 router.use(authenticateToken);
