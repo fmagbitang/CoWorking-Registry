@@ -72,7 +72,23 @@ async function checkLogin(token) {
   }
 }
 
+const logout = async (req, res) => {
+    try {
+        // Assuming you are using JWT for authentication
+        // Clear the token from the client-side (e.g., local storage)
+        res.clearCookie('token'); // Clear the token cookie
+
+        // Send a response indicating successful logout
+        res.json({ message: 'Logout successful' });
+    } catch (error) {
+        // Handle any errors that might occur during logout
+        res.status(500).json({ error: 'An error occurred during logout' });
+    }
+};
+
+
 module.exports = {
   login,
   checkLogin,
+  logout,
 };

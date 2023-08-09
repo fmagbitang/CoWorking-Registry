@@ -1,327 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTML Card with Login Modal and Navigation Bar</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <title>HTML Card with Login Modal and Navigation Bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-light">
-    <div class="container" >
-        <a href="#" class="navbar-brand"> 
-            <img src="/public/img/facebooklogo.png" alt="logo" width="30" height="24" class="d-inline-block align-top">
-        Co-Working Registry
-        </a>
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-label="Expand Navagation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="nav">
-            <ul class="navbar-nav text-end ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link login-btn" data-bs-toggle="modal" data-bs-target="#logIn">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signUp">Sign-up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
-                </li>
-            </ul>
-        </div>   
-    </div>
-</nav>
-
-<header>
-    <div class="container">
-        <h1 class="text-center">Workspace for Everyone</h1>
-    </div>
-</header>
-
-
-<main>
-
-<!-- Cards Landing Page Structre -->
-    <div class="container">
-        <div class="row row-cols-4 gy-4" id="cardContainer">
-            <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-               <div class="card">
-                <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                <div class="card-body">
-                    <h2 class="card-title">Workspace Name</h2>
-                    <span class="card-subtitle">332 Covile Drive</span>
-                    <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                </div>
-               </div>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="/public/img/facebooklogo.png" alt="logo" width="30" height="24"
+                    class="d-inline-block align-top">
+                Co-Working Registry
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+                aria-label="Expand Navagation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav text-end ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link login-btn" data-bs-toggle="modal" data-bs-target="#logIn">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signUp">Sign-up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div>
-             <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div><div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                <div class="card">
-                 <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                 <div class="card-body">
-                     <h2 class="card-title">Workspace Name</h2>
-                     <span class="card-subtitle">332 Covile Drive</span>
-                     <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque itaque, deleniti!</div>
-                 </div>
-                </div>
-             </div>
         </div>
-    </div>
-    
+    </nav>
 
-<!-- Modal for Properties -->
-    <div id="property-modals">
-    <!-- Modal Structure for Properties -->
+    <header>
+        <div class="container">
+            <h1 class="text-center">Workspace for Everyone</h1>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- Cards Landing Page Structre -->
+        <div class="container">
+            <div class="row row-cols-4 gy-4" id="cardContainer">
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal for Properties -->
+        <div id="property-modals">
+            <!-- Modal Structure for Properties -->
+            <div class="container">
+                <div class="modal fade" id="modal">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1>Workspace Name</h1>
+                                <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="/img/coworking.jpg" alt="Image" style="display: flex; margin: 30px 60px;">
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam,
+                                    doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse
+                                    magnam eveniet totam earum dolores libero eos accusamus eius quidem?
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam,
+                                    doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse
+                                    magnam eveniet totam earum dolores libero eos accusamus eius quidem?
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam,
+                                    doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse
+                                    magnam eveniet totam earum dolores libero eos accusamus eius quidem?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary">Book</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer class="footer bg-dark text-light py-3">
+
+        <div class="container text-center">
+            <p>&copy; Co-working Registry. All rights reserved.</p>
+        </div>
+
+    </footer>
+
+
+    <!-- Modal For Login -->
     <div class="container">
-        <div class="modal fade" id="modal">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal fade" id="logIn">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 >Workspace Name</h1>
-                        <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#modal"></button>
+                        <h1 class="modal-title">Log-in</h1>
+                        <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#logIn"></button>
                     </div>
                     <div class="modal-body">
-                        <img src="/img/coworking.jpg" alt="Image" style="display: flex; margin: 30px 60px;">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam, doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse magnam eveniet totam earum dolores libero eos accusamus eius quidem?
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam, doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse magnam eveniet totam earum dolores libero eos accusamus eius quidem?
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam, doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse magnam eveniet totam earum dolores libero eos accusamus eius quidem?
-                        </p>
+                        <form novalidate id="loginForm">
+                            <div class="form-floating">
+                                <input type="text" id="identifier" name="identifier" required class="form-control">
+                                <label for="identifier" class="form-label">Email or Username:</label>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input type="password" id="password" name="password" required class="form-control">
+                                <label for="password" class="form-label">Password:</label>
+                            </div>
+
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-sm float-end">Login</button>
+                        </form>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary">Book</button>
+                        <p>Don't have an account? <a href="#" id="switchToSignUp">Sign up</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Sign Up -->
+    <div class="container">
+        <div class="modal fade" id="signUp">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Sign-up</h2>
+                        <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form novalidate>
+                            <div class="form-floating">
+                                <input type="text" id="fullName" placeholder="John Doe" class="form-control" required>
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <div class="invalid-feedback">Invalid Name</div>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input type="text" id="username" placeholder="John234" class="form-control" required>
+                                <label for="username" class="form-label">Username</label>
+                                <div class="invalid-feedback">Enter a valid Username</div>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input type="email" id="email" placeholder="example@email.com" class="form-control"
+                                    required>
+                                <label for="email" class="form-label">Email</label>
+                                <div class="invalid-feedback">Invalid Email (eg. example@email.com) </div>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                    placeholder="888-888-8888" class="form-control" required>
+                                <label for="phone">Phone Number</label>
+                                <div class="invalid-feedback">Invalid Phone Number (eg: 888-888-8888)</div>
+                            </div>
+                            <br>
+                            <select name="role" id="role" class="form-select">
+                                <option value="role" disabled selected>Account Type</option>
+                                <option value="role">Owner</option>
+                                <option value="role">User</option>
+                            </select>
+                            <br>
+
+                            <button class="btn btn-primary btn-sm float-end">Sign-Up</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>Want to login? <a href="#" id="switchToLogin">Login</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
+    <!-- Modal for Contact Us -->
+    <div class="container">
+        <div class="modal fade" id="contactUs">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Contact Us</h1>
+                        <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#contactUs"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="contact"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto esse eos
+                            architecto illo ullam quidem at voluptates tempore aspernatur natus magnam vero molestiae
+                            nisi rerum nesciunt repellendus, quo quam laboriosam.</div>
+                    </div>
+                    <div class="modal-footer">
 
-</main>
-
-<footer class="footer bg-dark text-light py-3">
-
-    <div class="container text-center">
-        <p>&copy; Co-working Registry. All rights reserved.</p>
-    </div>
-   
-</footer>
-
-
-<!-- Modal For Login -->
-<div class="container">
-    <div class="modal fade" id="logIn">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title">Log-in</h1>
-                    <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#logIn"></button>
-                </div>
-                <div class="modal-body">
-                    <form novalidate id="loginForm">
-                        <div class="form-floating">
-                            <input type="text" id="identifier" name="identifier" required class="form-control">
-                            <label for="identifier" class="form-label">Email or Username:</label>
-                        </div>
-                        <br>
-                        <div class="form-floating">
-                            <input type="password" id="password" name="password" required class="form-control">
-                            <label for="password" class="form-label">Password:</label>
-                        </div>
-
-                        <br>
-                        <button type="submit" class="btn btn-primary btn-sm float-end">Login</button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for Sign Up -->
-<div class="container">
-    <div class="modal fade" id="signUp">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">Sign-up</h2>
-                    <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
-                </div>
-                <div class="modal-body">
-                    <form novalidate>
-                        <div class="form-floating">
-                            <input type="text" id="fullName" placeholder="John Doe" class="form-control" required>
-                            <label for="fullName" class="form-label">Full Name</label>
-                            <div class="invalid-feedback">Invalid Name</div>
-                        </div>
-                        <br>
-                        <div class="form-floating">
-                            <input type="text" id="username" placeholder="John234" class="form-control" required>
-                            <label for="username" class="form-label">Username</label>
-                            <div class="invalid-feedback">Enter a valid Username</div>
-                        </div>
-                        <br>
-                        <div class="form-floating">
-                            <input type="email" id="email" placeholder="example@email.com" class="form-control" required>
-                            <label for="email" class="form-label">Email</label>
-                            <div class="invalid-feedback">Invalid Email (eg. example@email.com) </div>
-                        </div>
-                        <br>
-                        <div class="form-floating">
-                            <input type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="888-888-8888" class="form-control" required>
-                            <label for="phone" >Phone Number</label>
-                            <div class="invalid-feedback">Invalid Phone Number (eg: 888-888-8888)</div>
-                        </div>
-                        <br>
-                        <select name="role" id="role" class="form-select">
-                            <option value="role" disabled selected>Account Type</option>
-                            <option value="role">Owner</option>
-                            <option value="role">User</option>
-                        </select>
-                        <br>
-
-                        <button class="btn btn-primary btn-sm float-end">Sign-Up</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Modal for Contact Us -->
-<div class="container">
-    <div class="modal fade" id="contactUs">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1>Contact Us</h1>
-                    <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#contactUs"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="contact"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto esse eos architecto illo ullam quidem at voluptates tempore aspernatur natus magnam vero molestiae nisi rerum nesciunt repellendus, quo quam laboriosam.</div>
-                </div>
-                <div class="modal-footer">
-
-                </div>
-            </div>
-        </div>
-    </div>  
-</div>
 
 
-<!-- Handle Errors in Forms -->
-<script>
-    const forms = document.querySelectorAll("form");
-
-    forms.forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-                event.preventDefault();
+    <!-- script for checking user if logged in -->
+    <script>
+        async function checkLoggedIn() {
+            const token = localStorage.getItem('token'); // Get the stored token
+            if (!token) {
+                console.log('User is not logged in');
+                $('#logIn').modal('show'); // Show the login modal
+                return;
             }
-            form.classList.add('was-validated');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/verify', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const verificationData = await response.json();
+                    console.log('User is logged in:', verificationData);
+                } else {
+                    console.log('User verification failed:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error verifying user:', error);
+            }
+        }
+
+        checkLoggedIn();
+    </script>
+
+    <!-- Switch Login to Signup Modal Vice Versa-->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const switchToSignUpLink = document.getElementById("switchToSignUp");
+            const switchToLoginLink = document.getElementById("switchToLogin");
+
+            switchToSignUpLink.addEventListener("click", () => {
+                $('#logIn').modal('hide'); // Close the login modal
+                $('#signUp').modal('show'); // Open the sign-up modal
+            });
+            switchToLoginLink.addEventListener("click", () => {
+                $('#signUp').modal('hide'); // Close the sign-up modal
+                $('#logIn').modal('show'); // Open the login modal
+            });
         });
-    });
-</script>
+    </script>
 
+    <!-- Handle Errors in Forms -->
+    <script>
+        const forms = document.querySelectorAll("form");
 
-<!-- Creates a card for every Workspace -->
-<script>
-    const cardContainer = document.getElementById('cardContainer');
+        forms.forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    </script>
 
-    const createCard = (data) => {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'col';
-        cardElement.setAttribute('data-bs-toggle', 'modal');
-        cardElement.setAttribute('data-bs-target', `#${data.id}modal`);
+    <!-- Creates a card for every Workspace -->
+    <script>
+        const cardContainer = document.getElementById('cardContainer');
 
-        const cardContent = 
-        `<div class="card">
+        const createCard = (data) => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'col';
+            cardElement.setAttribute('data-bs-toggle', 'modal');
+            cardElement.setAttribute('data-bs-target', `#${data.id}modal`);
+
+            const cardContent =
+                `<div class="card">
             <img src="${data.image}" alt="Property image" class="card-img-top">
             <div class="card-body">
                 <h2 class="card-title">${data.name}</h2>
@@ -332,30 +426,30 @@
             </div>
         </div>`;
 
-        cardElement.innerHTML = cardContent;
-        cardContainer.appendChild(cardElement);
-    };
+            cardElement.innerHTML = cardContent;
+            cardContainer.appendChild(cardElement);
+        };
 
-    // Fetch data from the API server
-    fetch('http://143.198.237.154/api/workspace/')
-        .then(response => response.json())
-        .then(data => {
-            // Loop through the data and create cards
-            data.forEach(item => {
-                createCard(item);
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-</script>
-<!-- CREATES MODALS FOR EACH WORKSPACE -->
-<script>
-    const propertyModal = document.getElementById('property-modals');
+        // Fetch data from the API server
+        fetch('http://143.198.237.154/api/workspace/')
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the data and create cards
+                data.forEach(item => {
+                    createCard(item);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+    <!-- CREATES MODALS FOR EACH WORKSPACE -->
+    <script>
+        const propertyModal = document.getElementById('property-modals');
 
-    const createModal = (data) => {
-        const modalElement = document.createElement('div');
-        modalElement.className = "container";
+        const createModal = (data) => {
+            const modalElement = document.createElement('div');
+            modalElement.className = "container";
 
-        const modalContent = `
+            const modalContent = `
         <div class="modal fade" id="${data.id}modal">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
@@ -378,60 +472,75 @@
                 </div>
             </div>`;
 
-        modalElement.innerHTML = modalContent;
-        propertyModal.appendChild(modalElement);
+            modalElement.innerHTML = modalContent;
+            propertyModal.appendChild(modalElement);
 
-         // Fetch data from the API server
-        fetch('http://143.198.237.154/api/workspace/')
-        .then(response => response.json())
-        .then(data => {
-            // Loop through the data and create cards
-            data.forEach(item => {
-                createModal(item);
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    }
-
-</script>
-
-<!-- HANDLES FORM SUBMISSION -->
-<script>
-
-    // Function to handle form submission
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-
-        const form = document.getElementById('loginForm');
-        const formData = new FormData(form);
-
-        try {
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                // Handle login error
-                const errorData = await response.json();
-                console.error('Login Error:', errorData.error);
-                alert('Invalid email or password. Please try again.');
-            } else {
-                // Login successful, get the JWT token from the response
-                const data = await response.json();
-                const token = data.token;
-                // Store the token in local storage or as a cookie
-                localStorage.setItem('token', token);
-                // Redirect the user to the desired page
-                window.location.href = '/dashboard'; // Change to your desired URL
-            }
-        } catch (error) {
-            console.error('Error logging in:', error);
-            alert('An error occurred. Please try again later.');
+            // Fetch data from the API server
+            fetch('http://143.198.237.154/api/workspace/')
+                .then(response => response.json())
+                .then(data => {
+                    // Loop through the data and create cards
+                    data.forEach(item => {
+                        createModal(item);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
         }
-    };
 
-</script>
+    </script>
+
+    <!-- HANDLES FORM SUBMISSION -->
+    <script>
+
+        // Function to handle form submission
+        const handleFormSubmit = async (event) => {
+            event.preventDefault();
+
+            const form = document.getElementById('loginForm');
+            const formData = new FormData(form);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            const requestBody = JSON.stringify({
+                identifier: formData.get('identifier'),
+                password: formData.get('password')
+            });
+
+            const requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBody,
+                redirect: 'follow'
+            };
+
+            try {
+                const response = await fetch("http://localhost:3000/api/login", requestOptions);
+                const result = await response.text();
+                console.log(result);
+
+                if (response.ok) {
+                    const data = await JSON.parse(result);
+                    const token = data.token;
+                    console.log(token);
+                    // Store the token in local storage or as a cookie
+                    localStorage.setItem('token', token);
+                    // Redirect the user to the desired page
+                    console.log('redirecting to / now');
+                    window.location.href = '/'; // Change to your desired URL
+                } else {
+                    alert('Invalid email or password. Please try again.');
+                }
+            } catch (error) {
+                console.log('error', error);
+                alert('An error occurred. Please try again later.');
+            }
+        };
+
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', handleFormSubmit);
+
+    </script>
 </body>
 
 </html>
