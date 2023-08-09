@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const sendEmail = require('../config/mailerConfig');
 
 const timeElapsed = Date.now(); // get the date now
 const today = new Date(timeElapsed); // formated a date today.
@@ -45,6 +46,11 @@ const createUser = async (req, res, next) => {
       created_at, 
       updated_at
     });
+
+    // Send welcome email
+    const welcomeMessage = 'Thank you for registering with our app!';
+    sendEmail(email, 'Welcome to Our App', welcomeMessage);
+
     res.status(201).json(user);
   } catch (err) {
     next(err);

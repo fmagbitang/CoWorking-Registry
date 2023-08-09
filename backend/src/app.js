@@ -1,18 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/routes');
-const indexRoutes = require('./routes/index');
-
+// const indexRoutes = require('./routes/index');
+const cors = require('cors');
 // Load environment variables from .env file
 require('dotenv').config();
 
 const app = express();
-
 // Parse incoming requests with JSON payloads
 app.use(bodyParser.json());
 
+// add cors origin
+app.use(cors());
+const corsOptions = {
+  origin: '*', // Specify the allowed origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify allowed HTTP methods
+  optionsSuccessStatus: 204, // Specify the status code for preflight success
+};
+
+app.use(cors(corsOptions)); 
+
 // Routes
-app.use('/', indexRoutes);
+// app.use('/', indexRoutes);
 app.use('/api', userRoutes);
 
 
