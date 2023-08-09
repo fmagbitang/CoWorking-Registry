@@ -6,7 +6,7 @@ const propertyController = require('../controllers/propertyController');  //  pr
 const leaseController = require('../controllers/leaseController');  //  lease controller
 const authenticateToken = require('../middleware/authenticateToken'); // import authenticateToken in middleware
 const isOwner = require('../middleware/isOwner'); // import isOwner role in middleware
-const { login, checkLogin } = require('../controllers/authController');
+const { login, checkLogin, logout } = require('../controllers/authController');
 
 // Routes for create user 
 router.post('/signup', userController.createUser);
@@ -17,7 +17,7 @@ router.get('/property/', propertyController.getAllProperty);
 
 // Route for user login
 router.post('/login', login);
-
+router.get('/logout', logout);
 // verify token of user
 router.get('/verify', async (req, res) => {
   const jwtToken = req.headers.authorization; // Extract the JWT token from the headers
@@ -38,6 +38,7 @@ router.get('/verify', async (req, res) => {
   }
 
 });
+
 
 // Protected routes w
 router.use(authenticateToken);
