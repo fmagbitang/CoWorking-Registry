@@ -10,6 +10,7 @@ db.run(`
     fname TEXT NOT NULL,
     lname TEXT NOT NULL,
     email TEXT NOT NULL,
+    email_verification BOOL default false,
     username TEXT NOT NULL,
     mobile TEXT,
     password TEXT NOT NULL,

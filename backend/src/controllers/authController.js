@@ -24,6 +24,10 @@ const login = async (req, res, next) => {
       return res.status(401).json({ message: 'Invalid username or email.' });
     }
 
+    if (!user.email_verification){
+      return res.status(401).json({ message: 'Please verify your email.'});
+    }
+
     const isPasswordValid = await user.verifyPassword(password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid email or password' });
@@ -33,7 +37,10 @@ const login = async (req, res, next) => {
     const token = jwt.sign({ 
       userId: user.id,
       UserOrEmail: identifier,
-      role: user.role 
+      role: user.role,
+      fname: user.fname,
+      lname: user.lname,
+      mobile: user.mobile
     }, SECRET_KEY, { expiresIn: '5h' });
     res.json({ token });
   } catch (err) {
@@ -53,6 +60,7 @@ async function checkLogin(token) {
     // Check if the token is still valid (optional)
     const currentTime = Math.floor(Date.now() / 1000);
     const tokenExpiry = payload.exp; // Expiry time from the payload
+    console.log(payload);
 
     if (currentTime < tokenExpiry) {
       return {
