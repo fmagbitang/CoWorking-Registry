@@ -3,29 +3,31 @@ require('dotenv').config();
 const EMAIL = process.env.EMAIL_USERNAME || 'sample@gmail.com';
 const PASS = process.env.EMAIL_PASSWORD || 'mysecretpassword';
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: EMAIL,
-    pass: PASS,
-  },
-});
-
-const sendEmail = (to, subject, text) => {
-  const mailOptions = {
-    from: EMAIL,
-    to,
-    subject,
-    text,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-    } else {
+async function sendEmail(subject, text, toEmail, html) {
+    const transporter = nodemailer.createTransport({
+      host: 'gmail', // Replace with your SMTP server hostname
+      port: 465, // Replace with your SMTP server port
+      secure: true,
+      auth: {
+        user: EMAIL, // Replace with your email
+        pass: PASS, // Replace with your email password or app password
+      },
+    });
+  
+    const mailOptions = {
+      from: EMAIL,
+      to: toEmail,
+      subject: subject,
+      text: text,
+      html: html,
+    };
+  
+    try {
+      const info = await transporter.sendMail(mailOptions);
       console.log('Email sent:', info.response);
+    } catch (error) {
+      console.error('Error sending email:', error);
     }
-  });
-};
-
-module.exports = sendEmail;
+  }
+  
+  module.exports = { sendEmail };

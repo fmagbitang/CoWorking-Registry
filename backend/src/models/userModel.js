@@ -38,6 +38,10 @@ const User = sequelize.define(
         },
       },
     },
+    email_verification: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 0
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -86,12 +90,12 @@ const User = sequelize.define(
         const hashedPassword = await bcrypt.hash(user.password, saltRounds);
         user.password = hashedPassword;
       },
-      beforeUpdate: async (user) => {
-        // Hash the user's password before saving it to the database
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-        user.password = hashedPassword;
-      },
+      // beforeUpdate: async (user) => {
+      //   // Hash the user's password before saving it to the database
+      //   const saltRounds = 10;
+      //   const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+      //   user.password = hashedPassword;
+      // },
     },
   }
 );
