@@ -15,7 +15,11 @@ const User = sequelize.define(
       primaryKey: true,
       autoIncrement: true, // Use auto-incrementing ID
     },
-    name: {
+    fname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
