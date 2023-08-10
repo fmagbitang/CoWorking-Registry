@@ -7,7 +7,8 @@ const db = new sqlite3.Database('./coworking_registry.db');
 db.run(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+    fname TEXT NOT NULL,
+    lname TEXT NOT NULL,
     email TEXT NOT NULL,
     username TEXT NOT NULL,
     mobile TEXT,

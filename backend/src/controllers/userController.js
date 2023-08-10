@@ -30,14 +30,15 @@ const getUserById = async (req, res, next) => {
 
 // Create a new 
 const createUser = async (req, res, next) => {
-  const { name, email, username, role, mobile, password } = req.body;
+  const { fname, lname, email, username, role, mobile, password } = req.body;
   try {
     created_at = today.toISOString();
     updated_at = today.toISOString();
     const userRole = role || 'coworker';
 
     const user = await User.create({ 
-      name,
+      fname,
+      lname,
       email,
       username,
       mobile,
