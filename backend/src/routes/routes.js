@@ -11,6 +11,7 @@ const { login, checkLogin, logout } = require('../controllers/authController');
 // Routes for create user 
 router.post('/signup', userController.createUser);
 router.get('/verify_email/:email', userController.updateEmailVerification);
+router.post('/forgot_passsword', userController.forgotPassword);
 // get all workspaces
 router.get('/workspace/', workspaceController.getAllWorkspace);
 // get all property

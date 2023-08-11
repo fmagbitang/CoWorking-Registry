@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const { Sequelize } = require('sequelize');
 const emailService = require('../config/mailerConfig');
 
 const timeElapsed = Date.now(); // get the date now
@@ -124,6 +125,38 @@ const updateEmailVerification = async (req, res, next) => {
   }
 };
 
+// forgot password
+const forgotPassword = async (req, res, next) => {
+  try {
+    const { identifier, password } = req.body;
+
+    if (!identifier) {
+      return res.status(400).json({ message: 'Username or email is required.' });
+    }
+
+    // Find the user by checking both username and email
+    const user = await User.findOne({
+      where: Sequelize.or(
+        { username: identifier }, // Check if the identifier matches the username field
+        { email: identifier } // Check if the identifier matches the email field
+      ),
+    });
+
+    if (!user){
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    user.update({password: hashedPassword});
+
+    res.status(200).json({ message: 'Password successfully changes.' });
+  } catch (err) {
+    console.error('Error logging in: ', err);
+    res.status(500).json({ message: 'An error occured while loggin in.' });
+  }
+};
+
 // Delete a user by ID
 const deleteUser = async (req, res, next) => {
   const { id } = req.params;
@@ -147,4 +180,5 @@ module.exports = {
   updateUser,
   deleteUser,
   updateEmailVerification,
+  forgotPassword,
 };
