@@ -273,45 +273,78 @@
                         <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
                     </div>
                     <div class="modal-body">
-                        <form novalidate>
+                        <form novalidate id="signUpForm">
                             <div class="form-floating">
-                                <input type="text" id="fullName" placeholder="John Doe" class="form-control" required>
-                                <label for="fullName" class="form-label">Full Name</label>
+                                <input name="fname" type="text" id="fname" placeholder="John" class="form-control" required>
+                                <label for="fname" class="form-label">First Name</label>
                                 <div class="invalid-feedback">Invalid Name</div>
                             </div>
                             <br>
                             <div class="form-floating">
-                                <input type="text" id="username" placeholder="John234" class="form-control" required>
+                                <input name="lname" type="text" id="lname" placeholder="Doe" class="form-control" required>
+                                <label for="lname" class="form-label">Last Name</label>
+                                <div class="invalid-feedback">Invalid Name</div>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input name="username" type="text" id="username" placeholder="John234" class="form-control" required>
                                 <label for="username" class="form-label">Username</label>
                                 <div class="invalid-feedback">Enter a valid Username</div>
                             </div>
                             <br>
                             <div class="form-floating">
-                                <input type="email" id="email" placeholder="example@email.com" class="form-control"
+                                <input name="email" type="email" id="email" placeholder="example@email.com" class="form-control"
                                     required>
                                 <label for="email" class="form-label">Email</label>
                                 <div class="invalid-feedback">Invalid Email (eg. example@email.com) </div>
                             </div>
                             <br>
                             <div class="form-floating">
-                                <input type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                <input name="phone" type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                     placeholder="888-888-8888" class="form-control" required>
                                 <label for="phone">Phone Number</label>
                                 <div class="invalid-feedback">Invalid Phone Number (eg: 888-888-8888)</div>
                             </div>
                             <br>
-                            <select name="role" id="role" class="form-select">
+                            <select name="role" id="role"  class="form-select">
                                 <option value="role" disabled selected>Account Type</option>
-                                <option value="role">Owner</option>
-                                <option value="role">User</option>
+                                <option value="owner">Owner</option>
+                                <option value="user">User</option>
                             </select>
                             <br>
+                            <div class="form-floating">
+                                <input name="password" type="password" id="signUpPassword" class="form-control" required>
+                                <label for="password" class="form-label">Password</label>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input type="password" placeholder="Confirm Password" id="confirm_password" required>
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                            </div>
 
                             <button class="btn btn-primary btn-sm float-end">Sign-Up</button>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <p>Want to login? <a href="#" id="switchToLogin">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification after signing-up -->
+    <div class="container">
+        <div class="modal fade" id="signupVerification">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title">Email verification</h1>
+                        <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#logIn"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please confirm your email to continue using CoWorking Registry</p>
+                        <p>Click <a href="https://gmail.com" target="_blank">here</a> to be redirected to your email.</p>
                     </div>
                 </div>
             </div>
@@ -340,6 +373,73 @@
         </div>
     </div>
 
+    <!-- script for signUp -->
+
+    <script>
+        let password = document.getElementById("signUpPassword");
+        let confirm_password = document.getElementById("confirm_password");
+
+        function matchPassword() {
+            if(password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords don't match.")
+            }
+            else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = matchPassword;
+        confirm_password.onkeyup = matchPassword;
+
+        const handleSignupForm = async(event) => {
+            event.preventDefault();
+
+            const signupForm = document.getElementById("signUpForm");
+            const signUpformData = new FormData(signupForm);
+            
+
+            const myHeaders = new Headers(); //para malaman ni server na json and padala
+            myHeaders.append("Content-Type", "application/json")
+
+            const requestBodySU = JSON.stringify({
+                fname: signUpformData.get('fname'),
+                lname: signUpformData.get('lname'),
+                username: signUpformData.get('username'),
+                email: signUpformData.get('email'),
+                mobile: signUpformData.get('phone'),
+                password: signUpformData.get('password'),
+                role: signUpformData.get('role')
+            });
+
+            const requestOptionsSU = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBodySU,
+                redirect: 'follow'
+            }
+
+            try{
+                const responseSu = await fetch('http://143.198.237.154/api/signup', requestOptionsSU);
+                const resultSu = await responseSu.text();
+
+                if(responseSu.ok) {
+                    $('#logIn').modal('hide');
+                    $('#signUp').modal('hide'); // Close the sign-up modal
+                    $('#signupVerification').modal('show'); //shows the verification message
+                }  
+            }
+            catch (error) {
+                console.log('error', error);
+                alert('An error occurred. Please try again later.');
+            }
+        };
+        
+        const signUpForm = document.getElementById('signUpForm');
+        signUpForm.addEventListener('submit', handleSignupForm);
+
+
+    </script>
+
 
     <!-- script for checking user if logged in -->
     <script>
@@ -347,12 +447,11 @@
             const token = localStorage.getItem('token'); // Get the stored token
             if (!token) {
                 console.log('User is not logged in');
-                $('#logIn').modal('show'); // Show the login modal
+                //$('#logIn').modal('show'); // Show the login modal
                 return;
             }
-
             try {
-                const response = await fetch('http://localhost:3000/api/verify', {
+                const response = await fetch('http://143.198.237.154/api/verify', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -369,7 +468,6 @@
                 console.error('Error verifying user:', error);
             }
         }
-
         checkLoggedIn();
     </script>
 
@@ -489,7 +587,7 @@
 
     </script>
 
-    <!-- HANDLES FORM SUBMISSION -->
+    <!-- HANDLES FORM SUBMISSION (Login)-->
     <script>
 
         // Function to handle form submission
@@ -514,8 +612,8 @@
                 redirect: 'follow'
             };
 
-            try {
-                const response = await fetch("http://localhost:3000/api/login", requestOptions);
+            try { 
+                const response = await fetch("http://143.198.237.154/api/login", requestOptions);
                 const result = await response.text();
                 console.log(result);
 
@@ -541,6 +639,8 @@
         loginForm.addEventListener('submit', handleFormSubmit);
 
     </script>
+
+   
 </body>
 
 </html>
