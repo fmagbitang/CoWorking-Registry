@@ -65,8 +65,7 @@ async function checkLogin(token) {
     if (currentTime < tokenExpiry) {
       return {
         loggedIn: true,
-        userId: payload.sub,
-        username: payload.name
+        data: payload
       };
     } else {
       return {
