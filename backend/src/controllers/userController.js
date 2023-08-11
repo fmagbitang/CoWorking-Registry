@@ -52,10 +52,11 @@ const createUser = async (req, res, next) => {
     });
 
     // Send welcome email
+    const LINK = process.env.LINK || 'localhost:3000';
     const subject = 'Email Verification';
     const text = 'Please confirm your email to continue using CoWorking Registry';
     const html = `
-      <p>${text} Click <a href="http://localhost:3000/api/email_verification/${email}" target="_blank">here</a> to visit the masked link.</p>
+      <p>${text} Click <a href="http://${LINK}/api/email_verification/${email}" target="_blank">here</a> to verify your email.</p>
     `;
     const toEmail = email; // Replace with the user's email
     await emailService.sendEmail(subject, text, toEmail, html);
