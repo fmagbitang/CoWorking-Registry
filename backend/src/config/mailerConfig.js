@@ -2,12 +2,13 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 const EMAIL = process.env.EMAIL_USERNAME || 'sample@gmail.com';
 const PASS = process.env.EMAIL_PASSWORD || 'mysecretpassword';
+const MAILER = process.env.MAILER || 'gmail';
 
 async function sendEmail(subject, text, toEmail, html) {
     const transporter = nodemailer.createTransport({
-      host: 'gmail', // Replace with your SMTP server hostname
-      port: 465, // Replace with your SMTP server port
-      secure: true,
+      host: MAILER, // Replace with your SMTP server hostname
+      port: 587, // Replace with your SMTP server port
+      secure: false,
       auth: {
         user: EMAIL, // Replace with your email
         pass: PASS, // Replace with your email password or app password
@@ -15,7 +16,7 @@ async function sendEmail(subject, text, toEmail, html) {
     });
   
     const mailOptions = {
-      from: EMAIL,
+      from: `Echo <${EMAIL}>`,
       to: toEmail,
       subject: subject,
       text: text,
