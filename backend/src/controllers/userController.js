@@ -57,7 +57,7 @@ const createUser = async (req, res, next) => {
     const subject = 'Email Verification';
     const text = 'Please confirm your email to continue using CoWorking Registry';
     const html = `
-      <p>${text} Click <a href="http://${LINK}/api/email_verification/${email}" target="_blank">here</a> to verify your email.</p>
+      <p>${text} Click <a href="http://${LINK}/api/verify_email/${email}" target="_blank">here</a> to verify your email.</p>
     `;
     const toEmail = email; // Replace with the user's email
     await emailService.sendEmail(subject, text, toEmail, html);
@@ -118,8 +118,35 @@ const updateEmailVerification = async (req, res, next) => {
       return res.status(404).json({ message: 'User not found' });
     }
     user.update({email_verification: 1})
+    const jwt = require('jsonwebtoken');
+    require('dotenv').config();
+    const SECRET_KEY = process.env.SECRET_KEY;
+    const token = jwt.sign({ 
+          userId: user.id,
+          UserOrEmail: email,
+          role: user.role,
+          fname: user.fname,
+          lname: user.lname,
+          mobile: user.mobile
+        }, SECRET_KEY, { expiresIn: '5h' });
     
-    res.status(200).json(user);
+    // res.status(200).json(user);
+    const redirectToPath = '/';
+    res.status(200).send(`
+        <html>
+        <head>
+            <meta http-equiv="refresh" content="3; URL='${redirectToPath}'">
+        </head>
+        <body>
+            <h1>Hello ${user.fname},</h1>
+            <h1>Thank you for confirming you\'re email.</h1>
+            <h1>Platform will redirecting to ${redirectToPath} in 3 seconds...</h1>
+            <script>
+            localStorage.setItem('token', token);
+            </script>
+        </body>
+        </html>
+    `);
   } catch (err) {
     next(err);
   }
