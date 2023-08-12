@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Card with Login Modal and Navigation Bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <style>
+        #create-property-container{
+            border: .5px solid black;
+            padding: 60px;
+            margin: 40px;
+            width: 800px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="/public/img/facebooklogo.png" alt="logo" width="30" height="24"
+                    class="d-inline-block align-top">
+                Co-Working Registry
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+                aria-label="Expand Navagation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav text-end ms-auto">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="workspace.html" class="nav-link">Workspace</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1 class="text-center">Workspace for Everyone</h1>
+        </div>
+    </header>
+
+    <main>
+       
+        <!-- Display all current Properties -->
+        <div class="container">
+            <h1>Property Listings</h1>
+            <div class="row row-cols-8">
+                <div class="col">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- FORM FOR CREATING A NEW PROPERTY -->
+        <div class="container" id="create-property-container">
+            <h1 class="modal-header text-center">Add a Property</h1><br>
+            <form novalidate id="createProperty">
+                <div class="form-floating">
+                    <input type="text" name="address" id="address" class="form-control" placeholder="199 Key Drive SW, Calgary, AB , T2A 4C5" required>
+                    <label for="address" class="form-label">Address</label>
+                    <div class="invalid-feedback">Invalid Address</div>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Raddison" required>
+                    <label for="neighborhood" class="form-label">Neighborhood</label>
+                    <div class="invalid-feedback">Invalid Neighborhood</div>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="text" name="squarefoot" id="squarefoot" class="form-control" placeholder="10sqm" required>
+                    <label for="squarefoot" class="form-label">Squarefoot</label>
+                    <div class="invalid-feedback">Invalid SqureFoot</div>
+                </div>
+                <br>
+                <div class="form-check">
+                    <input type="checkbox" name="parking" id="parking" value="1" class="form-check-input">
+                    <label for="parking" class="form-check-label">Is parking Available?</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="smoking" id="smoking" value="1" class="form-check-input">
+                    <label for="smoking" class="form-check-label">Is smoking Available?</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="transpo" id="transpo" value="1" class="form-check-input">
+                    <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
+                </div>
+                <br>
+                <div>
+                    <label for="image" class="form-label">Please Upload an image of the workspace</label>
+                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm float-end">Add Property</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer class="footer bg-dark text-light py-2">
+
+        <div class="container text-center">
+            <p>&copy; Co-working Registry. All rights reserved.</p>
+        </div>
+
+    </footer>
+
+
+
+<!-- 
+    SCRIPT TO ADD PROPERTIES BASED ON THE USER -->
+    <script>
+
+        const token = localStorage.getItem('token');
+
+        // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJVc2VyT3JFbWFpbCI6ImpvemVsc3Vycm9lZHVAZ21haWwuY29tIiwicm9sZSI6Im93bmVyIiwiZm5hbWUiOiJKb3plbCIsImxuYW1lIjoiU3Vycm8iLCJtb2JpbGUiOiI4MjUtNzMzLTA5NTUiLCJpYXQiOjE2OTE4Mjk4NzYsImV4cCI6MTY5MTg0Nzg3Nn0.43qsTPEiDPgLWvHVbDAx3FyVqnak65lwJmRLQfkQM7U';
+
+        const convertCheckBox = (check) => {
+            if(check !== "1"){
+                return 0;
+            }else
+                return 1;
+        };
+
+        const handleCreateProperties = async(event) => {
+            event.preventDefault();
+
+            const propertiesForm = document.getElementById('createProperty');
+            const propertiesFormData = new FormData(propertiesForm);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-type", "application/json")
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const requestBody = JSON.stringify({
+                address:propertiesFormData.get('address'),
+                neighborhood:propertiesFormData.get('neighborhood'),
+                squarefoot:propertiesFormData.get('squarefoot'),
+                parking:convertCheckBox(propertiesFormData.get('parking')),
+                tranportation:convertCheckBox(propertiesFormData.get('trasportation')),
+                smoking:convertCheckBox(propertiesFormData.get('smoking')),
+                // photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null (Add when the data has been updated)
+                // How can i link the owner id of the table to the one making the table
+            });
+
+            const requestOptionsAP = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBody,
+                redirect: 'follow'
+            }
+
+            try{
+                const responseAP = await fetch('http://143.198.237.154/api/property/create',requestOptionsAP);
+                const resultsAP = await responseAP.text();
+
+                if(responseAP.ok){
+                    console.log("succesfully added")
+                }
+            }catch (err) {
+                console.log('err', err);
+                alert('An error occured, Please Try again later!');
+            }
+        };
+        
+        if(!token){
+            alert('Please Login to an Account');
+        }else{
+            const propertyForm = document.getElementById('createProperty');
+            propertyForm.addEventListener('submit', handleCreateProperties);
+        }
+
+    </script>
+    
+    <!-- Handle Errors in Forms -->
+    <script>
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    </script>
+
+</body>
+
+
+
+
+</html>
