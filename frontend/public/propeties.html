@@ -135,6 +135,11 @@
                     <input type="checkbox" name="transpo" id="transpo" value="1" class="form-check-input">
                     <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
                 </div>
+                <br>
+                <div>
+                    <label for="image" class="form-label">Please Upload an image of the workspace</label>
+                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                </div>
                 <button type="submit" class="btn btn-primary btn-sm float-end">Add Property</button>
             </form>
         </div>
@@ -183,6 +188,7 @@
                 parking:convertCheckBox(propertiesFormData.get('parking')),
                 tranportation:convertCheckBox(propertiesFormData.get('trasportation')),
                 smoking:convertCheckBox(propertiesFormData.get('smoking')),
+                // photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null (Add when the data has been updated)
                 // How can i link the owner id of the table to the one making the table
             });
 

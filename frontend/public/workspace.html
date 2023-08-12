@@ -101,7 +101,7 @@
 
     </main>
 
-        <footer class="footer bg-dark text-light py-3">
+        <footer class="footer bg-dark text-light py-3 fixed-bottom">
 
         <div class="container text-center">
             <p>&copy; Co-working Registry. All rights reserved.</p>
@@ -129,8 +129,8 @@
 
                 const requestBody = JSON.stringify({
                     name:workspaceFormData.get('name'),
-                    capacity:workspaceFormData.get('capacity')
-                    // photos:workspaceFormData.get('image')
+                    capacity:workspaceFormData.get('capacity'),
+                    photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null
                     // Ask on how to insert the owners ID to this(foreign key and property ID)
                 });
 
