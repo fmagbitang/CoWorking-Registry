@@ -121,6 +121,7 @@ const updateEmailVerification = async (req, res, next) => {
     const jwt = require('jsonwebtoken');
     require('dotenv').config();
     const SECRET_KEY = process.env.SECRET_KEY;
+    const LOCALHOST = process.env.LOCALHOST || process.env.LINK;
     const token = jwt.sign({ 
           userId: user.id,
           UserOrEmail: email,
@@ -131,7 +132,7 @@ const updateEmailVerification = async (req, res, next) => {
         }, SECRET_KEY, { expiresIn: '5h' });
     
     // res.status(200).json(user);
-    const redirectToPath = '/';
+    const redirectToPath = `http://${LOCALHOST}/`;
     res.status(200).send(`
         <html>
         <head>
@@ -140,7 +141,7 @@ const updateEmailVerification = async (req, res, next) => {
         <body>
             <h1>Hello ${user.fname},</h1>
             <h1>Thank you for confirming you\'re email.</h1>
-            <h1>Platform will redirecting to ${redirectToPath} in 3 seconds...</h1>
+            <h1>Platform will redirecting in 3 seconds...</h1>
             <script>
             localStorage.setItem('token', ${token});
             </script>
