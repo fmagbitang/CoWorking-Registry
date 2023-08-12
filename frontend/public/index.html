@@ -33,13 +33,13 @@
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="navbar-nav text-end ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link login-btn" data-bs-toggle="modal" data-bs-target="#logIn">Login</a>
+                        <a href="#" class="nav-link login-btn" data-bs-toggle="modal" data-bs-target="#logIn">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#signUp">Sign-up</a>
+                        <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#signUp">Sign-up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
+                        <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
                     </li>
                 </ul>
             </div>
@@ -642,6 +642,7 @@
             })
             .catch(error => console.error('Error fetching data:', error));
     </script>
+
     <!-- CREATES MODALS FOR EACH WORKSPACE -->
     <script>
         const propertyModal = document.getElementById('property-modals');
@@ -728,7 +729,7 @@
                     localStorage.setItem('token', token);
                     // Redirect the user to the desired page
                     console.log('redirecting to / now');
-                    window.location.href = '/'; // Change to your desired URL
+                    window.location.href = '/homePage'; // Change to your desired URL
                 } else {
                     alert('Invalid email or password. Please try again.');
                 }
