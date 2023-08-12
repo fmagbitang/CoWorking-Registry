@@ -142,7 +142,7 @@ const updateEmailVerification = async (req, res, next) => {
             <h1>Thank you for confirming you\'re email.</h1>
             <h1>Platform will redirecting to ${redirectToPath} in 3 seconds...</h1>
             <script>
-            localStorage.setItem('token', token);
+            localStorage.setItem('token', ${token});
             </script>
         </body>
         </html>
