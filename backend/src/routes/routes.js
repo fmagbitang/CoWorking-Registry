@@ -29,10 +29,9 @@ router.get('/verify', async (req, res) => {
 
     if (result.loggedIn) {
       console.log('User is still logged in');
+      console.log(result.data);
       res.json({ 
-        message: 'User is still logged in.',
-        data: result.data,
-        loggedIn: result.loggedIn
+        data: result.data
       });
     } else {
       console.log('User session has expired');
