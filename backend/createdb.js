@@ -39,7 +39,7 @@ db.run(`
     property_id INTEGER,
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(property_id) REFERENCES property(id)
-  )
+  );
 `, (err) => {
   if (err) {
     console.error('Error creating the workspace table:', err.message);
@@ -47,6 +47,16 @@ db.run(`
     console.log('Workspace table created (or already exists)');
   }
 });
+db.run(`
+ALTER TABLE workspace
+  ADD ratings VARCHAR default 5;
+  `, (err)=> {
+    if (err) {
+      console.error('Error in Alter ADD ', err.message);
+    } else {
+      console.log('Alter Table workspace successful.');
+    }
+  });
 //  property
 db.run(`
   CREATE TABLE IF NOT EXISTS property (

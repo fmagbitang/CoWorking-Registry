@@ -7,7 +7,7 @@ const today = new Date(timeElapsed); // formated a date today.
 
 // Create a new workspace
 const createWorkspace = async (req, res, next) => {
-  const { name, photos, capacity, availability, user_id, property_id } = req.body;
+  const { name, photos, capacity, availability, user_id, property_id, ratings } = req.body;
   const userId = req.user.userId;
   try {
     created_at = today.toISOString();
@@ -20,6 +20,7 @@ const createWorkspace = async (req, res, next) => {
         availability,
         user_id: userId,
         property_id,
+        ratings,
         created_at,
         updated_at
     });
@@ -36,6 +37,7 @@ const getAllWorkspace = async (req, res, next) => {
     const workspaces = await Workspace.findAll();
     res.status(200).json(workspaces);
   } catch (err) {
+    console.log(err.message);
     next(err);
   }
 };
