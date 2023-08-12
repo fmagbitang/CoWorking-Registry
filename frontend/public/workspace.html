@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Card with Login Modal and Navigation Bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <img src="/public/img/facebooklogo.png" alt="logo" width="30" height="24"
+                    class="d-inline-block align-top">
+                Co-Working Registry
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+                aria-label="Expand Navagation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav text-end ms-auto">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="propeties.html" class="nav-link">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Workspace</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1 class="text-center">Workspace for Everyone</h1>
+        </div>
+    </header>
+
+    <main>
+
+        <h1 class="modal-header text-center">Create Workspace</h1><br>
+
+        <!-- FORM FOR CREATING A NEW Workspace -->
+        <div class="container">
+            <form novalidate id="createWorkspace">
+                <div class="form-floating">
+                    <input type="text" name="name" id="name" class="form-control"  placeholder="Meeting Room" required>
+                    <label for="name" class="form-label">Type of Workspace</label>
+                    <div class="invalid-feedback">Invalid Workspace</div>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
+                    <label for="capacity" class="form-label">Maximum Capacity</label>
+                    <div class="invalid-feedback">Invalid input</div>
+                </div>
+                <br>
+                <select name="lease_term" id="lease_term"  class="form-select" required>
+                    <option value="term" disabled selected>Term Type</option>
+                    <option value="per 30 minutes">per 30 minutes</option>
+                    <option value="per 1 hour">per 1 hour</option>
+                    <option value="per 2 hours">per 2 hours</option>
+                </select>
+                <br>
+                <div class="form-floating">
+                    <input type="number" name="price" id="price" class="form-control"  placeholder="30" required>
+                    <label for="price" class="form-label">Price</label>
+                    <div class="invalid-feedback">Invalid input</div>
+                </div>
+                <br>
+                <div>
+                    <label for="image" class="form-label">Please Upload an image of the workspace</label>
+                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary btn-sm">Add Workspace</button>
+            </form>
+        </div>
+
+    </main>
+
+        <footer class="footer bg-dark text-light py-3">
+
+        <div class="container text-center">
+            <p>&copy; Co-working Registry. All rights reserved.</p>
+        </div>
+
+    </footer>
+
+
+
+<!-- 
+    SCRIPT TO ADD WORKSPACE BASED ON THE PROperties of the USER -->
+    <script>
+
+            const token = localStorage.getItem('token');
+
+            const handleCreateWorkspace = async(event) => {
+                event.preventDefault();
+
+                const workspaceForm = document.getElementById('createWorkspace');
+                const workspaceFormData = new FormData(workspaceForm);
+
+                const myHeaders = new Headers();
+                myHeaders.append("Content-type", "application/json")
+                myHeaders.append("Authorization", `Bearer ${token}`);
+
+                const requestBody = JSON.stringify({
+                    name:workspaceFormData.get('name'),
+                    capacity:workspaceFormData.get('capacity')
+                    // photos:workspaceFormData.get('image')
+                    // Ask on how to insert the owners ID to this(foreign key and property ID)
+                });
+
+                const requestOptionsAW = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: requestBody,
+                    redirect: 'follow'
+                }
+
+                try{
+                    const responseAW = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsAW);
+                    const resultsAW = await responseAW.text();
+
+                    if(responseAW.ok){
+                        console.log("succesfully added")
+                    }
+                }catch (err) {
+                    console.log('err', err);
+                    alert('An error occured, Please Try again later!');
+                }
+            };
+
+            if(!token){
+                alert('Please Login to an Account');
+            }else{
+                const workspaceForm = document.getElementById('createWorkspace');
+                workspaceForm.addEventListener('submit', handleCreateWorkspace);
+            }
+
+    </script>
+
+    <!-- Handle Errors in Forms -->
+    <script>
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    </script>
+</body>
+
+
+
+
+</html>
