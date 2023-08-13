@@ -18,4 +18,8 @@ router.get('/owner/workspace/', (req,res) => {
   res.sendFile(path.join(__dirname, '../public/workspace.html'));
 });
 
+router.get('/homePage', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/homePage.html'))
+});
+
 module.exports = router;

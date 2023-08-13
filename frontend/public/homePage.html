@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML Card with Login Modal and Navigation Bar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+  </script>
+  <!-- Include jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Include Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-light">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <img src="img/coworking.jpg" alt="logo" width="54" height="50" class="d-inline-block align-top" />
+        Co-Working Registry
+      </a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+        aria-label="Expand Navagation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav text-end ms-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="myBookings.html" class="nav-link">MyBookings</a>
+          </li>
+          <div class="dropdown">
+            <button type="button" data-toggle="dropdown" class="nav-link">
+              Account <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#profile" id="profile">Profile</a></li>
+              <li><a href="#" class="nav-link" id="logout">Logout</a></li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="container">
+      <h1 class="text-center" id="myBookings">Workspace for everyone</h1>
+    </div>
+  </header>
+
+  <main>
+    <!-- Cards Landing Page Structre -->
+    <div class="container">
+      <div class="row row-cols-4 gy-4" id="cardContainer">
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+        <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+          <div class="card">
+            <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">Workspace Name</h2>
+              <span class="card-subtitle">332 Covile Drive</span>
+              <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                itaque, deleniti!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Properties -->
+    <div id="property-modals">
+      <!-- Modal Structure for Properties -->
+      <div class="container">
+        <div class="modal fade" id="modal">
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1>Workspace Name</h1>
+                <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#modal"></button>
+              </div>
+              <div class="modal-body">
+                <img src="/img/coworking.jpg" alt="Image" style="display: flex; margin: 30px 60px;">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam,
+                  doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse
+                  magnam eveniet totam earum dolores libero eos accusamus eius quidem?
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam,
+                  doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse
+                  magnam eveniet totam earum dolores libero eos accusamus eius quidem?
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam,
+                  doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse
+                  magnam eveniet totam earum dolores libero eos accusamus eius quidem?
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer bg-dark text-light py-3">
+
+    <div class="container text-center">
+      <p>&copy; Co-working Registry. All rights reserved.</p>
+    </div>
+
+  </footer>
+
+  <!-- Modal for Viewing Profile -->
+  <div class="container">
+    <div class="modal fade" id="profile">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1>My Profile</h1>
+            <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#profile"></button>
+          </div>
+          <div class="modal-body">
+            <div class="profile">
+              <!-- script for profile -->
+              <script>
+                async function viewProfile() {
+                  const tokenProfile = localStorage.getItem('token'); // Get the stored token
+                  if (!tokenProfile) {
+                    console.log('Can\'t view profile at the moment!');
+                    alert('Can\'t view profile at the moment!')
+                    return;
+                  }
+                  try {
+                    const responseProfile = await fetch('http://143.198.237.154/api/verify', {
+                      method: 'GET',
+                      headers: {
+                        'Authorization': `Bearer ${tokenProfile}`
+                      }
+                    });
+                    const resultProfile = await responseProfile.text();
+                    console.log(resultProfile);
+
+                    if (responseProfile.ok) {
+                      const verificationData = await JSON.parse(responseProfile);
+                      console.log('Profile:', verificationData);
+                    } else {
+                      console.log('User verification failed:', responseProfile.statusText);
+                    }
+                  } catch (error) {
+                    console.error('Error verifying user:', error);
+                  }
+                }
+                //viewProfile();
+                const profile = document.getElementById('profile');
+    profile.addEventListener('click', viewProfile);
+              </script>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- script for log out -->
+  <script>
+    const handleLogoutButton = async (event) => {
+      event.preventDefault();
+
+      const requestOptionsLO = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+      const response = await fetch("http://143.198.237.154/api/logout", requestOptionsLO);
+
+      try {
+        if (response.ok) {
+          localStorage.clear();
+          window.location.href = '/';
+        } else {
+          alert("Something went wrong!")
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    const logout = document.getElementById('logout');
+    logout.addEventListener('click', handleLogoutButton);
+  </script>
+
+
+
+</body>
+
+</html>
