@@ -41,7 +41,7 @@ const Workspace = sequelize.define(
     ratings: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 5,
+      defaultValue: 5.0,
     },
     created_at: {
       type: DataTypes.STRING,
