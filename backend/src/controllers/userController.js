@@ -1,8 +1,11 @@
 const User = require('../models/userModel');
-const sendEmail = require('../config/mailerConfig');
+const { Sequelize } = require('sequelize');
+const emailService = require('../config/mailerConfig');
 
 const timeElapsed = Date.now(); // get the date now
 const today = new Date(timeElapsed); // formated a date today.
+// import bcrypt
+const bcrypt = require('bcrypt');
 
 // Get all users
 const getAllUsers = async (req, res, next) => {
@@ -30,26 +33,34 @@ const getUserById = async (req, res, next) => {
 
 // Create a new 
 const createUser = async (req, res, next) => {
-  const { name, email, username, role, mobile, password } = req.body;
+  const { fname, lname, email, username, role, mobile, password } = req.body;
   try {
     created_at = today.toISOString();
     updated_at = today.toISOString();
     const userRole = role || 'coworker';
 
     const user = await User.create({ 
-      name,
+      fname,
+      lname,
       email,
       username,
       mobile,
       role: userRole,
       password,
+      email_verification: 0,
       created_at, 
       updated_at
     });
 
     // Send welcome email
-    const welcomeMessage = 'Thank you for registering with our app!';
-    sendEmail(email, 'Welcome to Our App', welcomeMessage);
+    const LINK = process.env.LINK || 'localhost:3000';
+    const subject = 'Email Verification';
+    const text = 'Please confirm your email to continue using CoWorking Registry';
+    const html = `
+      <p>${text} Click <a href="http://${LINK}/api/verify_email/${email}" target="_blank">here</a> to verify your email.</p>
+    `;
+    const toEmail = email; // Replace with the user's email
+    await emailService.sendEmail(subject, text, toEmail, html);
 
     res.status(201).json(user);
   } catch (err) {
@@ -61,14 +72,15 @@ const createUser = async (req, res, next) => {
 // Update a user by ID
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { name, username, role, email, mobile, password } = req.body;
+  const { fname, lname, username, role, email, mobile, password } = req.body;
   try {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.name = name;
+    user.fname = fname;
+    user.lname = lname;
     if (email){
       user.email = email;
     }
@@ -79,12 +91,96 @@ const updateUser = async (req, res, next) => {
       user.role = role;
     }
     user.mobile = mobile;
-    user.password = password;
+    if (password){
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      user.password = hashedPassword;
+    }
     user.updated_at = today.toISOString();
     await user.save();
     res.status(200).json(user);
   } catch (err) {
     next(err);
+  }
+};
+
+// Update verification of email
+const updateEmailVerification = async (req, res, next) => {
+  const { email } = req.params;
+  try {
+    const user = await User.findOne({
+      where: {
+        email: email
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.update({email_verification: 1})
+    const jwt = require('jsonwebtoken');
+    require('dotenv').config();
+    const SECRET_KEY = process.env.SECRET_KEY;
+    const token = jwt.sign({ 
+          userId: user.id,
+          UserOrEmail: email,
+          role: user.role,
+          fname: user.fname,
+          lname: user.lname,
+          mobile: user.mobile
+        }, SECRET_KEY, { expiresIn: '5h' });
+    
+    // res.status(200).json(user);
+    const redirectToPath = '/';
+    res.status(200).send(`
+        <html>
+        <head>
+            <meta http-equiv="refresh" content="3; URL='${redirectToPath}'">
+        </head>
+        <body>
+            <h1>Hello ${user.fname},</h1>
+            <h1>Thank you for confirming you\'re email.</h1>
+            <h1>Platform will redirecting to ${redirectToPath} in 3 seconds...</h1>
+            <script>
+            localStorage.setItem('token', ${token});
+            </script>
+        </body>
+        </html>
+    `);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// forgot password
+const forgotPassword = async (req, res, next) => {
+  try {
+    const { identifier, password } = req.body;
+
+    if (!identifier) {
+      return res.status(400).json({ message: 'Username or email is required.' });
+    }
+
+    // Find the user by checking both username and email
+    const user = await User.findOne({
+      where: Sequelize.or(
+        { username: identifier }, // Check if the identifier matches the username field
+        { email: identifier } // Check if the identifier matches the email field
+      ),
+    });
+
+    if (!user){
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    user.update({password: hashedPassword});
+
+    res.status(200).json({ message: 'Password successfully changes.' });
+  } catch (err) {
+    console.error('Error logging in: ', err);
+    res.status(500).json({ message: 'An error occured while loggin in.' });
   }
 };
 
@@ -110,4 +206,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  updateEmailVerification,
+  forgotPassword,
 };

@@ -6,10 +6,12 @@ const propertyController = require('../controllers/propertyController');  //  pr
 const leaseController = require('../controllers/leaseController');  //  lease controller
 const authenticateToken = require('../middleware/authenticateToken'); // import authenticateToken in middleware
 const isOwner = require('../middleware/isOwner'); // import isOwner role in middleware
-const { login, checkLogin, logout } = require('../controllers/authController');
+const { login, verify, logout } = require('../controllers/authController');
 
 // Routes for create user 
 router.post('/signup', userController.createUser);
+router.get('/verify_email/:email', userController.updateEmailVerification);
+router.post('/forgot_passsword', userController.forgotPassword);
 // get all workspaces
 router.get('/workspace/', workspaceController.getAllWorkspace);
 // get all property
@@ -19,25 +21,7 @@ router.get('/property/', propertyController.getAllProperty);
 router.post('/login', login);
 router.get('/logout', logout);
 // verify token of user
-router.get('/verify', async (req, res) => {
-  const jwtToken = req.headers.authorization; // Extract the JWT token from the headers
-
-  try {
-    const result = await checkLogin(jwtToken);
-
-    if (result.loggedIn) {
-      console.log('User is still logged in');
-      res.json({ message: 'User is still logged in.' });
-    } else {
-      console.log('User session has expired');
-      res.json({ message: 'User session has expired.' });
-    }
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.json({ message: error.message });
-  }
-
-});
+router.get('/verify', verify);
 
 
 // Protected routes w

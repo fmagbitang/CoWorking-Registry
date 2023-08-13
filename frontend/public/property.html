@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Property</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js" defer></script>
+ <style>
+   
+/* Style the modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ </style>
+    
+    </head>
+<body>
+   <main>
+    <section id="properties">
+        <!-- Property listings will be dynamically added here using JavaScript -->
+    </section>
+
+    <section id="add-property">
+        <h2>Add a Property</h2>
+        <button id="open-modal">Add Property</button>
+    </section>
+</main>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close"></span>
+        <h2>Add a Property</h2>
+        <form id="property-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br>
+
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" required><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required><br>
+
+            <label for="neighborhood">Nearest Landmark:</label>
+            <input type="text" id="neighborhood" name="neighborhood" required><br>
+
+            <label for="sqf">Square Feet:</label>
+            <input type="text" id="sft" name="square feet" required><br>
+
+            <label for="parking">Parking Garage:</label>
+            <select id="parking"> 
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+            <label for="transpo">Public Transportation:</label>
+            <select id="transpo"> 
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+
+                <button type="submit">Add Property</button>
+            </form>
+    </div>
+</div>
+
+
+</body>
+</html>
