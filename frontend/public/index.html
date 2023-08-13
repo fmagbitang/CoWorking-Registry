@@ -475,13 +475,15 @@
                 const response = await fetch('http://143.198.237.154/api/verify', {
                     method: 'GET',
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `${token}`
                     }
                 });
+                const resultLogin = await response.text();
+                console.log(resultLogin);
 
                 if (response.ok) {
-                    const verificationData = await response.json();
-                    console.log('User is logged in:', verificationData);
+                    const loginData = await JSON.parse(resultLogin);
+                    console.log('Profile:', loginData);
                 } else {
                     console.log('User verification failed:', response.statusText);
                 }
