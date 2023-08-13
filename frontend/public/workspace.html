@@ -21,36 +21,41 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
-            <a href="#" class="navbar-brand">
-                <img src="/public/img/facebooklogo.png" alt="logo" width="30" height="24"
-                    class="d-inline-block align-top">
-                Co-Working Registry
-            </a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
-                aria-label="Expand Navagation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="nav">
-                <ul class="navbar-nav text-end ms-auto">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="propeties.html" class="nav-link">Properties</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Workspace</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
-                    </li>
+          <a href="#" class="navbar-brand">
+            <img src="img/coworking.jpg" alt="logo" width="54" height="50" class="d-inline-block align-top" />
+            Co-Working Registry
+          </a>
+          <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+            aria-label="Expand Navagation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav text-end ms-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="propeties.html" class="nav-link">Properties</a>
+                </li>
+                <li class="nav-item">
+                    <a href="workspace.html" class="nav-link">Workspace</a>
+                </li>
+                <li class="nav-item">
+                    <a href="myBookings.html" class="nav-link">MyBookings</a>
+                </li>
+              <div class="dropdown">
+                <button type="button" data-toggle="dropdown" class="nav-link">
+                  Account <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#profile" id="profile">Profile</a></li>
+                  <li><a href="#" class="nav-link" id="logout">Logout</a></li>
                 </ul>
-            </div>
+              </div>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
 
     <header>
         <div class="container">
@@ -60,44 +65,9 @@
 
     <main>
 
-        <h1 class="modal-header text-center">Create Workspace</h1><br>
+        <h1 class="modal-header text-center">My WorkSpace</h1><br>
 
-        <!-- FORM FOR CREATING A NEW Workspace -->
-        <div class="container">
-            <form novalidate id="createWorkspace">
-                <div class="form-floating">
-                    <input type="text" name="name" id="name" class="form-control"  placeholder="Meeting Room" required>
-                    <label for="name" class="form-label">Type of Workspace</label>
-                    <div class="invalid-feedback">Invalid Workspace</div>
-                </div>
-                <br>
-                <div class="form-floating">
-                    <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
-                    <label for="capacity" class="form-label">Maximum Capacity</label>
-                    <div class="invalid-feedback">Invalid input</div>
-                </div>
-                <br>
-                <select name="lease_term" id="lease_term"  class="form-select" required>
-                    <option value="term" disabled selected>Term Type</option>
-                    <option value="per 30 minutes">per 30 minutes</option>
-                    <option value="per 1 hour">per 1 hour</option>
-                    <option value="per 2 hours">per 2 hours</option>
-                </select>
-                <br>
-                <div class="form-floating">
-                    <input type="number" name="price" id="price" class="form-control"  placeholder="30" required>
-                    <label for="price" class="form-label">Price</label>
-                    <div class="invalid-feedback">Invalid input</div>
-                </div>
-                <br>
-                <div>
-                    <label for="image" class="form-label">Please Upload an image of the workspace</label>
-                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary btn-sm">Add Workspace</button>
-            </form>
-        </div>
+       
 
     </main>
 
@@ -177,8 +147,4 @@
         });
     </script>
 </body>
-
-
-
-
 </html>

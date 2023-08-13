@@ -22,6 +22,14 @@
             padding: 60px;
             margin: 40px;
             width: 800px;
+            position:relative;
+            left: 30vh;
+        }
+
+        .addWorkSpace{
+            position: absolute;
+            top: 20px;
+            right: 10px;
         }
     </style>
 
@@ -31,36 +39,41 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
-            <a href="#" class="navbar-brand">
-                <img src="/public/img/facebooklogo.png" alt="logo" width="30" height="24"
-                    class="d-inline-block align-top">
-                Co-Working Registry
-            </a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
-                aria-label="Expand Navagation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="nav">
-                <ul class="navbar-nav text-end ms-auto">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Properties</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="workspace.html" class="nav-link">Workspace</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
-                    </li>
+          <a href="#" class="navbar-brand">
+            <img src="img/coworking.jpg" alt="logo" width="54" height="50" class="d-inline-block align-top" />
+            Co-Working Registry
+          </a>
+          <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+            aria-label="Expand Navagation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav text-end ms-auto">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="propeties.html" class="nav-link">Properties</a>
+                </li>
+                <li class="nav-item">
+                    <a href="workspace.html" class="nav-link">Workspace</a>
+                </li>
+                <li class="nav-item">
+                    <a href="myBookings.html" class="nav-link">MyBookings</a>
+                </li>
+              <div class="dropdown">
+                <button type="button" data-toggle="dropdown" class="nav-link">
+                  Account <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#profile" id="profile">Profile</a></li>
+                  <li><a href="#" class="nav-link" id="logout">Logout</a></li>
                 </ul>
-            </div>
+              </div>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
 
     <header>
         <div class="container">
@@ -71,28 +84,18 @@
     <main>
        
         <!-- Display all current Properties -->
-        <div class="container">
+        <div class="container" >
             <h1>Property Listings</h1>
-            <div class="row row-cols-8">
+            <div class="row row-cols-3 gy-4" id="property-listings">
                 <div class="col">
                     <div class="card">
                         <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
                         <div class="card-body">
-                            <h2 class="card-title">Workspace Name</h2>
-                            <span class="card-subtitle">332 Covile Drive</span>
+                            <h2 class="card-title">Workspace Address</h2>
+                            <span class="card-subtitle">Neighborhood</span>
                             <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
                                 itaque, deleniti!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                        <div class="card-body">
-                            <h2 class="card-title">Workspace Name</h2>
-                            <span class="card-subtitle">332 Covile Drive</span>
-                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-                                itaque, deleniti!</div>
+                            <button class="btn btn-primary btn-sm float-end addWorkSpace" data-bs-toggle="modal" data-bs-target="#addWorkspace">Add WorkSpace</button>
                         </div>
                     </div>
                 </div>
@@ -136,12 +139,88 @@
                     <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
                 </div>
                 <br>
+                <h2>Workspace</h2>
+                <div class="form-floating">
+                    <input type="text" name="name" id="name" class="form-control"  placeholder="Meeting Room" required>
+                    <label for="name" class="form-label">Type of Workspace</label>
+                    <div class="invalid-feedback">Invalid Workspace</div>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
+                    <label for="capacity" class="form-label">Maximum Capacity</label>
+                    <div class="invalid-feedback">Invalid input</div>
+                </div>
+                <br>
+                <select name="lease_term" id="lease_term"  class="form-select" required>
+                    <option value="term" disabled selected>Term Type</option>
+                    <option value="30m">per 30 minutes</option>
+                    <option value="1h">per 1 hour</option>
+                    <option value="2h">per 2 hours</option>
+                </select>
+                <br>
+                <div class="form-floating">
+                    <input type="number" name="price" id="price" class="form-control"  placeholder="30" required>
+                    <label for="price" class="form-label">Price</label>
+                    <div class="invalid-feedback">Invalid input</div>
+                </div>
+                <br>
                 <div>
                     <label for="image" class="form-label">Please Upload an image of the workspace</label>
                     <input type="file" name="image" id="image" class="form-control" accept="Image/*">
                 </div>
+                <br>
                 <button type="submit" class="btn btn-primary btn-sm float-end">Add Property</button>
             </form>
+        </div>
+
+        <!-- MODAL FOR ADDING WORKSPACE FOR A LISTED PROPERTY -->
+        <div class="container">
+            <div class="modal fade" id="addWorkspace">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Add Workspace</h2>
+                            <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form novalidate id="createWorkspace">
+                                <div class="form-floating">
+                                    <input type="text" name="name" id="name" class="form-control"  placeholder="Meeting Room" required>
+                                    <label for="name" class="form-label">Type of Workspace</label>
+                                    <div class="invalid-feedback">Invalid Workspace</div>
+                                </div>
+                                <br>
+                                <div class="form-floating">
+                                    <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
+                                    <label for="capacity" class="form-label">Maximum Capacity</label>
+                                    <div class="invalid-feedback">Invalid input</div>
+                                </div>
+                                <br>
+                                <select name="lease_term" id="lease_term"  class="form-select" required>
+                                    <option value="term" disabled selected>Term Type</option>
+                                    <option value="per 30 minutes">per 30 minutes</option>
+                                    <option value="per 1 hour">per 1 hour</option>
+                                    <option value="per 2 hours">per 2 hours</option>
+                                </select>
+                                <br>
+                                <div class="form-floating">
+                                    <input type="number" name="price" id="price" class="form-control"  placeholder="30" required>
+                                    <label for="price" class="form-label">Price</label>
+                                    <div class="invalid-feedback">Invalid input</div>
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="image" class="form-label">Please Upload an image of the workspace</label>
+                                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-sm float-end">Add Workspace</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
@@ -156,13 +235,10 @@
 
 
 
-<!-- 
-    SCRIPT TO ADD PROPERTIES BASED ON THE USER -->
+<!-- SCRIPT TO ADD PROPERTIES and WORKSPACE BASED FOR OWNERS -->
     <script>
 
         const token = localStorage.getItem('token');
-
-        // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJVc2VyT3JFbWFpbCI6ImpvemVsc3Vycm9lZHVAZ21haWwuY29tIiwicm9sZSI6Im93bmVyIiwiZm5hbWUiOiJKb3plbCIsImxuYW1lIjoiU3Vycm8iLCJtb2JpbGUiOiI4MjUtNzMzLTA5NTUiLCJpYXQiOjE2OTE4Mjk4NzYsImV4cCI6MTY5MTg0Nzg3Nn0.43qsTPEiDPgLWvHVbDAx3FyVqnak65lwJmRLQfkQM7U';
 
         const convertCheckBox = (check) => {
             if(check !== "1"){
@@ -181,7 +257,7 @@
             myHeaders.append("Content-type", "application/json")
             myHeaders.append("Authorization", `Bearer ${token}`);
 
-            const requestBody = JSON.stringify({
+            const requestBodyPr = JSON.stringify({
                 address:propertiesFormData.get('address'),
                 neighborhood:propertiesFormData.get('neighborhood'),
                 squarefoot:propertiesFormData.get('squarefoot'),
@@ -192,7 +268,76 @@
                 // How can i link the owner id of the table to the one making the table
             });
 
-            const requestOptionsAP = {
+            const requestBodyWs = JSON.stringify({
+                name:propertiesFormData.get('name'),
+                capacity:propertiesFormData.get('capacity'),
+                photos: propertiesFormData.get('image') ? propertiesFormData.get('image').name : null
+                // Ask on how to insert the owners ID to this(foreign key and property ID)
+            });
+
+
+            const requestOptionsPr = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBodyPr,
+                redirect: 'follow'
+            }
+
+            const requestOptionsWs = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBodyWs,
+                redirect: 'follow'
+            }
+
+            try{
+                const responseAP = await fetch('http://143.198.237.154/api/property/create',requestOptionsPr);
+                const resultsAP = await responseAP.text();
+
+                if(responseAP.ok){
+                    console.log("succesfully added")
+
+                    const responseWs = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsWs);
+                    const resultsWs = await responseWs.text();
+                }
+            }catch (err) {
+                console.log('err', err);
+                alert('An error occured, Please Try again later!');
+            }
+        };
+
+        
+        if(!token){
+            // alert('Please Login to an Account');
+        }else{
+            const propertyForm = document.getElementById('createProperty');
+            propertyForm.addEventListener('submit', handleCreateProperties);
+        }
+
+    </script>
+
+<!-- SCRIPT TO ADD NEW WORKSPACE ON A LISTED PROPERTY -->
+    <script>
+        const token1 = localStorage.getItem('token');
+
+        const handleCreateWorkspace = async(event) => {
+            event.preventDefault();
+
+            const workspaceForm = document.getElementById('createWorkspace');
+            const workspaceFormData = new FormData(workspaceForm);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-type", "application/json")
+            myHeaders.append("Authorization", `Bearer ${token1}`);
+
+            const requestBody = JSON.stringify({
+                name:workspaceFormData.get('name'),
+                capacity:workspaceFormData.get('capacity'),
+                photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null
+                // How can i get the property id to connect he recently made workspace
+            });
+
+            const requestOptionsAW = {
                 method: 'POST',
                 headers: myHeaders,
                 body: requestBody,
@@ -200,10 +345,10 @@
             }
 
             try{
-                const responseAP = await fetch('http://143.198.237.154/api/property/create',requestOptionsAP);
-                const resultsAP = await responseAP.text();
+                const responseAW = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsAW);
+                const resultsAW = await responseAW.text();
 
-                if(responseAP.ok){
+                if(responseAW.ok){
                     console.log("succesfully added")
                 }
             }catch (err) {
@@ -211,15 +356,15 @@
                 alert('An error occured, Please Try again later!');
             }
         };
-        
-        if(!token){
+
+        if(!token1){
             alert('Please Login to an Account');
         }else{
-            const propertyForm = document.getElementById('createProperty');
-            propertyForm.addEventListener('submit', handleCreateProperties);
+            const workspaceForm = document.getElementById('createWorkspace');
+            workspaceForm.addEventListener('submit', handleCreateWorkspace);
         }
-
     </script>
+    
     
     <!-- Handle Errors in Forms -->
     <script>
@@ -235,9 +380,47 @@
         });
     </script>
 
+
+
+
+    <!-- SCRIPT TO GET OWNERS PROPERTIES AND DISPLAY ON THE APP -->
+    <script>
+        const cardContainer = document.getElementById('property-listings');
+
+        const createCard = (data) => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'col';
+
+            const cardContent =
+                `<div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">${data.address}</h2>
+                            <span class="card-subtitle">${data.neighborhood} \</span>
+                            <div class="card-text">Squarefoot: ${data.squarefoot} <br>Parking: ${parseBool(data.parking)} <br> Smoking:${parseBool(data.smoking)} <br> Public Transportation Accessible: ${parseBool(data.tranportation)} </div>
+                            <button class="btn btn-primary btn-sm float-end addWorkSpace" data-bs-toggle="modal" data-bs-target="#addWorkspace">Add WorkSpace</button>
+                        </div>
+                    </div>`;
+
+            cardElement.innerHTML = cardContent;
+            cardContainer.appendChild(cardElement);
+        };
+
+        // Fetch data from the API server
+        fetch('http://143.198.237.154/api/property/')
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the data and create cards
+                data.forEach(item => {
+                    createCard(item);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        const parseBool = (a) => {
+            return a ? "Yes" : "No";
+        }
+
+    </script>
 </body>
-
-
-
-
 </html>
