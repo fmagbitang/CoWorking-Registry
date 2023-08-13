@@ -49,34 +49,30 @@ const login = async (req, res, next) => {
   }
 };
 
-async function checkLogin(token) {
+const verify = async (req, res) => {
+  console.log(req.headers);
+  console.log(req.headers.authorization);
+  const jwtToken = req.headers.authorization; // Extract the JWT token from the headers
+
   try {
-    // Decode JWT payload
-    const jwtParts = token.split('.');
-    const base64Payload = jwtParts[1];
-    const decodedPayload = atob(base64Payload);
-    const payload = JSON.parse(decodedPayload);
-
-    // Check if the token is still valid (optional)
+    const result = await jwt.verify(jwtToken, SECRET_KEY);
     const currentTime = Math.floor(Date.now() / 1000);
-    const tokenExpiry = payload.exp; // Expiry time from the payload
-    console.log(payload);
+    const expiration = new Date(result.exp * 1000);
 
-    if (currentTime < tokenExpiry) {
-      return {
-        loggedIn: true,
-        data: payload
-      };
+    if (currentTime < expiration) {
+        result.message = 'User is still logged in';
+        console.log(result);
+        res.json(result);
     } else {
-      return {
-        loggedIn: false
-      };
+        result.message = 'User session has expired';
+        console.log(result);
+        res.json(result);
     }
   } catch (error) {
-    return {
-      loggedIn: false
-    };
+      console.error('Error:', error.message);
+      res.json({ message: error.message });
   }
+
 }
 
 const logout = async (req, res) => {
@@ -96,6 +92,6 @@ const logout = async (req, res) => {
 
 module.exports = {
   login,
-  checkLogin,
   logout,
+  verify,
 };
