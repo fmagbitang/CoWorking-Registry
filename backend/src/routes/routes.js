@@ -40,14 +40,16 @@ router.delete('/users/:id', userController.deleteUser);
 // create/add workspace
 router.post('/workspace/create', isOwner, workspaceController.createWorkspace);
 // update workspace
-router.put('/workspace/update/:id', workspaceController.updateWorkspace);
+router.put('/workspace/update/:id', isOwner, workspaceController.updateWorkspace);
 // get workspace with user and property by ID
-router.get('/workspace/:id', workspaceController.getWorkspaceByPropertyId);
+router.get('/workspace/:id', isOwner, workspaceController.getWorkspaceByPropertyId);
+// get workspace with user and property by ID
+router.get('/myworkspace/:id', isOwner, workspaceController.getAllWorkspaceByOwner);
 // Route for property
 // create/add property
 router.post('/property/create', isOwner, propertyController.createProperty);
 // list all property of owner
-router.post('/property/:id', propertyController.getAllPropertyByOwner);
+router.post('/myproperty/:id', isOwner, propertyController.getAllPropertyByOwner);
 // Route for lease
 // create/add lease
 router.post('/lease/create', leaseController.createLease);
