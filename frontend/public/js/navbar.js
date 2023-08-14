@@ -81,10 +81,12 @@ fetch('/navbar.html')
         if (!tokenNav) {
             console.log('User is not logged in');
             const proper = document.getElementById("proper");
+            const myProper = document.getElementById("myProper");
             const worksp = document.getElementById("worksp");
             const bookings = document.getElementById("bookings");
             const acct = document.getElementById("acct");
             proper.style.display = 'none';
+            myProper.style.display = 'none';
             worksp.style.display = 'none';            
             bookings.style.display = 'none';            
             acct.style.display = 'none';            
@@ -102,6 +104,11 @@ fetch('/navbar.html')
             .then(body => {
                 console.log(body);
                 const bodyParse = JSON.parse(body);
+                const message = bodyParse.message;
+                console.log(message)
+                if(message === "jwt expired"){
+                    localStorage.clear();
+                }else{
                 const role = bodyParse.role;
                 const userID = bodyParse.userId;
                 localStorage.setItem('role', role);
@@ -117,7 +124,8 @@ fetch('/navbar.html')
                 } else {
                     const proper = document.getElementById("proper");
                     proper.style.display = 'none';
-                }
+                } 
+            }
             })
             .catch(error => console.error('error: ', error));
 
