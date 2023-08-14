@@ -50,7 +50,7 @@ db.run(`
 db.run(`
 ALTER TABLE workspace
   ADD ratings VARCHAR default 5;
-  ADD description VARCAR default 'no description provided';
+  ADD description VARCHAR default 'no description provided';
   `, (err)=> {
     if (err) {
       console.error('Error in Alter ADD ', err.message);
@@ -100,6 +100,17 @@ db.run(`
     console.log('Property table created (or already exists)');
   }
 });
+
+db.run(`
+ALTER TABLE lease
+  ADD workspace_id INTEGER;
+  `, (err)=> {
+    if (err) {
+      console.error('Error in Alter ADD ', err.message);
+    } else {
+      console.log('Alter Table workspace successful.');
+    }
+  });
 
 // Close the database connection after creating the table
 db.close((err) => {
