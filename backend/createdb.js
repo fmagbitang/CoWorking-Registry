@@ -101,6 +101,17 @@ db.run(`
   }
 });
 
+db.run(`
+ALTER TABLE lease
+  ADD workspace_id INTEGER;
+  `, (err)=> {
+    if (err) {
+      console.error('Error in Alter ADD ', err.message);
+    } else {
+      console.log('Alter Table workspace successful.');
+    }
+  });
+
 // Close the database connection after creating the table
 db.close((err) => {
   if (err) {
