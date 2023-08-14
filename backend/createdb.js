@@ -50,6 +50,7 @@ db.run(`
 db.run(`
 ALTER TABLE workspace
   ADD ratings VARCHAR default 5;
+  ADD description VARCAR default 'no description provided';
   `, (err)=> {
     if (err) {
       console.error('Error in Alter ADD ', err.message);
