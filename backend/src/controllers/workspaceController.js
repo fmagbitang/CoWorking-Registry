@@ -72,6 +72,21 @@ const getWorkspaceByPropertyId = async (req, res, next) => {
   }
 };
 
+// Get all property of owner
+const getAllWorkspaceByOwner = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const ownerWorkspace = await Workspace.findAll({
+      where: {
+        user_id: id
+      }
+    });
+    res.status(200).json(ownerWorkspace);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // update workspace availability
 const updateWorkspace = async (req, res, next) => {
   const { id } = req.params;
@@ -110,4 +125,5 @@ module.exports =  {
   getAllWorkspace,
   updateWorkspace,
   getWorkspaceByPropertyId,
+  getAllWorkspaceByOwner,
 }
