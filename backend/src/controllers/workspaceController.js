@@ -7,7 +7,7 @@ const today = new Date(timeElapsed); // formated a date today.
 
 // Create a new workspace
 const createWorkspace = async (req, res, next) => {
-  const { name, photos, capacity, availability, user_id, property_id, ratings } = req.body;
+  const { name, photos, capacity, availability, user_id, property_id, ratings, description } = req.body;
   const userId = req.user.userId;
   try {
     created_at = today.toISOString();
@@ -21,6 +21,7 @@ const createWorkspace = async (req, res, next) => {
         user_id: userId,
         property_id,
         ratings,
+        description,
         created_at,
         updated_at
     });
