@@ -14,6 +14,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Include Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include Link for rating Star Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
 </head>
@@ -21,8 +24,6 @@
 <body>
     <div id="navbarContent"></div>
     <!-- script for navbar include -->
-    <script src="/js/navbar.js"></script>
-
     <header>
         <div class="container">
             <h1 class="text-center">Workspace for Everyone</h1>
@@ -30,14 +31,33 @@
     </header>
 
     <main>
-
-        <h1 class="modal-header text-center">My WorkSpace</h1><br>
-
-       
+        <!-- MY Workspaces -->
+        <div class="container" >
+        <h1>My Workspaces</h1>
+        <div class="container">
+            <div class="row row-cols-4 gy-4" id="MyWorkSpaces">
+                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
+                    <div class="card">
+                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">Workspace Name</h2>
+                            <span class="card-subtitle">332 Covile Drive</span>
+                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+                                itaque, deleniti!
+                            </div>
+                            <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 25px 3px 3px">
+                                <span class="fa fa-star checked" style="color: orange;"></span>
+                                <p style="position: absolute; top: 4px; right: 0px;" class="star-rating">5.0</p>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 
-        <footer class="footer bg-dark text-light py-3 fixed-bottom">
+    <footer class="footer bg-dark text-light py-3 ">
 
         <div class="container text-center">
             <p>&copy; Co-working Registry. All rights reserved.</p>
@@ -47,70 +67,93 @@
 
 
 
-<!-- 
-    SCRIPT TO ADD WORKSPACE BASED ON THE PROperties of the USER -->
-    <script>
 
-            const token = localStorage.getItem('token');
 
-            const handleCreateWorkspace = async(event) => {
-                event.preventDefault();
+<!-- SCRIPT TO ADD YOUR WORKSPACE BASED ON YOUR USER_ID  MOdified-->
+<script>
 
-                const workspaceForm = document.getElementById('createWorkspace');
-                const workspaceFormData = new FormData(workspaceForm);
+const cardContainer = document.getElementById('MyWorkSpaces');
 
-                const myHeaders = new Headers();
-                myHeaders.append("Content-type", "application/json")
-                myHeaders.append("Authorization", `Bearer ${token}`);
+const createCard = (workspace_data, property_data) => {
+    const cardElement = document.createElement('div');
+    cardElement.className = 'col';
 
-                const requestBody = JSON.stringify({
-                    name:workspaceFormData.get('name'),
-                    capacity:workspaceFormData.get('capacity'),
-                    photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null
-                    // Ask on how to insert the owners ID to this(foreign key and property ID)
-                });
+    const cardContent =
+        `<div class="card">
+    <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
+    <div class="card-body">
+        <h2 class="card-title">${workspace_data.name}</h2>
+        <span class="card-subtitle">${property_data.address === undefined ? 'No Address Provided': `${property_data.address}`}</span>
+        <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 20px 3px 3px">
+            <span class="fa fa-star checked" style="color: orange;"></span>
+            <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${workspace_data.ratings}</p>
+        </div>
+        <div class="card-text">
+            ${workspace_data.description === undefined ? 'No Description Provided': `${workspace_data.description}`}  
+        </div>
+        <div class="card-text" style= "padding-top: 5px">
+            <p class="availability">${workspace_data.availability ? 'Available' : 'Not Available'}</p>
+        </div>
+        <div class=""card-text>
+            This is my Property ID: ${property_data.id} <br>
+            This is the User ID: ${workspace_data.user_id} <br>
+            This is the Workspace ID: ${workspace_data.property_id}
+        </div>
+    </div>
+</div>`;
 
-                const requestOptionsAW = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: requestBody,
-                    redirect: 'follow'
-                }
+    cardElement.innerHTML = cardContent;
+    cardContainer.appendChild(cardElement);
+    updateAvailabilityColor();
+};
 
-                try{
-                    const responseAW = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsAW);
-                    const resultsAW = await responseAW.text();
+const userId = localStorage.getItem('userID');
 
-                    if(responseAW.ok){
-                        console.log("succesfully added")
+// Fetch data from the API server
+fetch('http://143.198.237.154/api/workspace/')
+    .then(response => response.json())
+    .then(workspacedata => {
+        fetch('http://143.198.237.154/api/property/')
+            .then(response => response.json())
+            .then(propertydata => {
+                // Loop through the data and create cards
+                workspacedata.forEach(workspaceItem => {
+                    propertydata.forEach(propertyItem => {
+                        if(workspaceItem.property_id === propertyItem.id && workspaceItem.user_id == userId){
+                        createCard(workspaceItem,propertyItem);
                     }
-                }catch (err) {
-                    console.log('err', err);
-                    alert('An error occured, Please Try again later!');
-                }
-            };
+                    })
+                })
+                  
+            })
+            .catch(error => console.error('Error fetching data', error));
+        })
+    .catch(error => console.error('Error fetching data:', error));
 
-            if(!token){
-                alert('Please Login to an Account');
-            }else{
-                const workspaceForm = document.getElementById('createWorkspace');
-                workspaceForm.addEventListener('submit', handleCreateWorkspace);
-            }
+// Function to change availability text color
+function updateAvailabilityColor() {
+   // Get all elements with the availability class
+   var availabilityElements = document.querySelectorAll('.availability');
 
-    </script>
+   // Loop through each element
+   availabilityElements.forEach(function(element) {
+       // Check if availability is "Available"
+       if (element.textContent.trim() === 'Available') {
+           // Set font color to green
+           element.style.color = 'green';
+       } else {
+           // Set font color to red
+           element.style.color = 'red';
+       }
+   });
+}
+</script>
 
-    <!-- Handle Errors in Forms -->
-    <script>
-        const forms = document.querySelectorAll("form");
 
-        forms.forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                }
-                form.classList.add('was-validated');
-            });
-        });
-    </script>
+<!-- script for navbar include -->
+<script src="/js/navbar.js"></script>
+<!-- Creates a card for every Workspace -->
+<!-- CREATES MODALS FOR EACH WORKSPACE -->
+<!-- <script src="/js/cards.js"></script> -->
 </body>
 </html>
