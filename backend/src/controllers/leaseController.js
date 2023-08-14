@@ -5,7 +5,7 @@ const today = new Date(timeElapsed); // formated a date today.
 
 // Create a new lease
 const createLease = async (req, res, next) => {
-  const { lease_term, price, user_id, property_id } = req.body;
+  const { lease_term, price, user_id, property_id, workspace_id } = req.body;
   try {
     created_at = today.toISOString();
     updated_at = today.toISOString();
@@ -15,6 +15,7 @@ const createLease = async (req, res, next) => {
         price,
         user_id,
         property_id,
+        workspace_id,
         created_at,
         updated_at
     });
