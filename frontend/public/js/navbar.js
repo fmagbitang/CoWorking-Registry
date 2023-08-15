@@ -124,6 +124,10 @@ fetch('/navbar.html')
                 } else {
                     const proper = document.getElementById("proper");
                     proper.style.display = 'none';
+                    const myproper = document.getElementById("myProper");
+                    myproper.style.display = 'none';
+                    const worksp = document.getElementById("worksp");
+                    worksp.innerHTML = "Workspaces";
                 } 
             }
             })
