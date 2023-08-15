@@ -7,20 +7,25 @@ const today = new Date(timeElapsed); // formated a date today.
 
 // Create a new lease
 const createLease = async (req, res, next) => {
-  const { lease_term, price, user_id, property_id, workspace_id } = req.body;
+  const { user_id, property_id, workspace_id } = req.body;
   try {
-    created_at = today.toISOString();
     updated_at = today.toISOString();
 
-    const lease = await Lease.create({
-      lease_term,
-      price,
-      user_id,
-      property_id,
-      workspace_id,
-      created_at,
-      updated_at
+    const lease = await Lease.findOne({
+      where: {
+        workspace_id: workspace_id,
+        property_id: property_id
+      }
     });
+
+    if(!lease){
+      return res.status(404).json({ message: 'Lease not found' });
+    }
+
+    lease.update({
+       user_id: user_id,
+       updated_at: updated_at
+    })
 
     const workspace = await Workspace.findOne({
       where: {
