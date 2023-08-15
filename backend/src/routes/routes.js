@@ -57,6 +57,8 @@ router.post('/lease/create', leaseController.createLease);
 router.get('/lease/', leaseController.getAllLease);
 // update a lease
 router.post('/lease/:id', leaseController.updateLease);
+// get all lease of login user
+router.post('/mylease/:id', leaseController.getAllLeaseUserID);
 
 // Protected route for getting user data
 router.get('/', (req, res) => {
