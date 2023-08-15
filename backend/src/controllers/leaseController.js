@@ -88,15 +88,14 @@ const getAllLeaseUserID = async (req, res, next) => {
 
 // post all workspace, property and lease by workspace ID
 const getWPL = async (req, res, next) => {
-  const { id } = req.params;
   try {
-    const allwpl = await Workspace.findAll({
+    const allwpl = await Lease.findAll({
       include: [
         {
           model: Property,
         },
         {
-          model: Lease,
+          model: Workspace,
         }
       ]
     })
