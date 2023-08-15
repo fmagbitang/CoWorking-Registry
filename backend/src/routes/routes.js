@@ -16,6 +16,8 @@ router.post('/forgot_passsword', userController.forgotPassword);
 router.get('/workspace/', workspaceController.getAllWorkspace);
 // get all property
 router.get('/property/', propertyController.getAllProperty);
+// get id by post 
+router.get('/allworkspace/', leaseController.getWPL);
 
 // Route for user login
 router.post('/login', login);
