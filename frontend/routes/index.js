@@ -26,4 +26,8 @@ router.get('/myProperties', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/myProperties.html'))
 });
 
+router.get('/myBookings', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/myBookings.html'))
+});
+
 module.exports = router;
