@@ -18,6 +18,8 @@ router.get('/workspace/', workspaceController.getAllWorkspace);
 router.get('/property/', propertyController.getAllProperty);
 // get id by post 
 router.get('/allworkspace/', leaseController.getWPL);
+router.put('/property/update/:id', propertyController.updateProperty);
+router.delete('/property/delete/:id',  propertyController.deleteProperty);
 
 // Route for user login
 router.post('/login', login);
@@ -43,6 +45,7 @@ router.delete('/users/:id', userController.deleteUser);
 router.post('/workspace/create', isOwner, workspaceController.createWorkspace);
 // update workspace
 router.put('/workspace/update/:id', isOwner, workspaceController.updateWorkspace);
+router.delete('/workspace/delete/:id', isOwner, workspaceController.deleteWorkspace);
 // get workspace with user and property by ID
 router.get('/workspace/:id', isOwner, workspaceController.getWorkspaceByPropertyId);
 // get workspace with user and property by ID
