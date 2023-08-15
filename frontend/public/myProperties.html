@@ -323,11 +323,12 @@
     }
 </script>
 
-<!-- SCRIPT FOR CREATING A NEW WORKSPACE BASED ON THE EXISTING PROPERTY ID -->
+<!-- SCRIPT FOR STORING ID's On Forms for properties -->
 <script>
    document.addEventListener('DOMContentLoaded', function () {
     const cardContainer = document.getElementById('myProperties'); // Parent element for delegation
 
+    //For adding Workspace
     cardContainer.addEventListener('click', function (event) {
         if (event.target.classList.contains('addWorkSpace')) {
             const propertyId = event.target.getAttribute('data-property-id');
@@ -336,8 +337,104 @@
             console.log("This is the property value:" + propertyId);
         }
     });
+
+    // For Editing Property
+    cardContainer.addEventListener('click', function (event) {
+        if (event.target.classList.contains('editProperty')) {
+            const editPropertyId = event.target.getAttribute('edit_property_id');
+            const editPropertyInput = document.getElementById('edit_propertyID');
+            editPropertyInput.value = editPropertyId;
+        }
+    })
+
+    //For Deleting Property
+    cardContainer.addEventListener('click', function (event) {
+        if (event.target.classList.contains('deleteProperty')) {
+            const deletePropertyId = event.target.getAttribute('delete_property_id');
+            const deletePropertyInput = document.getElementById('delete_propertyID');
+            deletePropertyInput.value = deletePropertyId;
+        }
+    })
+ 
 });
+
 </script>
+
+
+
+<!-- SCRIPT TO RESET AND DELETE THE PROPERTIES -->
+<script>
+    const token2 = localStorage.getItem('token');
+    const userID2 = localStorage.getItem('userID');
+
+    const editProperty = async(event) => {
+        event.preventDefault();
+
+        const editPropertyForm = document.getElementById('editMyProperty');
+        const editPropertyData = new FormData(editPropertyData);
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-type", "application/json")
+        myHeaders.append("Authorization", `Bearer ${token2}`);
+
+        const requestBody = JSON.stringify({
+            address: editPropertyData.get('address'),
+            neighborhood: editPropertyData.get('neighborhood'),
+            squarefoot: editPropertyData.get('squarefoot'),
+            parking: convertCheckBox(editPropertyData.get('parking')),
+            smoking: convertCheckBox(editPropertyData.get('smoking')),
+            transportation: convertCheckBox(editPropertyData.get('transpo')),
+            property_id: editPropertyData.get('edit_propertyID')
+        });
+
+        console.log(requestBody);
+
+        const requestOptionsAW = {
+            method: 'POST',
+            headers: myHeaders,
+            body: requestBody,
+            redirect: 'follow'
+        }
+
+        try{
+            const responseAW = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsAW);
+            const resultsAW = await responseAW.text();
+
+            if(responseAW.ok){
+                console.log("succesfully added")
+            }
+        }catch (err) {
+            console.log('err', err);
+
+            alert('An error occured, Please Try again later!');
+        }
+    }
+
+    // const deleteProperty = async (event) => {
+    //     event.preventDefault()
+
+    //     const deletePropertyForm = document.getElementById('deleteMyProperty');
+    //     const deletePropertyData = new FormData(deletePropertyData);
+
+    //     ////PUT CODE HERE
+
+    // }
+
+
+    if(!token2){
+        alert('Please Login to an Account');
+    }else{
+        const editPropertyForm = document.getElementById('editMyProperty');
+        editPropertyForm.addEventListener('submit', editProperty);
+
+        // const deletePropertyForm = document.getElementById('deleteMyProperty');
+        // deletePropertyForm.addEventListener('submit', deleteProperty)
+    }
+</script>
+
+
+
+
 
 <!-- SCRIPT TO ADD NEW WORKSPACE ON A LISTED PROPERTY -->
 <script>

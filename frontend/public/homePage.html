@@ -165,6 +165,103 @@ document.addEventListener('click', function (event) {
   </script>
 
 
+<!-- SCRIPT STORING ID's WORKSPACE -->
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function () {
+  const workspaceContainer = document.getElementById('cardContainer'); // Parent element for delegation
+
+
+  // For Editing Workspace
+  workspaceContainer.addEventListener('click', function (event) {
+      if (event.target.classList.contains('editWorkspace')) {
+          const editWorkspaceId = event.target.getAttribute('edit_');
+          const editWorkspaceInput = document.getElementById('edit_WorkspaceID');
+          const editWorkspacePropertyId = event.target.getAttribute('edit_'); /////EDIT ALL ATTRIBUTES
+          const editWorkspacePropertyInput = document.getElementById('edit_WorkspacePropertyID');
+          const editWorkspaceLeaseId = event.target.getAttribute('edit_');
+          const editWorkspaceLeaseInput = document.getElementById('edit_WorkspaceLeaseID');
+          editWorkspaceInput.value = editWorkspaceId;
+      }
+  })
+
+  //For Deleting Workspace
+  workspaceContainer.addEventListener('click', function (event) {
+      if (event.target.classList.contains('deleteWorkspace')) {
+          const deleteWorkspaceId = event.target.getAttribute('');
+          const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
+          deleteWorkspaceInput.value = deleteWorkspaceId;
+      }
+  })
+
+});
+
+</script> -->
+
+
+<!-- SCRIPT TO  and edit DELETE WORKSPACE -->
+<!-- <script>
+  const token3 = localStorage.getItem('token');
+  const userID3 = localStorage.getItem('userID');
+
+  const editWorkspace = async(event) => {
+      event.preventDefault();
+
+      const editWorkspaceForm = document.getElementById('editMyWorkspace');
+      const editWorkspaceData = new FormData(editWorkspaceData);
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-type", "application/json")
+      myHeaders.append("Authorization", `Bearer ${token2}`);
+
+      const requestBody = JSON.stringify({
+          //Input all info here
+      });
+
+      console.log(requestBody);
+
+      const requestOptionsAW = {
+          method: 'POST',
+          headers: myHeaders,
+          body: requestBody,
+          redirect: 'follow'
+      }
+
+      try{
+          const responseAW = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsAW);
+          const resultsAW = await responseAW.text();
+
+          if(responseAW.ok){
+              console.log("succesfully added")
+          }
+      }catch (err) {
+          console.log('err', err);
+
+          alert('An error occured, Please Try again later!');
+      }
+  }
+
+  // const deleteWorkspace = async (event) => {
+  //     event.preventDefault()
+
+  //     const deleteWorkspaceForm = document.getElementById('deleteMyWorkspace');
+  //     const deleteWorkspaceData = new FormData(deleteWorkspaceData);
+
+  //     ////PUT CODE HERE
+
+  // }
+
+
+  if(!token2){
+      alert('Please Login to an Account');
+  }else{
+      const editWorkspaceForm = document.getElementById('editMyWorkspace');
+      editWorkspaceForm.addEventListener('submit', editProperty);
+
+      // const deleteWorkspaceForm = document.getElementById('deleteMyWorkspace');
+      // deleteWorkspaceForm.addEventListener('submit', deleteProperty)
+  }
+
+</script> -->
 
   <!-- Creates a card for every Workspace -->
   <!-- CREATES MODALS FOR EACH WORKSPACE -->
