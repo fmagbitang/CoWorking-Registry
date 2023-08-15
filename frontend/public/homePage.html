@@ -62,7 +62,9 @@
       const myHeaders = new Headers();
       myHeaders.append("Content-type", "application/json");
       myHeaders.append("Authorization", `Bearer ${token2}`);
-  
+      
+      console.log(workspaceId);
+
       const requestBody = JSON.stringify({
         user_id: userID,
         property_id: propertyId,
@@ -76,6 +78,8 @@
         redirect: 'follow'
       };
   
+      console.log(requestBody);
+
       try {
         const response = await fetch('http://143.198.237.154/api/lease/book', requestOptions);
         const results = await response.text();
@@ -83,6 +87,13 @@
   
         if (response.ok) {
           console.log("Successfully booked and added to the database");
+          const refresh = document.getElementById('refreshdiv')
+
+          refresh.innerHTML = `
+          <head>
+            <meta http-equiv="refresh" content="1">
+        </head>`
+
         } else {
           console.log("Booking failed");
         }
@@ -94,23 +105,24 @@
   
 
   
-    document.addEventListener('DOMContentLoaded', function () {
-      const bookWorkspace = document.querySelectorAll('.book-workspace');
+    // document.addEventListener('DOMContentLoaded', function () {
+    //   const bookWorkspace = document.querySelectorAll('.book-workspace');
   
-      bookWorkspace.forEach(function (button) {
-        button.addEventListener('click', function () {
-          if (!token2) {
-            alert('Please Login to an Account');
-          } else {
-            console.log("I am currently booking");
-            const propertyId = this.getAttribute('data-property-id');
-            const workspaceId = this.getAttribute('data-workspace-id');
+    //   bookWorkspace.forEach(function (button) {
+    //     button.classList.add('Addt')
+    //     button.addEventListener('click', function () {
+    //       if (!token2) {
+    //         alert('Please Login to an Account');
+    //       } else {
+    //         console.log("I am currently booking");
+    //         const propertyId = this.getAttribute('data-property-id');
+    //         const workspaceId = this.getAttribute('data-workspace-id');
   
-            handleCreateLease(propertyId, workspaceId);
-          }
-        });
-      });
-    });
+    //         handleCreateLease(propertyId, workspaceId);
+    //       }
+    //     });
+    //   });
+    // });
 
 
  
@@ -134,6 +146,22 @@
 //     // console.log("working");
 //   });
 // });
+
+
+
+document.addEventListener('click', function (event) {
+    const target = event.target;
+    if (target.classList.contains('book-workspace')) {
+      if (!token2) {
+        alert('Please Login to an Account');
+      } else {
+        const propertyId = target.getAttribute('data-property-id');
+        const workspaceId = target.getAttribute('data-workspace-id');
+        handleCreateLease(propertyId, workspaceId);
+      }
+    }
+  });
+
   </script>
 
 

@@ -97,9 +97,12 @@
             <br>
             <h2>Workspace</h2>
             <div class="form-floating">
-                <input type="text" name="name" id="name" class="form-control" placeholder="Meeting Room" required>
-                <label for="name" class="form-label">Type of Workspace</label>
-                <div class="invalid-feedback">Invalid Workspace</div>
+                <select name="name" id="name"  class="form-select" required>
+                    <option disabled selected>Type of Workspace</option>
+                    <option value="Meeting Room">Meeting Room</option>
+                    <option value="Private Office Room">Private Office Room</option>
+                    <option value="Desk">Desk</option>
+                </select>
             </div>
             <br>
             <div class="form-floating">
@@ -150,9 +153,12 @@
                         <form novalidate id="createWorkspace">
                             <input type="number" name="propertyID" id="propertyID" hidden>
                             <div class="form-floating">
-                                <input type="text" name="name" id="name" class="form-control"  placeholder="Meeting Room" required>
-                                <label for="name" class="form-label">Type of Workspace</label>
-                                <div class="invalid-feedback">Invalid Workspace</div>
+                                <select name="name" id="name"  class="form-select" required>
+                                    <option disabled selected>Type of Workspace</option>
+                                    <option value="Meeting Room">Meeting Room</option>
+                                    <option value="Private Office Room">Private Office Room</option>
+                                    <option value="Desk">Desk</option>
+                                </select>
                             </div>
                             <br>
                             <div class="form-floating">
