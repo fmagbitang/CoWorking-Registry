@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 37ede2a (Added lease)
 //SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
 const cardContainer = document.getElementById('cardContainer');
 
@@ -49,12 +53,21 @@ const userId = localStorage.getItem('userID');
 fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata => {
+<<<<<<< HEAD
         // Loop through the data and create cards
         workspacedata.forEach(workspaceItem => {
             createCard(workspaceItem);
         })
     })
     .catch(error => console.error('Error fetching data', error));
+=======
+            // Loop through the data and create cards
+            workspacedata.forEach(workspaceItem => {
+                    createCard(workspaceItem);
+                })
+            })   
+        .catch(error => console.error('Error fetching data', error));
+>>>>>>> 37ede2a (Added lease)
 
 
 //SELECTING ALL VALID WORKSPACE FOR MODEL
@@ -122,6 +135,7 @@ const createModal = (data) => {
 fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata1 => {
+<<<<<<< HEAD
         // Loop through the data and create card
         workspacedata1.forEach(workspaceItem1 => {
             // const lease = JSON.parse(workspaceItem1.Leases[0])
@@ -131,6 +145,17 @@ fetch("http://143.198.237.154/api/allworkspace/")
         })
     })
     .catch(error => console.error('Error fetching data', error));
+=======
+            // Loop through the data and create card
+            workspacedata1.forEach(workspaceItem1 => {
+                // const lease = JSON.parse(workspaceItem1.Leases[0])
+                // console.log(lease.price)
+                // console.log(workspaceItem1.Leases[0])
+                    createModal(workspaceItem1);
+                })
+            })   
+        .catch(error => console.error('Error fetching data', error));
+>>>>>>> 37ede2a (Added lease)
 
 const parseBool = (a) => {
     return a ? "Yes" : "No";
