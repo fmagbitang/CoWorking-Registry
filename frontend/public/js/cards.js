@@ -237,7 +237,7 @@ const createModal = (workspace_data, property_data) => {
                     
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary">Book</button>
+                    <button class="btn btn-primary book-workspace" data-property-id="${workspace_data.property_id}" data-workspace-id="${workspace_data.id}">Book</button>
                 </div>
             </div>
         </div>

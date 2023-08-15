@@ -119,9 +119,9 @@ fetch('http://143.198.237.154/api/workspace/')
                 // Loop through the data and create cards
                 workspacedata.forEach(workspaceItem => {
                     propertydata.forEach(propertyItem => {
-                        if(workspaceItem.property_id === propertyItem.id && workspaceItem.user_id == userId){
+                        if(workspaceItem.property_id === propertyItem.id && workspaceItem.user_id ==  userId){
                         createCard(workspaceItem,propertyItem);
-                    }
+                        }
                     })
                 })
                   

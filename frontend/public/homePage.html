@@ -16,11 +16,34 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Include Link for rating Star Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    #create-property-container{
+        border: .5px solid black;
+        padding: 60px;
+        margin: 40px;
+        width: 800px;
+        position:relative;
+        display: block;
+        margin: 15px auto;
+    }
+
+    .addWorkSpace{
+        position: absolute;
+        top: 20px;
+        right: 10px;
+    }
+</style>
+
 </head>
 
 <body>
+    
+    <div id="navbarContent"></div>
+    <!-- script for navbar include -->
+    <script src="/js/navbar.js"></script>
 
-  <div id="navbarContent"></div>
+<hr>
 
   <header>
     <div class="container">
@@ -100,6 +123,123 @@
   <script src="/js/cards.js"></script>
   
 
+
+<!-- SCRIPT FOR BOOKING A WORKSPACE -->
+<!-- <script>
+  const userID = localStorage.getItem('userID');
+  const token2 = localStorage.getItem('token');
+  
+  document.addEventListener('DOMContentLoaded', function () {
+      const bookWorkspace = document.querySelectorAll('.book-workspace');
+  
+      bookWorkspace.forEach(function (button) {
+      button.addEventListener('click', function () {
+
+        if(!token2){
+          alert('Please Login to an Account');
+        }else{
+          console.log("I am currenlty booking");
+          const propertyId = this.getAttribute('data-property-id').value;
+          const workspaceId = this.getAttribute('data-workspace-id').value;
+
+            const handleCreateLease = async (event) => {
+            event.preventDefault();
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-type", "application/json")
+            myHeaders.append("Authorization", `Bearer ${token2}`);
+
+            const requestBody = JSON.stringify({
+                user_id: userID,
+                property_id: propertyId,
+                workspace_id: workspaceId,
+            });
+
+            const requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBody,
+                redirect: 'follow'
+            }
+
+            try {
+                const response = await fetch('http://143.198.237.154/api/lease/book', requestOptions)
+                const results = await response.text()
+                console.log(results)
+
+                if (responseAP.ok) {
+                    console.log("succesfully booked and added to the data base")
+                }
+            } catch (err) {
+                console.log('err', err);
+                alert('An error occured, Please Try again later!');
+            }
+        }
+          
+      };
+
+      });
+      });
+  });
+
+</script> -->
+
+<script>
+  const userID = localStorage.getItem('userID');
+  const token2 = localStorage.getItem('token');
+
+  const handleCreateLease = async (propertyId, workspaceId) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token2}`);
+
+    const requestBody = JSON.stringify({
+      user_id: userID,
+      property_id: propertyId,
+      workspace_id: workspaceId,
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: requestBody,
+      redirect: 'follow'
+    };
+
+    try {
+      const response = await fetch('http://143.198.237.154/api/lease/book', requestOptions);
+      const results = await response.text();
+      console.log(results);
+
+      if (response.ok) {
+        console.log("Successfully booked and added to the database");
+      } else {
+        console.log("Booking failed");
+      }
+    } catch (err) {
+      console.log('err', err);
+      alert('An error occurred. Please try again later!');
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const bookWorkspace = document.querySelectorAll('.book-workspace');
+
+    bookWorkspace.forEach(function (button) {
+      button.addEventListener('click', function () {
+        if (!token2) {
+          alert('Please Login to an Account');
+        } else {
+          console.log("I am currently booking");
+          const propertyId = this.getAttribute('data-property-id');
+          const workspaceId = this.getAttribute('data-workspace-id');
+
+          handleCreateLease(propertyId, workspaceId);
+        }
+      });
+    });
+  });
+</script>
 </body>
 
 </html>
