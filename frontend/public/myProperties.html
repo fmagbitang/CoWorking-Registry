@@ -97,9 +97,12 @@
             <br>
             <h2>Workspace</h2>
             <div class="form-floating">
-                <input type="text" name="name" id="name" class="form-control" placeholder="Meeting Room" required>
-                <label for="name" class="form-label">Type of Workspace</label>
-                <div class="invalid-feedback">Invalid Workspace</div>
+                <select name="name" id="name"  class="form-select" required>
+                    <option disabled selected>Type of Workspace</option>
+                    <option value="Meeting Room">Meeting Room</option>
+                    <option value="Private Office Room">Private Office Room</option>
+                    <option value="Desk">Desk</option>
+                </select>
             </div>
             <br>
             <div class="form-floating">
@@ -150,9 +153,12 @@
                         <form novalidate id="createWorkspace">
                             <input type="number" name="propertyID" id="propertyID" hidden>
                             <div class="form-floating">
-                                <input type="text" name="name" id="name" class="form-control"  placeholder="Meeting Room" required>
-                                <label for="name" class="form-label">Type of Workspace</label>
-                                <div class="invalid-feedback">Invalid Workspace</div>
+                                <select name="name" id="name"  class="form-select" required>
+                                    <option disabled selected>Type of Workspace</option>
+                                    <option value="Meeting Room">Meeting Room</option>
+                                    <option value="Private Office Room">Private Office Room</option>
+                                    <option value="Desk">Desk</option>
+                                </select>
                             </div>
                             <br>
                             <div class="form-floating">
@@ -193,7 +199,80 @@
         </div>
     </div>
 </main>
+     <!-- **************************MODAL EDITING A PROPERTY -->
+     <div class="container">
+        <div class="modal fade" id="editProperty">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Edit Property</h2>
+                        <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form novalidate id="editMyProperty">
+                            <input type="number" name="edit_propertyID" id="edit_propertyID" hidden>
+                            <div class="form-floating">
+                                <input type="text" name="address" id="address" class="form-control"  placeholder="199 Key Drive SW, Calgary, AB , T2A 4C5" required>
+                                <label for="address" class="form-label">Address</label>
+                                <div class="invalid-feedback">Invalid Workspace</div>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Raddison"
+                                required>
+                                <label for="neighborhood" class="form-label">Neighborhood</label>
+                                <div class="invalid-feedback">Invalid input</div>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <input type="text" name="squarefoot" id="squarefoot" class="form-control" placeholder="10sqm" required>
+                                <label for="squarefoot" class="form-label">Squarefoot</label>
+                                <div class="invalid-feedback">Invalid input</div>
+                            </div>
+                            <br>
+                            <div class="form-check">
+                                <input type="checkbox" name="parking" id="parking" value="1" class="form-check-input">
+                                <label for="parking" class="form-check-label">Is parking Available?</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="smoking" id="smoking" value="1" class="form-check-input">
+                                <label for="smoking" class="form-check-label">Is smoking Available?</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="transpo" id="transpo" value="1" class="form-check-input">
+                                <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-sm float-end editProperty">Edit Property</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+         <!-- **************************MODAL FOR DELETING A PROPERTY -->
+         <div class="container">
+            <div class="modal fade" id="deleteProperty">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Delete Property</h2>
+                            <input type="number" name="delete_propertyID" id="delete_propertyID" hidden>
+                            <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this property?</p>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-sm float-end ">No, don't delete</button>
+                            <br><br>
+                            <button type="submit" class="btn btn-primary btn-sm float-end deleteProperty">Yes, delete property</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
 <footer class="footer bg-dark text-light py-2">
 
     <div class="container text-center">
@@ -227,6 +306,12 @@
                     <div>
                         This is my Property ID :${data.id} <br>
                     </div>
+                    <div>
+    <button class="btn btn-primary btn-sm float-end editProperty" data-bs-toggle="modal" data-bs-target="#editProperty">Edit</button>
+    </div>
+    <div>
+    <button class="btn btn-primary btn-sm float-end deleteProperty" data-bs-toggle="modal" data-bs-target="#deleteProperty">Delete</button>
+</div>
                 </div>`;
 
         cardElement.innerHTML = cardContent;
