@@ -52,11 +52,11 @@ router.post('/property/create', isOwner, propertyController.createProperty);
 router.post('/myproperty/:id', isOwner, propertyController.getAllPropertyByOwner);
 // Route for lease
 // create/add lease
-router.post('/lease/create', leaseController.createLease);
+router.post('/lease/book', leaseController.createLease);
 // get all lease
 router.get('/lease/', leaseController.getAllLease);
 // update a lease
-router.post('/lease/:id', leaseController.updateLease);
+// router.post('/lease/:id', leaseController.updateLease);
 // get all lease of login user
 router.post('/mylease/:id', leaseController.getAllLeaseUserID);
 
