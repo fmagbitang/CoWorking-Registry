@@ -1,6 +1,5 @@
 
-
-// SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
+//SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
 const cardContainer = document.getElementById('cardContainer');
 
 const createCard = (data) => {
@@ -13,22 +12,22 @@ const createCard = (data) => {
         `<div class="card">
     <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
     <div class="card-body">
-        <h2 class="card-title">${workspace_data.name}</h2>
-        <span class="card-subtitle">${property_data.address === undefined ? 'No Address Provided': `${property_data.address}`}</span>
+        <h2 class="card-title">${data.Workspace.name}</h2>
+        <span class="card-subtitle">${data.Property.address === undefined ? 'No Address Provided': `${data.Property.address}`}</span>
         <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 20px 3px 3px">
             <span class="fa fa-star checked" style="color: orange;"></span>
-            <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${workspace_data.ratings}</p>
+            <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${data.Workspace.ratings}</p>
         </div>
         <div class="card-text">
-            ${workspace_data.description === undefined ? 'No Description Provided': `${workspace_data.description}`}  
+            ${data.Workspace.description === undefined ? 'No Description Provided': `${data.Workspace.description}`}  
         </div>
         <div class="card-text" style= "padding-top: 5px">
-            <p class="availability">${workspace_data.availability ? 'Available' : 'Not Available'}</p>
+            <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
         </div>
         <div class=""card-text>
-            This is my Property ID: ${workspace_data.property_id} <br>
-            This is the User ID: ${workspace_data.user_id} <br>
-            This is the Workspace ID: ${workspace_data.id}
+            This is my Property ID: ${data.Workspace.property_id} <br>
+            This is the User ID: ${data.Workspace.user_id} <br>
+            This is the Workspace ID: ${data.Workspace.id}
         </div>
     </div>
 
@@ -48,25 +47,15 @@ const createCard = (data) => {
 const userId = localStorage.getItem('userID');
 
 // Fetch data from the API server
-fetch('http://143.198.237.154/api/workspace/')
+fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata => {
-        fetch('http://143.198.237.154/api/property/')
-            .then(response => response.json())
-            .then(propertydata => {
-                // Loop through the data and create cards
-                workspacedata.forEach(workspaceItem => {
-                    propertydata.forEach(propertyItem => {
-                        if(workspaceItem.property_id === propertyItem.id){
-                        createCard(workspaceItem,propertyItem);
-                    }
-                    })
+            // Loop through the data and create cards
+            workspacedata.forEach(workspaceItem => {
+                    createCard(workspaceItem);
                 })
-                  
-            })
-            .catch(error => console.error('Error fetching data', error));
-        })
-    .catch(error => console.error('Error fetching data:', error));
+            })   
+        .catch(error => console.error('Error fetching data', error));
 
 
 //SELECTING ALL VALID WORKSPACE FOR MODEL
@@ -82,33 +71,39 @@ const createModal = (data) => {
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1>${workspace_data.name}</h1>
-                    <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#${workspace_data.id}modal"></button>
+                    <h1>${data.Workspace.name}</h1>
+                    <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#${data.Workspace.id}modal"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="${workspace_data.photos !== null ? '/img/coworking.jpg': `${workspace_data.photos}`}" alt="Image" style="display: block; margin: 0 auto;"">
+                    <img src="${data.Workspace.photos !== null ? '/img/coworking.jpg': `${data.Workspace.photos}`}" alt="Image" style="display: block; margin: 0 auto;"">
                     <hr>
 
-                    <span>${workspace_data.Property.address === undefined ? 'No Address Provided': `${workspace_data.Property.address}`}</span>
-                    <div class="card-text">Capacity: ${workspace_data.capacity} </div>
+                    <span>${data.Property.address === undefined ? 'No Address Provided': `${data.Property.address}`}</span>
+                    <div class="card-text">Capacity: ${data.Workspace.capacity} </div>
                     <div>
-                        ${workspace_data.description === undefined ? 'No Description Provided': `${workspace_data.description}`}  
+                        ${data.Workspace.description === undefined ? 'No Description Provided': `${data.Workspace.description}`}  
                     </div>
-                    <div class="card-text">Squarefoot: ${workspace_data.Property.squarefoot} <br>Parking: ${parseBool(workspace_data.Property.parking)} <br> Smoking:${parseBool(workspace_data.Property.smoking)} <br> Public Transportation Accessible: ${parseBool(workspace_data.Property.transportation)} 
+                    <div class="card-text">Squarefoot: ${data.Property.squarefoot} <br>Parking: ${parseBool(data.Property.parking)} <br> Smoking:${parseBool(data.Property.smoking)} <br> Public Transportation Accessible: ${parseBool(data.Property.transportation)} 
                     </div>
-                    <div class="card-text">Price: ${workspace_data.Leases.price} <br>Lease Term: ${parseBool(workspace_data.Leases.lease_term)}
+                    <div class="card-text">Price: ${data.price} <br>Lease Term: ${data.lease_term}
+                    <br> Lease Id : ${data.id}
                     </div>
                     <div style="padding-top: 5px">
-                        <p class="availability">${workspace_data.availability ? 'Available' : 'Not Available'}</p>
+                        <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
                     </div>
                     <div class="card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 20px 3px 3px">
                         <span class="fa fa-star checked" style="color: orange;"></span>
-                        <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${workspace_data.ratings}</p>
+                        <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${data.Workspace.ratings}</p>
+                    </div>
+
+                    <div style="display:none" id="refreshdiv">
+                        
                     </div>
                     
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary book-workspace" book-workspace-id=${workspace_data.id}" data-property-id="${workspace_data.property_id}">Book</button>
+                ${data.Workspace.availability ? `<button class="btn btn-primary book-workspace" data-workspace-id="${parseInt(data.Workspace.id)}" data-property-id="${parseInt(data.Workspace.property_id)}">Book</button> `: `<button class="btn btn-danger">Rented</button>`}
+                    
                 </div>
             </div>
         </div>
@@ -128,8 +123,11 @@ const createModal = (data) => {
 fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata1 => {
-            // Loop through the data and create cards
+            // Loop through the data and create card
             workspacedata1.forEach(workspaceItem1 => {
+                // const lease = JSON.parse(workspaceItem1.Leases[0])
+                // console.log(lease.price)
+                // console.log(workspaceItem1.Leases[0])
                     createModal(workspaceItem1);
                 })
             })   
@@ -142,18 +140,18 @@ const parseBool = (a) => {
 
 // Function to change availability text color
 function updateAvailabilityColor() {
-    // Get all elements with the availability class
-    var availabilityElements = document.querySelectorAll('.availability');
+// Get all elements with the availability class
+var availabilityElements = document.querySelectorAll('.availability');
 
-    // Loop through each element
-    availabilityElements.forEach(function (element) {
-        // Check if availability is "Available"
-        if (element.textContent.trim() === 'Available') {
-            // Set font color to green
-            element.style.color = 'green';
-        } else {
-            // Set font color to red
-            element.style.color = 'red';
-        }
-    });
+// Loop through each element
+availabilityElements.forEach(function(element) {
+    // Check if availability is "Available"
+    if (element.textContent.trim() === 'Available') {
+        // Set font color to green
+        element.style.color = 'green';
+    } else {
+        // Set font color to red
+        element.style.color = 'red';
+    }
+});
 }
