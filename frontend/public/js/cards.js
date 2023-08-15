@@ -204,7 +204,7 @@ fetch('http://143.198.237.154/api/workspace/')
 
 const propertyModal = document.getElementById('property-modals');
 
-const createModal = (workspace_data, property_data) => {
+const createModal = (workspace_data) => {
     const modalElement = document.createElement('div');
     modalElement.className = "container";
 
@@ -220,12 +220,14 @@ const createModal = (workspace_data, property_data) => {
                     <img src="${workspace_data.photos !== null ? '/img/coworking.jpg': `${workspace_data.photos}`}" alt="Image" style="display: block; margin: 0 auto;"">
                     <hr>
 
-                    <span>${property_data.address === undefined ? 'No Address Provided': `${property_data.address}`}</span>
+                    <span>${workspace_data.Property.address === undefined ? 'No Address Provided': `${workspace_data.Property.address}`}</span>
                     <div class="card-text">Capacity: ${workspace_data.capacity} </div>
                     <div>
                         ${workspace_data.description === undefined ? 'No Description Provided': `${workspace_data.description}`}  
                     </div>
-                    <div class="card-text">Squarefoot: ${property_data.squarefoot} <br>Parking: ${parseBool(property_data.parking)} <br> Smoking:${parseBool(property_data.smoking)} <br> Public Transportation Accessible: ${parseBool(property_data.transportation)} 
+                    <div class="card-text">Squarefoot: ${workspace_data.Property.squarefoot} <br>Parking: ${parseBool(workspace_data.Property.parking)} <br> Smoking:${parseBool(workspace_data.Property.smoking)} <br> Public Transportation Accessible: ${parseBool(workspace_data.Property.transportation)} 
+                    </div>
+                    <div class="card-text">Price: ${workspace_data.Leases.price} <br>Lease Term: ${parseBool(workspace_data.Leases.lease_term)}
                     </div>
                     <div style="padding-top: 5px">
                         <p class="availability">${workspace_data.availability ? 'Available' : 'Not Available'}</p>
@@ -237,7 +239,7 @@ const createModal = (workspace_data, property_data) => {
                     
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary book-workspace-id=${workspace_data.id}" data-property-id="${workspace_data.property_id}">Book</button>
+                    <button class="btn btn-primary book-workspace" book-workspace-id=${workspace_data.id}" data-property-id="${workspace_data.property_id}">Book</button>
                 </div>
             </div>
         </div>
@@ -248,29 +250,25 @@ const createModal = (workspace_data, property_data) => {
     updateAvailabilityColor();
 }
 
+// fetch("http://143.198.237.154/api/allworkspace/", requestOptions)
+//   .then(response => response.text())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));
+
 // Fetch data from the API server
-fetch('http://143.198.237.154/api/workspace/')
+fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata1 => {
-        fetch('http://143.198.237.154/api/property/')
-            .then(response => response.json())
-            .then(propertydata1 => {
-                // Loop through the data and create cards
-                workspacedata1.forEach(workspaceItem1 => {
-                    propertydata1.forEach(propertyItem1 => {
-                        if(workspaceItem1.property_id == propertyItem1.id){
-                            createModal(workspaceItem1,propertyItem1);
-                        }
-                    })
-                })   
-            })
-            .catch(error => console.error('Error fetching data', error));
-        })
-    .catch(error => console.error('Error fetching data:', error));
+            // Loop through the data and create cards
+            workspacedata1.forEach(workspaceItem1 => {
+                    createModal(workspaceItem1);
+                })
+            })   
+        .catch(error => console.error('Error fetching data', error));
 
-    const parseBool = (a) => {
-        return a ? "Yes" : "No";
-    }
+const parseBool = (a) => {
+    return a ? "Yes" : "No";
+}
 
 
 // Function to change availability text color
