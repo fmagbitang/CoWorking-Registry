@@ -92,38 +92,48 @@
       }
     };
   
-    // document.addEventListener('DOMContentLoaded', function () {
-    //   const bookWorkspace = document.querySelectorAll('.book-workspace');
-  
-    //   bookWorkspace.forEach(function (button) {
-    //     button.addEventListener('click', function () {
-    //       if (!token2) {
-    //         alert('Please Login to an Account');
-    //       } else {
-    //         console.log("I am currently booking");
-    //         const propertyId = this.getAttribute('data-property-id');
-    //         const workspaceId = this.getAttribute('data-workspace-id');
-  
-    //         handleCreateLease(propertyId, workspaceId);
-    //       }
-    //     });
-    //   });
-    // });
 
-    document.addEventListener('click', function (event) {
-    const target = event.target;
-    if (target.classList.contains('book-workspace')) {
-      if (!token2) {
-        alert('Please Login to an Account');
-      } else {
-        console.log("I am currently booking");
-        const propertyId = target.getAttribute('data-property-id');
-        const workspaceId = target.getAttribute('data-workspace-id');
-        console.log("The proerty Id is" + {propertyId} + "\nThe workspaceID is" + {workspaceId})
-        handleCreateLease(propertyId, workspaceId);
-      }
-    }
-  });
+  
+    document.addEventListener('DOMContentLoaded', function () {
+      const bookWorkspace = document.querySelectorAll('.book-workspace');
+  
+      bookWorkspace.forEach(function (button) {
+        button.addEventListener('click', function () {
+          if (!token2) {
+            alert('Please Login to an Account');
+          } else {
+            console.log("I am currently booking");
+            const propertyId = this.getAttribute('data-property-id');
+            const workspaceId = this.getAttribute('data-workspace-id');
+  
+            handleCreateLease(propertyId, workspaceId);
+          }
+        });
+      });
+    });
+
+
+ 
+// EVENT DELEGATIOn
+
+//   document.addEventListener('DOMContentLoaded', function () {
+//   const propertyContainer = document.getElementById('property-modals'); 
+
+//     propertyContainer.addEventListener('click', function (event) {
+//       if (event.target.classList.contains('book-workspace')) {
+//         if (!token2) {
+//           alert('Please Login to an Account');
+//         } else {
+//           console.log("I am currently booking");
+//           // const propertyId = target.getAttribute('data-property-id');
+//           // const workspaceId = target.getAttribute('data-workspace-id');
+//           // console.log("The proerty Id is" + {propertyId} + "\nThe workspaceID is" + {workspaceId})
+//           // handleCreateLease(propertyId, workspaceId);
+//         }
+//     }
+//     // console.log("working");
+//   });
+// });
   </script>
 
 
