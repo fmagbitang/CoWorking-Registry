@@ -86,6 +86,27 @@ const getAllLeaseUserID = async (req, res, next) => {
   }
 };
 
+// post all workspace, property and lease by workspace ID
+const getWPL = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const allwpl = await Workspace.findAll({
+      include: [
+        {
+          model: Property,
+        },
+        {
+          model: Lease,
+        }
+      ]
+    })
+    res.status(200).json(allwpl);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 // update lease availability// Update a user by ID
 const updateLease = async (req, res, next) => {
   const { id } = req.params;
@@ -120,4 +141,5 @@ module.exports = {
   getAllLease,
   updateLease,
   getAllLeaseUserID,
+  getWPL,
 };
