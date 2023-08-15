@@ -76,9 +76,9 @@ const createCard = (workspace_data, property_data) => {
             <p class="availability">${workspace_data.availability ? 'Available' : 'Not Available'}</p>
         </div>
         <div class=""card-text>
-            This is my Property ID: ${property_data.id} <br>
+            This is my Property ID: ${workspace_data.property_id} <br>
             This is the User ID: ${workspace_data.user_id} <br>
-            This is the Workspace ID: ${workspace_data.property_id}
+            This is the Workspace ID: ${workspace_data.id}
         </div>
     </div>
 </div>`;
@@ -237,7 +237,7 @@ const createModal = (workspace_data, property_data) => {
                     
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary">Book</button>
+                    <button class="btn btn-primary book-workspace-id=${workspace_data.id}" data-property-id="${workspace_data.property_id}">Book</button>
                 </div>
             </div>
         </div>
