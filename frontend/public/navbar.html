@@ -1,3 +1,37 @@
+<style>
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.profile-header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    
+}
+
+.profile-header p {
+    color: #777;
+    font-size: 1rem;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+}
+
+.h1{
+  color: blue;
+}
+
+</style>
+
+
 <nav class="navbar navbar-expand-md navbar-light">
     <div class="container">
         <a href="#" class="navbar-brand">
@@ -48,11 +82,12 @@
     <div class="modal fade" id="profile">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
-            <h1>My Profile</h1>
+          <div class="modal-header profile-header">
+            <img src="img/profile.png" alt="User Profile">
+            <h1 class="h1">My Profile</h1>
             <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#profile"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body profile-info">
             <div class="profile" id="profileBody">
             </div>
           </div>
