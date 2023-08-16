@@ -155,13 +155,14 @@ const createModal = (data) => {
                     <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#${data.Workspace.id}modal"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="${data.Workspace.photos !== null ? '/img/coworking.jpg' : `${data.Workspace.photos}`}" alt="Image" style="display: block; margin: 0 auto;"">
+                <img src="${data.Workspace.photos !== null ? `/img/coworking.jpg` : data.Workspace.photos}" alt="Image" style="display: block; margin: 0 auto;">
+
                     <hr>
 
                     <span>${data.Property.address === undefined ? 'No Address Provided' : `${data.Property.address}`}</span>
                     <div class="card-text">Capacity: ${data.Workspace.capacity} </div>
                     <div>
-                        ${data.Workspace.description === undefined ? '143.198.237.154cription Provided' : `${data.Workspace.description}`}
+                        ${data.Workspace.description === undefined ? 'No description Provided' : `${data.Workspace.description}`}
                     </div>
                     <div class="card-text">Squarefoot: ${data.Property.squarefoot} <br>Parking: ${parseBool(data.Property.parking)} <br> Smoking:${parseBool(data.Property.smoking)} <br> Public Transportation Accessible: ${parseBool(data.Property.transportation)} 
                     </div>

@@ -151,7 +151,7 @@
                             <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
                         </div>
                         <div class="modal-body">
-                            <form novalidate id="createWorkspace">
+                            <form novalidate id="createWorkspace" enctype="multipart/form-data">
                                 <input type="number" name="propertyID" id="propertyID" hidden>
                                 <div class="form-floating">
                                     <select name="name" id="name" class="form-select" required>
@@ -194,7 +194,7 @@
                                 <div>
                                     <label for="image" class="form-label">Please Upload an image of the
                                         workspace</label>
-                                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                                    <input type="file" name="image" id="image" class="form-control" accept="image/*">
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-primary btn-sm float-end">Add Workspace</button>
@@ -370,6 +370,20 @@
             const myHeaders = new Headers();
             myHeaders.append("Content-type", "application/json");
             myHeaders.append("Authorization", `Bearer ${token}`);
+            const imageFile = propertiesFormData.get('image');
+            if (imageFile) {
+                fetch('/upload', {
+                    method: 'POST',
+                    body: propertiesFormData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('File uploaded:', data.filePath);
+                    })
+                    .catch(error => {
+                        console.error('Error uploading file:', error);
+                    });
+            }
 
             const requestBodyPr = JSON.stringify({
                 address: propertiesFormData.get('address'),
@@ -380,7 +394,7 @@
                 transportation: convertCheckBox(propertiesFormData.get('transpo')),
                 name: propertiesFormData.get('name'),
                 capacity: propertiesFormData.get('capacity'),
-                photos: propertiesFormData.get('image') ? propertiesFormData.get('image').name : null,
+                photos: imageFile ? `/img/${imageFile.name}` : null,
                 description: propertiesFormData.get('description'),
                 lease_term: propertiesFormData.get('lease_term'),
                 price: propertiesFormData.get('price')
@@ -580,11 +594,25 @@
             const myHeaders = new Headers();
             myHeaders.append("Content-type", "application/json");
             myHeaders.append("Authorization", `Bearer ${token1}`);
+            const imageFile = workspaceFormData.get('image');
+            if (imageFile) {
+                fetch('/upload', {
+                    method: 'POST',
+                    body: workspaceFormData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('File uploaded:', data.filePath);
+                    })
+                    .catch(error => {
+                        console.error('Error uploading file:', error);
+                    });
+            }
 
             const requestBody = JSON.stringify({
                 name: workspaceFormData.get('name'),
                 capacity: workspaceFormData.get('capacity'),
-                photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null,
+                photos: workspaceFormData.get('image') ? `/img/${imageFile.name}` : null,
                 property_id: workspaceFormData.get('propertyID'),
                 description: workspaceFormData.get('description'),
                 lease_term: workspaceFormData.get('lease_term'),

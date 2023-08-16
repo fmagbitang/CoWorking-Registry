@@ -25,7 +25,7 @@
   <div id="navbarContent"></div>
   <!-- script for navbar include -->
   <script src="/js/navbar.js"></script>
-  
+
 
 
   <header>
@@ -48,7 +48,7 @@
       <div class="row row-cols-4 gy-4" id="cardContainer">
       </div>
     </div>
-    
+
     <!-- Modal Container for Properties -->
     <div id="property-modals">
 
@@ -137,8 +137,8 @@
           </div>
         </div>
       </div>
-      
-      </div>
+
+    </div>
   </main>
   <footer class="footer bg-dark text-light py-3">
 
@@ -190,20 +190,20 @@
       }
     };
 
-    document.addEventListener('click', (event)=> {
+    document.addEventListener('click', (event) => {
       const target = event.target;
-      if(target.classList.contains('book-workspace')){
+      if (target.classList.contains('book-workspace')) {
         if (!token2) {
-            alert('Please Login to an Account');
-            window.location.href = '/';
-          } else {
-            console.log("I am currently booking");
-            const propertyId = target.getAttribute('data-property-id');
-            const workspaceId = target.getAttribute('data-workspace-id');
-            
+          alert('Please Login to an Account');
+          window.location.href = '/';
+        } else {
+          console.log("I am currently booking");
+          const propertyId = target.getAttribute('data-property-id');
+          const workspaceId = target.getAttribute('data-workspace-id');
 
-            handleCreateLease(propertyId, workspaceId);
-          }
+
+          handleCreateLease(propertyId, workspaceId);
+        }
       }
     })
   </script>
@@ -261,12 +261,26 @@
       const myHeaders = new Headers();
       myHeaders.append("Content-type", "application/json");
       myHeaders.append("Authorization", `Bearer ${token3}`);
+      const imageFile = editWorkspaceData.get('image');
+      if (imageFile) {
+        fetch('/upload', {
+          method: 'POST',
+          body: editWorkspaceData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('File uploaded:', data.filePath);
+          })
+          .catch(error => {
+            console.error('Error uploading file:', error);
+          });
+      }
 
       const requestBody = JSON.stringify({
         //Input all info here
         name: editWorkspaceData.get('name'),
         capacity: editWorkspaceData.get('capacity'),
-        photos: editWorkspaceData.get('image') ? editWorkspaceData.get('image').name : null,
+        photos: editWorkspaceData.get('image') ? `/img/${imageFile.name}` : null,
         property_id: editWorkspaceData.get('edit_WorkspacePropertyID'),
         description: editWorkspaceData.get('description'),
         lease_term: editWorkspaceData.get('lease_term'),
