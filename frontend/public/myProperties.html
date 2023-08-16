@@ -400,16 +400,13 @@
 
                 if (responseAP.ok) {
                     console.log("succesfully added");
-                    const refresh = document.getElementById('refreshdiv');
-
-                    refresh.innerHTML = `
-                    <head>
-                        <meta http-equiv="refresh" content="1">
-                    </head>`;
+                    alert("succesfully added");
+                    location.reload();
                 }
             } catch (err) {
                 console.log('err', err);
                 alert('An error occured, Please Try again later!');
+                location.reload();
             }
         };
 
@@ -503,16 +500,13 @@
 
                 if (responseUP.ok) {
                     alert("succesfully Modified");
-                    const refresh = document.getElementById('refreshdiv');
-
-                    refresh.innerHTML = `<head>
-                  <meta http-equiv="refresh" content="1">
-                </head>`;
+                    alert("succesfully Modified");
+                    location.reload();
                 }
             } catch (err) {
                 console.log('err', err);
-
                 alert('An error occured, Please Try again later!');
+                location.reload();
             }
         };
 
@@ -543,17 +537,14 @@
 
                 if (responseDP.ok) {
                     console.log("succesfully deleted");
-                    const refresh = document.getElementById('refreshdiv');
-
-                    refresh.innerHTML = `
-                    <head>
-                        <meta http-equiv="refresh" content="1">
-                    </head> `;
+                    alert("succesfully deleted");
+                    location.reload();
                 }
 
             } catch (err) {
                 console.log('err', err);
                 alert('An error occured, Please Try again later!');
+                location.reload();
             }
 
         };
@@ -615,16 +606,13 @@
 
                 if (responseAW.ok) {
                     console.log("succesfully added");
-                    const refresh = document.getElementById('refreshdiv');
-
-                    refresh.innerHTML = `<head>
-                  <meta http-equiv="refresh" content="1">
-                </head>`;
+                    alert("succesfully added");
+                    location.reload();
                 }
             } catch (err) {
                 console.log('err', err);
-
                 alert('An error occured, Please Try again later!');
+                location.reload();
             }
         };
 

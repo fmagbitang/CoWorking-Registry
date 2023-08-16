@@ -35,6 +35,14 @@
   </header>
 
   <main>
+    <!-- search section -->
+    <input type="text" id="searchInput" placeholder="Search...">
+    <button id="searchButton">Search</button>
+    <!-- sort section -->
+    <select id="sortSelect">
+      <option value="nameAsc">Ascending</option>
+      <option value="nameDesc">Descending</option>
+    </select>
     <!-- Cards Landing Page Structre -->
     <div class="container">
       <div class="row row-cols-4 gy-4" id="cardContainer">
@@ -43,8 +51,6 @@
     
     <!-- Modal Container for Properties -->
     <div id="property-modals">
-
-
 
       <!-- **************************MODAL EDITING A WORKSPACE -->
       <div class="container">
@@ -170,16 +176,19 @@
 
         if (response.ok) {
           console.log("Successfully booked and added to the database");
+          alert("Successfully booked and added to the database");
+          location.reload();
         } else {
           console.log("Booking failed");
+          alert("Booking failed");
+          location.reload();
         }
       } catch (err) {
         console.log('err', err);
         alert('An error occurred. Please try again later!');
+        location.reload();
       }
     };
-
-
 
     document.addEventListener('DOMContentLoaded', function () {
       const bookWorkspace = document.querySelectorAll('.book-workspace');
@@ -193,35 +202,13 @@
             console.log("I am currently booking");
             const propertyId = this.getAttribute('data-property-id');
             const workspaceId = this.getAttribute('data-workspace-id');
+            
 
             handleCreateLease(propertyId, workspaceId);
           }
         });
       });
     });
-
-
-
-    // EVENT DELEGATIOn
-
-    //   document.addEventListener('DOMContentLoaded', function () {
-    //   const propertyContainer = document.getElementById('property-modals');
-
-    //     propertyContainer.addEventListener('click', function (event) {
-    //       if (event.target.classList.contains('book-workspace')) {
-    //         if (!token2) {
-    //           alert('Please Login to an Account');
-    //         } else {
-    //           console.log("I am currently booking");
-    //           // const propertyId = target.getAttribute('data-property-id');
-    //           // const workspaceId = target.getAttribute('data-workspace-id');
-    //           // console.log("The proerty Id is" + {propertyId} + "\nThe workspaceID is" + {workspaceId})
-    //           // handleCreateLease(propertyId, workspaceId);
-    //         }
-    //     }
-    //     // console.log("working");
-    //   });
-    // });
   </script>
 
 
@@ -258,38 +245,9 @@
 
       });
 
-      // //For Deleting Workspace
-      // workspaceContainer.addEventListener('click', function (event) {
-      //     if (event.target.classList.contains('deleteWorkspace')) {
-      //         const deleteWorkspaceId = event.target.getAttribute('delete-Workspace-ID');
-      //         const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
-      //         console.log(deleteWorkspaceInput);
-      //         deleteWorkspaceInput.value = deleteWorkspaceId;
-      //     }
-      // })
-
     });
 
   </script>
-
-  <!-- SCRIPT STORING ID's WORKSPACE -->
-  <!-- <script>
-  document.addEventListener('DOMContentLoaded', function () {
-  const workspaceContainer = document.getElementById('cardContainer'); // Parent element for delegation
-
-  //For Deleting Workspace
-  workspaceContainer.addEventListener('click', function (event) {
-      if (event.target.classList.contains('deleteWorkspace')) {
-          const deleteWorkspaceId = event.target.getAttribute('delete-Workspace-ID');
-          const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
-          deleteWorkspaceInput.value = deleteWorkspaceId;
-          console.log(deleteWorkspaceInput);
-      }
-  })
-
-}); 
-
-</script> -->
 
 
   <!-- SCRIPT TO EDIT AND DELETE WORKSPACE -->
@@ -305,7 +263,7 @@
 
       const myHeaders = new Headers();
       myHeaders.append("Content-type", "application/json");
-      myHeaders.append("Authorization", `Bearer ${token2}`);
+      myHeaders.append("Authorization", `Bearer ${token3}`);
 
       const requestBody = JSON.stringify({
         //Input all info here
@@ -337,16 +295,12 @@
 
         if (responseUW.ok) {
           alert("succesfully Modified");
-          const refresh = document.getElementById('refreshdiv');
-
-          refresh.innerHTML =
-            `<head>
-              <meta http-equiv="refresh" content="1">
-            </head>`;
+          location.reload();
         }
       } catch (err) {
         console.log('err', err);
         alert('An error occured, Please Try again later!');
+        location.reload();
       }
     };
 
@@ -376,17 +330,14 @@
 
         if (resultsDW.ok) {
           console.log("succesfully deleted");
-          const refresh = document.getElementById('refreshdiv');
-
-          refresh.innerHTML = `
-                <head>
-                    <meta http-equiv="refresh" content="1">
-                </head>`;
+          alert("succesfully deleted");
+          location.reload();
         }
 
       } catch (err) {
         console.log('err', err);
         alert('An error occured, Please Try again later!');
+        location.reload();
       }
     };
 
@@ -403,11 +354,6 @@
     }
 
   </script>
-
-
-
-
-
 
   <!-- Creates a card for every Workspace -->
   <!-- CREATES MODALS FOR EACH WORKSPACE -->

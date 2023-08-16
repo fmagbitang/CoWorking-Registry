@@ -2,44 +2,72 @@
 //SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
 const cardContainer = document.getElementById('cardContainer');
 
-const createCard = (data) => {
+const createCard = (data, search) => {
+    var wpName, wpDescription, wpAvailability, wpUserID, wpRatings, wpID, wpPropertyID, pAddress;
+    
+    if (search == 1) {
+        wpName = data.Workspace.name;
+        wpRatings = data.Workspace.ratings;
+        wpDescription = data.Workspace.description;
+        wpAvailability = data.Workspace.availability;
+        wpPropertyID = data.Workspace.property_id;
+        wpUserID = data.Workspace.user_id;
+        wpID = data.Workspace.id;
+        pAddress = data.Property.address;
+    } else {
+
+        wpName = data.name;
+        wpRatings = data.ratings;
+        wpDescription = data.description;
+        wpAvailability = data.availability;
+        wpPropertyID = data.property_id;
+        wpUserID = data.user_id;
+        wpID = data.id;
+        pAddress = data.Property.address;
+    }
     const cardElement = document.createElement('div');
     cardElement.className = 'col';
     cardElement.setAttribute('data-bs-toggle', 'modal');
-    cardElement.setAttribute('data-bs-target', `#${data.Workspace.id}modal`);
+    cardElement.setAttribute('data-bs-target', `#${wpID}modal`);
+    const role = localStorage.getItem('role');
+    const editButtonHtml = role === "owner"
+        ? `<button class="btn btn-primary btn-sm float-end editWorkspace" data-bs-toggle="modal" data-bs-target="#editWorkspace" edit-WorkspaceL-ID="${wpID}"  edit-WorkspaceP-ID="${wpPropertyID}" edit-Workspace-ID="${wpID}" edit-WorkspaceA-ID="${wpAvailability}"  style="position: absolute; top: 60px; right: 10px;">Edit</button>`
+        : '';
 
+    const deleteButtonHtml = role === "owner"
+        ? `<button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace" delete-Workspace-ID="${wpID}" style="position: absolute; top: 20px; right: 10px;">Delete</button>`
+        : '';
     const cardContent =
-        `<div class="card">
+        `
+    <div class="card">
     <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
     <div class="card-body">
-        <h2 class="card-title">${data.Workspace.name}</h2>
-        <span class="card-subtitle">${data.Property.address === undefined ? 'No Address Provided' : `${data.Property.address}`}</span>
+        <h2 class="card-title">${wpName}</h2>
+        <span class="card-subtitle">${pAddress === undefined ? 'No Address Provided' : `${pAddress}`}</span>
         <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 20px 3px 3px">
             <span class="fa fa-star checked" style="color: orange;"></span>
-            <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${data.Workspace.ratings}</p>
+            <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${wpRatings}</p>
         </div>
         <div class="card-text">
-            ${data.Workspace.description === undefined ? 'No Description Provided' : `${data.Workspace.description}`}
+            ${wpDescription === undefined ? 'No Description Provided' : `${wpDescription}`}
         </div>
         <div class="card-text" style= "padding-top: 5px">
-            <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
+            <p class="availability">${wpAvailability ? 'Available' : 'Not Available'}</p>
         </div>
-        <div class=""card-text>
-            This is my Property ID: ${data.Workspace.property_id} <br>
-            This is the User ID: ${data.Workspace.user_id} <br>
-            This is the Workspace ID: ${data.Workspace.id}
+        <div class=""card-text">
+            This is my Property ID: ${wpPropertyID} <br>
+            This is the User ID: ${wpUserID} <br>
+            This is the Workspace ID: ${wpID}
         </div>
     </div>
-
     <div>
-    <button class="btn btn-primary btn-sm float-end editWorkspace" data-bs-toggle="modal" data-bs-target="#editWorkspace" edit-WorkspaceL-ID="${data.id}"  edit-WorkspaceP-ID="${data.Workspace.property_id}" edit-Workspace-ID="${data.Workspace.id}" edit-WorkspaceA-ID="${data.Workspace.availability}"  style="position: absolute; top: 60px; right: 10px;">Edit</button>
+        ${editButtonHtml}
     </div>
     <div>
-    <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace" delete-Workspace-ID="${data.Workspace.id}" style="position: absolute; top: 20px; right: 10px;">Delete</button>
-    <div style="display:none" id="refreshdiv">
-</div>
-</div>`;
-    console.log(`The Availability is ${data.Workspace.availability}`);
+        ${deleteButtonHtml}
+    </div>
+        `;
+    console.log(`The Availability is ${wpAvailability}`);
     cardElement.innerHTML = cardContent;
     cardContainer.appendChild(cardElement);
     updateAvailabilityColor();
@@ -47,22 +75,66 @@ const createCard = (data) => {
 
 const userId = localStorage.getItem('userID');
 
+
+// search button script
+searchButton.addEventListener('click', async () => {
+    const searchTerm = document.getElementById('searchInput').value;
+    console.log(searchTerm);
+    fetch(`http://143.198.237.154/api/search/workspace/${searchTerm}`)
+        .then(response => response.json())
+        .then(workspacedata => {
+            // Clear existing cards
+            cardContainer.innerHTML = '';
+            workspacedata.forEach(workspaceItem => {
+                console.log(workspaceItem);
+                createCard(workspaceItem, 0);
+            });
+        });
+});
+
 // Fetch data from the API server
 fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata => {
+        console.log(workspacedata);
+        //  sort data
+        const sortAndDisplayCards = (sortBy) => {
+            // Sort the cardData array based on the selected sorting option
+            if (sortBy === 'nameAsc') {
+                workspacedata.sort((a, b) =>  a.id - b.id);
+            } else if (sortBy === 'nameDesc') {
+                workspacedata.sort((a, b) => b.id - a.id);
+            }
+        
+            // Clear the existing card container
+            cardContainer.innerHTML = '';
+            // Re-create and display cards in the updated order
+            workspacedata.forEach((card) => {
+                createCard(card, 1); // Use the search value 1 since it's sorted data
+            });
+        };
+        const sortSelect = document.getElementById('sortSelect');
+        sortSelect.addEventListener('change', () => {
+            const sortBy = sortSelect.value;
+            sortAndDisplayCards(sortBy);
+        });
+        //  End of sort
         // Loop through the data and create cards
         workspacedata.forEach(workspaceItem => {
             const path = window.location.pathname;
             const role = localStorage.getItem('role');
             if (path == '/workspace' && role == 'owner') {
                 if (userId == workspaceItem.Workspace.user_id) {
-                    createCard(workspaceItem);
-                } 
+                    createCard(workspaceItem, 1);
+                }
+            } else if(path == '/myBookings' && role == 'coworker' || role == 'user')
+            {   
+                if(userId == workspaceItem.user_id){
+                 createCard(workspaceItem);
+                }
             } else {
-                createCard(workspaceItem);
+                createCard(workspaceItem, 1);
             }
-
         });
     })
     .catch(error => console.error('Error fetching data', error));
@@ -107,11 +179,11 @@ const createModal = (data) => {
                     <div style="display:none" id="refreshdiv">
                         
                     </div>
-                    
                 </div>
                 <div class="modal-footer">
-                ${data.Workspace.availability ? `<button class="btn btn-primary book-workspace" data-workspace-id="${parseInt(data.Workspace.id)}" data-property-id="${parseInt(data.Workspace.property_id)}">Book</button> ` : `<button class="btn btn-danger">Rented</button>`}
-                    
+                ${data.Workspace.availability ? 
+                    `<button class="btn btn-primary book-workspace" data-workspace-id="${data.Workspace.id}" data-property-id="${parseInt(data.Workspace.property_id)}">Book</button>` : 
+                    `<button class="btn btn-danger">Rented</button>`}
                 </div>
             </div>
         </div>
@@ -122,20 +194,11 @@ const createModal = (data) => {
     updateAvailabilityColor();
 };
 
-// fetch("http://143.198.237.154/api/allworkspace/", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
-
-// Fetch data from the API server
 fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata1 => {
         // Loop through the data and create card
         workspacedata1.forEach(workspaceItem1 => {
-            // const lease = JSON.parse(workspaceItem1.Leases[0])
-            // console.log(lease.price)
-            // console.log(workspaceItem1.Leases[0])
             createModal(workspaceItem1);
         });
     })

@@ -128,6 +128,11 @@ fetch('/navbar.html')
                     myproper.style.display = 'none';
                     const worksp = document.getElementById("worksp");
                     worksp.innerHTML = "Workspaces";
+                    const currentPath = window.location.pathname;
+                    if (currentPath == '/myProperties'){
+                        window.history.back();
+                        alert('You don\'t have permission to access this site.');
+                    }
                 } 
             }
             })

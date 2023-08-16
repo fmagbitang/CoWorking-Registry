@@ -167,12 +167,8 @@
 
         if (response.ok) {
           console.log("Successfully booked and added to the database");
-          const refresh = document.getElementById('refreshdiv')
-
-          refresh.innerHTML = `
-          <head>
-            <meta http-equiv="refresh" content="1">
-        </head>`
+          alert("Successfully booked and added to the database");
+          location.reload();
 
         } else {
           console.log("Booking failed");
@@ -180,6 +176,7 @@
       } catch (err) {
         console.log('err', err);
         alert('An error occurred. Please try again later!');
+        location.reload();
       }
     };
 
@@ -190,6 +187,7 @@
         button.addEventListener('click', function () {
           if (!token2) {
             alert('Please Login to an Account');
+            window.location.href = '/';
           } else {
             console.log("I am currently booking");
             const propertyId = this.getAttribute('data-property-id');
@@ -208,6 +206,7 @@ document.addEventListener('click', function (event) {
     if (target.classList.contains('book-workspace')) {
       if (!token2) {
         alert('Please Login to an Account');
+        window.location.href = '/';
       } else {
         const propertyId = target.getAttribute('data-property-id');
         const workspaceId = target.getAttribute('data-workspace-id');
@@ -292,12 +291,13 @@ document.addEventListener('click', function (event) {
           const resultsAW = await responseAW.text();
 
           if(responseAW.ok){
-              console.log("succesfully added")
+              console.log("succesfully added");
+              location.reload();
           }
       }catch (err) {
           console.log('err', err);
-
           alert('An error occured, Please Try again later!');
+          location.reload();
       }
   }
 
@@ -314,6 +314,7 @@ document.addEventListener('click', function (event) {
 
   if(!token2){
       alert('Please Login to an Account');
+      window.location.href = '/';
   }else{
       const editWorkspaceForm = document.getElementById('editMyWorkspace');
       editWorkspaceForm.addEventListener('submit', editProperty);
