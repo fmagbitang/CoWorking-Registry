@@ -9,7 +9,7 @@
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-  </script>
+    </script>
   <!-- Include jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- Include Bootstrap JS -->
@@ -18,11 +18,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+
+
 <body>
 
   <div id="navbarContent"></div>
   <!-- script for navbar include -->
   <script src="/js/navbar.js"></script>
+  
 
 
   <header>
@@ -35,11 +38,9 @@
     <!-- Cards Landing Page Structre -->
     <div class="container">
       <div class="row row-cols-4 gy-4" id="cardContainer">
-
-
       </div>
     </div>
-
+    
     <!-- Modal Container for Properties -->
     <div id="property-modals">
 
@@ -56,13 +57,18 @@
               </div>
               <div class="modal-body">
                 <form novalidate id="editMyWorkspace">
-                  <input type="number" name="edit_propertyID" id="edit_propertyID" hidden>
-                  <input type="number" name="edit_workspaceID" id="edit_workspaceID" hidden>
-                  <input type="number" name="lease_id" id="lease_id" hidden>
+                  <input type="number" name="edit_WorkspacePropertyID" id="edit_WorkspacePropertyID" hidden>
+                  <input type="number" name="edit_WorkspaceID" id="edit_WorkspaceID" hidden>
+                  <input type="number" name="edit_WorkspaceLeaseID" id="edit_WorkspaceLeaseID" hidden>
+                  <input type="number" name="edit_WorkspaceAvail" id="edit_WorkspaceAvail" hidden>
+
                   <div class="form-floating">
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Meeting Room" required>
-                    <label for="name" class="form-label">Type of Workspace</label>
-                    <div class="invalid-feedback">Invalid Workspace</div>
+                    <select name="name" id="name" class="form-select" required>
+                      <option disabled selected>Type of Workspace</option>
+                      <option value="Meeting Room">Meeting Room</option>
+                      <option value="Private Office Room">Private Office Room</option>
+                      <option value="Desk">Desk</option>
+                    </select>
                   </div>
                   <br>
                   <div class="form-floating">
@@ -74,9 +80,9 @@
                   <br>
                   <select name="lease_term" id="lease_term" class="form-select" required>
                     <option value="term" disabled selected>Term Type</option>
-                    <option value="per 30 minutes">per 30 minutes</option>
-                    <option value="per 1 hour">per 1 hour</option>
-                    <option value="per 2 hours">per 2 hours</option>
+                    <option value="1 Day">1 Days</option>
+                    <option value="2 Days">2 Days</option>
+                    <option value="3 Days">3 Days</option>
                   </select>
                   <br>
                   <div class="form-floating">
@@ -101,16 +107,15 @@
         </div>
       </div>
 
-      <!-- **************************MODAL FOR DELETING A WORKSPACE -->
+      <!-- MODAL FOR DELETING A WORKSPACE -->
       <div class="container">
         <div class="modal fade" id="deleteWorkspace">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <form novalidate id="deleteMyWorkspace">
-                  <input type="number" name="delete_propertyID" id="delete_propertyID" hidden>
-                  <input type="number" name="delete_workspaceID" id="delete_workspaceID" hidden>
                   <h2 class="modal-title">Delete Workspace</h2>
+                  <input type="number" name="delete_WorkspaceID" id="delete_WorkspaceID" hidden>
                   <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
               </div>
               <div class="modal-body">
@@ -118,18 +123,15 @@
                 <br>
                 <button type="submit" class="btn btn-primary btn-sm float-end ">Yes, delete workspace</button>
                 <br><br>
-
                 </form>
-                <button type="submit" class="btn btn-primary btn-sm float-end">No, don't delete</button>
-
+                <button type="submit" class="btn btn-primary btn-sm float-end close">No, don't delete</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
-    </div>
+      
+      </div>
   </main>
   <footer class="footer bg-dark text-light py-3">
 
@@ -139,6 +141,7 @@
   </footer>
 
 
+  <!-- CREATING BOOKINGS -->
   <script>
     const userID = localStorage.getItem('userID');
     const token2 = localStorage.getItem('token');
@@ -168,6 +171,13 @@
 
         if (response.ok) {
           console.log("Successfully booked and added to the database");
+          const refresh = document.getElementById('refreshdiv')
+
+          refresh.innerHTML = `
+          <head>
+            <meta http-equiv="refresh" content="1">
+        </head>`
+
         } else {
           console.log("Booking failed");
         }
@@ -176,8 +186,6 @@
         alert('An error occurred. Please try again later!');
       }
     };
-
-
 
     document.addEventListener('DOMContentLoaded', function () {
       const bookWorkspace = document.querySelectorAll('.book-workspace');
@@ -190,7 +198,6 @@
             console.log("I am currently booking");
             const propertyId = this.getAttribute('data-property-id');
             const workspaceId = this.getAttribute('data-workspace-id');
-
             handleCreateLease(propertyId, workspaceId);
           }
         });
@@ -199,27 +206,175 @@
 
 
 
-    // EVENT DELEGATIOn
+document.addEventListener('click', function (event) {
+    const target = event.target;
+    if (target.classList.contains('book-workspace')) {
+      if (!token2) {
+        alert('Please Login to an Account');
+      } else {
+        const propertyId = target.getAttribute('data-property-id');
+        const workspaceId = target.getAttribute('data-workspace-id');
+        handleCreateLease(propertyId, workspaceId);
+      }
+    }
+  });
 
-    //   document.addEventListener('DOMContentLoaded', function () {
-    //   const propertyContainer = document.getElementById('property-modals'); 
-
-    //     propertyContainer.addEventListener('click', function (event) {
-    //       if (event.target.classList.contains('book-workspace')) {
-    //         if (!token2) {
-    //           alert('Please Login to an Account');
-    //         } else {
-    //           console.log("I am currently booking");
-    //           // const propertyId = target.getAttribute('data-property-id');
-    //           // const workspaceId = target.getAttribute('data-workspace-id');
-    //           // console.log("The proerty Id is" + {propertyId} + "\nThe workspaceID is" + {workspaceId})
-    //           // handleCreateLease(propertyId, workspaceId);
-    //         }
-    //     }
-    //     // console.log("working");
-    //   });
-    // });
   </script>
+
+
+  <!-- SCRIPT STORING ID's WORKSPACE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const workspaceContainer = document.getElementById('cardContainer'); // Parent element for delegation
+
+
+      // For Editing Workspace
+      workspaceContainer.addEventListener('click', function (event) {
+        if (event.target.classList.contains('editWorkspace')) {
+          const editWorkspaceId = event.target.getAttribute('edit-Workspace-ID');
+          const editWorkspaceInput = document.getElementById('edit_WorkspaceID');
+          const editWorkspacePropertyId = event.target.getAttribute('edit-WorkspaceP-ID'); /////EDIT ALL ATTRIBUTES
+          const editWorkspacePropertyInput = document.getElementById('edit_WorkspacePropertyID');
+          const editWorkspaceLeaseId = event.target.getAttribute('edit-WorkspaceL-ID');
+          const editWorkspaceLeaseInput = document.getElementById('edit_WorkspaceLeaseID');
+          const editWorkspaceAvailId = event.target.getAttribute('edit-WorkspaceA-ID');
+          const editWorkspaceAvailInput = document.getElementById('edit_WorkspaceAvail');
+          editWorkspaceInput.value = editWorkspaceId;
+          editWorkspacePropertyInput.value = editWorkspacePropertyId;
+          editWorkspaceLeaseInput.value = editWorkspaceLeaseId;
+          editWorkspaceAvailInput.value = editWorkspaceAvailId;
+        } else (event.target.classList.contains('deleteWorkspace'));
+        {
+          const deleteWorkspaceId = event.target.getAttribute('delete-Workspace-ID');
+          console.log(deleteWorkspaceId);
+          const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
+          console.log(deleteWorkspaceInput.value);
+          deleteWorkspaceInput.value = deleteWorkspaceId;
+          console.log(deleteWorkspaceInput);
+        }
+
+      });
+
+    });
+
+  </script>
+
+
+
+  <!-- SCRIPT TO EDIT AND DELETE WORKSPACE -->
+  <script>
+    const token3 = localStorage.getItem('token');
+    const userID3 = localStorage.getItem('userID');
+
+    const editWorkspace = async (event) => {
+      event.preventDefault();
+
+      const editWorkspaceForm = document.getElementById('editMyWorkspace');
+      const editWorkspaceData = new FormData(editWorkspaceForm);
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${token2}`);
+
+      const requestBody = JSON.stringify({
+        //Input all info here
+        name: editWorkspaceData.get('name'),
+        capacity: editWorkspaceData.get('capacity'),
+        photos: editWorkspaceData.get('image') ? editWorkspaceData.get('image').name : null,
+        property_id: editWorkspaceData.get('edit_WorkspacePropertyID'),
+        description: editWorkspaceData.get('description'),
+        lease_term: editWorkspaceData.get('lease_term'),
+        price: editWorkspaceData.get('price'),
+        id: editWorkspaceData.get('edit_WorkspaceID'),
+        lease_id: editWorkspaceData.get('edit_WorkspaceLeaseID'),
+        user_id: userID3,
+        availability: editWorkspaceData.get('edit_WorkspaceAvail')
+      });
+
+      console.log(requestBody);
+
+      const requestOptionsUW = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: requestBody,
+        redirect: 'follow'
+      };
+
+      try {
+        const responseUW = await fetch(`http://143.198.237.154/api/workspace/update/${editWorkspaceData.get('edit_WorkspaceID')}`, requestOptionsUW);
+        const resultsUW = await responseUW.text();
+
+        if (responseUW.ok) {
+          alert("succesfully Modified");
+          const refresh = document.getElementById('refreshdiv');
+
+          refresh.innerHTML =
+            `<head>
+              <meta http-equiv="refresh" content="1">
+            </head>`;
+        }
+      } catch (err) {
+        console.log('err', err);
+        alert('An error occured, Please Try again later!');
+      }
+    };
+
+    const deleteWorkspace = async (event) => {
+      event.preventDefault();
+
+      const deleteWorkspaceForm = document.getElementById('deleteMyWorkspace');
+      const deleteWorkspaceData = new FormData(deleteWorkspaceForm);
+
+      const workspace = deleteWorkspaceData.get('delete_WorkspaceID');
+
+      const myHeaders = new Headers();
+      myHeaders.append("Content-type", "application/json");
+      myHeaders.append("Authorization", `Bearer ${token2}`);
+
+      console.log("Deleting in progress");
+      const requestOptionsDW = {
+        method: 'DELETE',
+        headers: myHeaders,
+        redirect: 'follow'
+      };
+
+      ////PUT CODE HERE
+      try {
+        const responseDW = await fetch(`http://143.198.237.154/api/workspace/delete/${workspace}`, requestOptionsDW);
+        const resultsDW = await responseDW.text();
+
+        if (responseDW.ok) {
+          console.log("succesfully deleted");
+          const refresh = document.getElementById('refreshdiv');
+
+          refresh.innerHTML = `
+                <head>
+                    <meta http-equiv="refresh" content="1">
+                </head>`;
+        }
+
+      } catch (err) {
+        console.log('err', err);
+        alert('An error occured, Please Try again later!');
+      }
+    };
+
+
+    if (!token2) {
+      alert('Please Login to an Account');
+      window.location.href = '/';
+    } else {
+      const editWorkspaceForm = document.getElementById('editMyWorkspace');
+      editWorkspaceForm.addEventListener('submit', editWorkspace);
+
+      const deleteWorkspaceForm = document.getElementById('deleteMyWorkspace');
+      deleteWorkspaceForm.addEventListener('submit', deleteWorkspace);
+    }
+
+  </script>
+
+
+
 
 
 
