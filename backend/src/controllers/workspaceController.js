@@ -120,7 +120,7 @@ const updateWorkspace = async (req, res, next) => {
     workspace.name = name;
     workspace.capacity = capacity;
     workspace.photos = photos;
-    workspace.availability = availability;
+    workspace.availability = workspace.availability;
     workspace.property_id = property_id;
     workspace.ratings = ratings;
     workspace.description = description;
