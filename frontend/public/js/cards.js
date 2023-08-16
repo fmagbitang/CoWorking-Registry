@@ -32,10 +32,11 @@ const createCard = (data) => {
     </div>
 
     <div>
-    <button class="btn btn-primary btn-sm float-end editWorkspace" data-bs-toggle="modal" data-bs-target="#editWorkspace">Edit</button>
+    <button class="btn btn-primary btn-sm float-end editWorkspace" data-bs-toggle="modal" data-bs-target="#editWorkspace" edit-WorkspaceL-ID=${data.id}  edit-WorkspaceP-ID=${data.Workspace.property_id} edit-Workspace-ID=${data.Workspace.id} edit-WorkspaceA-ID=${data.Workspace.availability}>Edit</button>
     </div>
     <div>
-    <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace">Delete</button>
+    <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace" delete-Workspace-ID=${data.Workspace.id}>Delete ${data.Workspace.id}</button>
+    <div style="display:none" id="refreshdiv">
 </div>
 </div>`;
 
@@ -52,12 +53,15 @@ fetch("http://143.198.237.154/api/allworkspace/")
     .then(workspacedata => {
             // Loop through the data and create cards
             workspacedata.forEach(workspaceItem => {
+                //const path = window.location.pathname;
+                    //if(path === "/workspace" && workspaceItem.User.role === "owner"){
+                    //if(userId === workspaceItem.user_id.id)    
                     createCard(workspaceItem);
+                    //}
+                    
                 })
             })   
         .catch(error => console.error('Error fetching data', error));
-
-
 //SELECTING ALL VALID WORKSPACE FOR MODEL
 
 const propertyModal = document.getElementById('property-modals');

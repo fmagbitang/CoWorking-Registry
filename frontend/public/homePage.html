@@ -220,7 +220,7 @@ document.addEventListener('click', function (event) {
 
 
 <!-- SCRIPT STORING ID's WORKSPACE -->
-<!-- <script>
+<script>
   document.addEventListener('DOMContentLoaded', function () {
   const workspaceContainer = document.getElementById('cardContainer'); // Parent element for delegation
 
@@ -239,21 +239,21 @@ document.addEventListener('click', function (event) {
   })
 
   //For Deleting Workspace
-  workspaceContainer.addEventListener('click', function (event) {
-      if (event.target.classList.contains('deleteWorkspace')) {
-          const deleteWorkspaceId = event.target.getAttribute('');
-          const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
-          deleteWorkspaceInput.value = deleteWorkspaceId;
-      }
-  })
+  // workspaceContainer.addEventListener('click', function (event) {
+  //     if (event.target.classList.contains('deleteWorkspace')) {
+  //         const deleteWorkspaceId = event.target.getAttribute('');
+  //         const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
+  //         deleteWorkspaceInput.value = deleteWorkspaceId;
+  //     }
+  // })
 
-});
+}); 
 
-</script> -->
+</script>
 
 
 <!-- SCRIPT TO  and edit DELETE WORKSPACE -->
-<!-- <script>
+<script>
   const token3 = localStorage.getItem('token');
   const userID3 = localStorage.getItem('userID');
 
@@ -269,6 +269,13 @@ document.addEventListener('click', function (event) {
 
       const requestBody = JSON.stringify({
           //Input all info here
+            name:workspaceFormData.get('name'),
+            capacity:workspaceFormData.get('capacity'),
+            photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null,
+            property_id: workspaceFormData.get('propertyID'),
+            description : workspaceFormData.get('description'),
+            lease_term : workspaceFormData.get('lease_term'),
+            price: workspaceFormData.get('price')
       });
 
       console.log(requestBody);
@@ -315,7 +322,7 @@ document.addEventListener('click', function (event) {
       // deleteWorkspaceForm.addEventListener('submit', deleteProperty)
   }
 
-</script> -->
+</script>
 
   <!-- Creates a card for every Workspace -->
   <!-- CREATES MODALS FOR EACH WORKSPACE -->
