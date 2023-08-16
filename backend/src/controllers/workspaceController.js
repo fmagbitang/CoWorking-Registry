@@ -117,16 +117,6 @@ const updateWorkspace = async (req, res, next) => {
       return res.status(404).json({ message: 'Workspace not found' });
     }
 
-    workspace.update({
-      name: name,
-      capacity: capacity,
-      photos: photos,
-      availability: availability,
-      ratings: ratings,
-      description: description,
-      updated_at: today.toISOString()
-    })
-
     workspace.name = name;
     workspace.capacity = capacity;
     workspace.photos = photos;

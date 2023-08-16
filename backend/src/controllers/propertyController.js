@@ -92,8 +92,12 @@ const updateProperty = async (req, res, next) => {
   const { address, neighborhood, squarefoot, parking, smoking, transportation, user_id } = req.body;
   try {
     updated_at = today.toISOString();
-    const propertyUpdate = await Property.findOne(id);
 
+    const propertyUpdate = await Property.findOne({
+      where: {
+        id: id
+      }
+    });
     if (!propertyUpdate) {
       return res.status(404).json({ message: 'Property not found' });
     }
@@ -107,6 +111,7 @@ const updateProperty = async (req, res, next) => {
     propertyUpdate.created_at = today.toISOString();
     propertyUpdate.updated_at = today.toISOString();
     await propertyUpdate.save();
+    res.status(200).json(propertyUpdate);
   } catch (error) {
     console.log('error: ', error);
     next(error);
