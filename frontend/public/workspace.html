@@ -115,7 +115,6 @@
               <div class="modal-header">
                 <form novalidate id="deleteMyWorkspace">
                   <h2 class="modal-title">Delete Workspace</h2>
-                  <input type="number" name="delete_propertyID" id="delete_propertyID" hidden>
                   <input type="number" name="delete_WorkspaceID" id="delete_WorkspaceID" hidden>
                   <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
               </div>
@@ -141,6 +140,8 @@
     </div>
   </footer>
 
+
+  <!-- CREATING BOOKINGS -->
   <script>
     const userID = localStorage.getItem('userID');
     const token2 = localStorage.getItem('token');
@@ -170,6 +171,13 @@
 
         if (response.ok) {
           console.log("Successfully booked and added to the database");
+          const refresh = document.getElementById('refreshdiv')
+
+          refresh.innerHTML = `
+          <head>
+            <meta http-equiv="refresh" content="1">
+        </head>`
+
         } else {
           console.log("Booking failed");
         }
@@ -179,8 +187,6 @@
       }
     };
 
-
-
     document.addEventListener('DOMContentLoaded', function () {
       const bookWorkspace = document.querySelectorAll('.book-workspace');
 
@@ -188,12 +194,10 @@
         button.addEventListener('click', function () {
           if (!token2) {
             alert('Please Login to an Account');
-            window.location.href = '/';
           } else {
             console.log("I am currently booking");
             const propertyId = this.getAttribute('data-property-id');
             const workspaceId = this.getAttribute('data-workspace-id');
-
             handleCreateLease(propertyId, workspaceId);
           }
         });
@@ -202,26 +206,19 @@
 
 
 
-    // EVENT DELEGATIOn
+document.addEventListener('click', function (event) {
+    const target = event.target;
+    if (target.classList.contains('book-workspace')) {
+      if (!token2) {
+        alert('Please Login to an Account');
+      } else {
+        const propertyId = target.getAttribute('data-property-id');
+        const workspaceId = target.getAttribute('data-workspace-id');
+        handleCreateLease(propertyId, workspaceId);
+      }
+    }
+  });
 
-    //   document.addEventListener('DOMContentLoaded', function () {
-    //   const propertyContainer = document.getElementById('property-modals');
-
-    //     propertyContainer.addEventListener('click', function (event) {
-    //       if (event.target.classList.contains('book-workspace')) {
-    //         if (!token2) {
-    //           alert('Please Login to an Account');
-    //         } else {
-    //           console.log("I am currently booking");
-    //           // const propertyId = target.getAttribute('data-property-id');
-    //           // const workspaceId = target.getAttribute('data-workspace-id');
-    //           // console.log("The proerty Id is" + {propertyId} + "\nThe workspaceID is" + {workspaceId})
-    //           // handleCreateLease(propertyId, workspaceId);
-    //         }
-    //     }
-    //     // console.log("working");
-    //   });
-    // });
   </script>
 
 
@@ -258,38 +255,10 @@
 
       });
 
-      // //For Deleting Workspace
-      // workspaceContainer.addEventListener('click', function (event) {
-      //     if (event.target.classList.contains('deleteWorkspace')) {
-      //         const deleteWorkspaceId = event.target.getAttribute('delete-Workspace-ID');
-      //         const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
-      //         console.log(deleteWorkspaceInput);
-      //         deleteWorkspaceInput.value = deleteWorkspaceId;
-      //     }
-      // })
-
     });
 
   </script>
 
-  <!-- SCRIPT STORING ID's WORKSPACE -->
-  <!-- <script>
-  document.addEventListener('DOMContentLoaded', function () {
-  const workspaceContainer = document.getElementById('cardContainer'); // Parent element for delegation
-
-  //For Deleting Workspace
-  workspaceContainer.addEventListener('click', function (event) {
-      if (event.target.classList.contains('deleteWorkspace')) {
-          const deleteWorkspaceId = event.target.getAttribute('delete-Workspace-ID');
-          const deleteWorkspaceInput = document.getElementById('delete_WorkspaceID');
-          deleteWorkspaceInput.value = deleteWorkspaceId;
-          console.log(deleteWorkspaceInput);
-      }
-  })
-
-}); 
-
-</script> -->
 
 
   <!-- SCRIPT TO EDIT AND DELETE WORKSPACE -->
@@ -374,7 +343,7 @@
         const responseDW = await fetch(`http://143.198.237.154/api/workspace/delete/${workspace}`, requestOptionsDW);
         const resultsDW = await responseDW.text();
 
-        if (resultsDW.ok) {
+        if (responseDW.ok) {
           console.log("succesfully deleted");
           const refresh = document.getElementById('refreshdiv');
 

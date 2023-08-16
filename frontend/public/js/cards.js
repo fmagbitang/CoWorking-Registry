@@ -21,6 +21,10 @@ const createCard = (data) => {
         <div class="card-text">
             ${data.Workspace.description === undefined ? 'No Description Provided' : `${data.Workspace.description}`}
         </div>
+        <div class="card-text">
+            Price: $ ${data.price} <br>
+            Lease Term: ${data.lease_term === null ? 'No Term Chosen': `${data.lease_term}`}
+        </div>
         <div class="card-text" style= "padding-top: 5px">
             <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
         </div>
@@ -53,13 +57,22 @@ fetch("http://143.198.237.154/api/allworkspace/")
     .then(workspacedata => {
         // Loop through the data and create cards
         workspacedata.forEach(workspaceItem => {
+            console.log(workspaceItem);
+            console.log(localStorage.getItem('role'));
             const path = window.location.pathname;
             const role = localStorage.getItem('role');
             if (path == '/workspace' && role == 'owner') {
                 if (userId == workspaceItem.Workspace.user_id) {
                     createCard(workspaceItem);
                 } 
+            }
+            else if(path == '/myBookings' && role == 'coworker')
+            {   
+                if(userId == workspaceItem.user_id){
+                 createCard(workspaceItem);
+                }
             } else {
+                console.log(workspaceItem.user_id)
                 createCard(workspaceItem);
             }
 
@@ -93,7 +106,7 @@ const createModal = (data) => {
                     </div>
                     <div class="card-text">Squarefoot: ${data.Property.squarefoot} <br>Parking: ${parseBool(data.Property.parking)} <br> Smoking:${parseBool(data.Property.smoking)} <br> Public Transportation Accessible: ${parseBool(data.Property.transportation)} 
                     </div>
-                    <div class="card-text">Price: ${data.price} <br>Lease Term: ${data.lease_term}
+                    <div class="card-text">Price:$ ${data.price} <br> Lease Term: ${data.lease_term === null ? 'No Term Chosen': `${data.lease_term}`}
                     <br> Lease Id : ${data.id}
                     </div>
                     <div style="padding-top: 5px">
