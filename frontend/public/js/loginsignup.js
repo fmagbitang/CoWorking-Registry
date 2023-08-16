@@ -34,8 +34,8 @@ const handleFormSubmit = async (event) => {
             // Store the token in local storage or as a cookie
             localStorage.setItem('token', token);
             // Redirect the user to the desired page
-            console.log('redirecting to / now');
-            window.location.href = '/homePage'; // Change to your desired URL
+            console.log('redirecting to /workspace now');
+            window.location.href = '/workspace'; // Change to your desired URL
         } else {
             alert('Invalid email or password. Please try again.');
         }
