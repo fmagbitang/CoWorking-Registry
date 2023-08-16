@@ -190,25 +190,22 @@
       }
     };
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const bookWorkspace = document.querySelectorAll('.book-workspace');
-
-      bookWorkspace.forEach(function (button) {
-        button.addEventListener('click', function () {
-          if (!token2) {
+    document.addEventListener('click', (event)=> {
+      const target = event.target;
+      if(target.classList.contains('book-workspace')){
+        if (!token2) {
             alert('Please Login to an Account');
             window.location.href = '/';
           } else {
             console.log("I am currently booking");
-            const propertyId = this.getAttribute('data-property-id');
-            const workspaceId = this.getAttribute('data-workspace-id');
+            const propertyId = target.getAttribute('data-property-id');
+            const workspaceId = target.getAttribute('data-workspace-id');
             
 
             handleCreateLease(propertyId, workspaceId);
           }
-        });
-      });
-    });
+      }
+    })
   </script>
 
 
