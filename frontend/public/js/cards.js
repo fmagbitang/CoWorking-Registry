@@ -1,6 +1,7 @@
 
 //SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
 const cardContainer = document.getElementById('cardContainer');
+const token3 = localStorage.getItem('token');
 
 const createCard = (data) => {
     const cardElement = document.createElement('div');
@@ -74,13 +75,21 @@ fetch("http://143.198.237.154/api/allworkspace/")
     .then(workspacedata => {
             // Loop through the data and create cards
             workspacedata.forEach(workspaceItem => {
-                    const rolee = localStorage.getItem('role');
-                    const delWorksp = document.querySelectorAll('.deleteWorkspace');
-                    const edWorksp = document.querySelectorAll('.editWorkspace');
-                    if (rolee !== 'owner'){
-                        edWorksp.forEach(x => {x.style.display ='none'})
-                        delWorksp.forEach(x => {x.style.display ='none'})
-                    }
+                    // const rolee = localStorage.getItem('role');
+                    // const delWorksp = document.querySelectorAll('.deleteWorkspace');
+                    // const edWorksp = document.querySelectorAll('.editWorkspace');
+                    // const ownerContact = document.querySelectorAll('.ownerInfo');
+                    // if (rolee === 'owner'){
+                    //     ownerContact.forEach(x => {x.style.display ='none'})
+                    // } else if (!token3) {
+                    //     edWorksp.forEach(x => {x.style.display ='none'})
+                    //     delWorksp.forEach(x => {x.style.display ='none'})
+                    //     ownerContact.forEach(x => {x.style.display ='none'})
+                    // }else{
+                    //     edWorksp.forEach(x => {x.style.display ='none'})
+                    //     delWorksp.forEach(x => {x.style.display ='none'})
+                    //     ownerContact.forEach(x => {x.style.display ='block'})
+                    // }
                     createCard(workspaceItem);
                 })
             })   
@@ -160,9 +169,17 @@ fetch("http://143.198.237.154/api/allworkspace/")
                     const rolee = localStorage.getItem('role');
                     const delWorksp = document.querySelectorAll('.deleteWorkspace');
                     const edWorksp = document.querySelectorAll('.editWorkspace');
-                    if (rolee !== 'owner'){
+                    const ownerContact = document.querySelectorAll('.ownerInfo');
+                    if (rolee === 'owner'){
+                        ownerContact.forEach(x => {x.style.display ='none'})
+                    } else if (!token3) {
                         edWorksp.forEach(x => {x.style.display ='none'})
                         delWorksp.forEach(x => {x.style.display ='none'})
+                        ownerContact.forEach(x => {x.style.display ='none'})
+                    }else{
+                        edWorksp.forEach(x => {x.style.display ='none'})
+                        delWorksp.forEach(x => {x.style.display ='none'})
+                        ownerContact.forEach(x => {x.style.display ='block'})
                     }
                     createModal(workspaceItem1);
                 })

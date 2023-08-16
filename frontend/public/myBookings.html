@@ -27,6 +27,117 @@
     </div>
   </header>
 
+
+  <!-- SCRIPT FOR MyBOOKINGS (USER INTERFACE) -->
+  <script>
+const cardContainer = document.getElementById('cardContainer');
+const token3 = localStorage.getItem('token');
+
+const createCard = (data) => {
+    const cardElement = document.createElement('div');
+    cardElement.className = 'col';
+    cardElement.setAttribute('data-bs-toggle', 'modal');
+    cardElement.setAttribute('data-bs-target', `#${data.Workspace.id}modal`);
+
+    const cardContent =
+        `<div class="card">
+    <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
+    <div class="card-body">
+        <h2 class="card-title">${data.Workspace.name}</h2>
+        <span class="card-subtitle">${data.Property.address === undefined ? 'No Address Provided': `${data.Property.address}`}</span>
+        <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 20px 3px 3px">
+            <span class="fa fa-star checked" style="color: orange;"></span>
+            <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${data.Workspace.ratings}</p>
+        </div>
+        <div class="card-text">
+            ${data.Workspace.description === undefined ? 'No Description Provided': `${data.Workspace.description}`}  
+        </div>
+        <div class="card-text" style= "padding-top: 5px">
+            <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
+        </div>
+        <div class=""card-text>
+            This is my Property ID: ${data.Workspace.property_id} <br>
+            This is the User ID: ${data.Workspace.user_id} <br>
+            This is the Workspace ID: ${data.Workspace.id}
+            This is the Workspace ID: ${data.User.role}
+            </div>
+    </div>
+
+    <div>
+    <button class="btn btn-primary btn-sm float-end editWorkspace" data-bs-toggle="modal" data-bs-target="#editWorkspace">Edit</button>
+    </div>
+    <div>
+    <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace">Delete</button>
+</div>
+<div>
+<button class="btn btn-primary btn-sm float-end ownerInfo" data-bs-toggle="modal" data-bs-target="#ownerInfo">Contact Owner</button>
+<div class="container">
+        <div class="modal fade" id="ownerInfo">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <form novalidate id="ownerInfo">
+                  <h2 class="modal-title">Renter's Contact Information</h2>
+              </div>
+              <div class="modal-body">
+                <h5>Name: ${data.User.fname}
+                ${data.User.lname} </h5>
+                <h5>Phone number: ${data.User.mobile}</h5>
+                <h5>Email Address: ${data.User.email}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>`;
+
+    cardElement.innerHTML = cardContent;
+    cardContainer.appendChild(cardElement);
+    updateAvailabilityColor();
+};
+
+const userId = localStorage.getItem('userID');
+
+// Fetch data from the API server
+fetch("http://143.198.237.154/api/allworkspace/")
+    .then(response => response.json())
+    .then(workspacedata => {
+            // Loop through the data and create cards
+            workspacedata.forEach(workspaceItem => {
+                    // const rolee = localStorage.getItem('role');
+                    // const delWorksp = document.querySelectorAll('.deleteWorkspace');
+                    // const edWorksp = document.querySelectorAll('.editWorkspace');
+                    // const ownerContact = document.querySelectorAll('.ownerInfo');
+                    // if (rolee === 'owner'){
+                    //     ownerContact.forEach(x => {x.style.display ='none'})
+                    // } else if (!token3) {
+                    //     edWorksp.forEach(x => {x.style.display ='none'})
+                    //     delWorksp.forEach(x => {x.style.display ='none'})
+                    //     ownerContact.forEach(x => {x.style.display ='none'})
+                    // }else{
+                    //     edWorksp.forEach(x => {x.style.display ='none'})
+                    //     delWorksp.forEach(x => {x.style.display ='none'})
+                    //     ownerContact.forEach(x => {x.style.display ='block'})
+                    // }
+
+                    
+                    // // console.log(userId)
+                    // const user = workspaceItem.User;
+                    // for (var i=0; i < user.lenght; i++){
+                    //   if (user[i].id !== userId) console.log(true);
+                    // }
+                    if(workspaceItem.User_id == userId){
+                      createCard(workspaceItem);
+                    }
+
+                })
+            })   
+        .catch(error => console.error('Error fetching data', error));
+
+
+  </script>
+
 </body>
 
 </html>
