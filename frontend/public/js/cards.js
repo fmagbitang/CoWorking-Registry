@@ -1,6 +1,7 @@
 
 //SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
 const cardContainer = document.getElementById('cardContainer');
+const token3 = localStorage.getItem('token');
 
 const createCard = (data) => {
     const cardElement = document.createElement('div');
@@ -32,7 +33,8 @@ const createCard = (data) => {
             This is my Property ID: ${data.Workspace.property_id} <br>
             This is the User ID: ${data.Workspace.user_id} <br>
             This is the Workspace ID: ${data.Workspace.id}
-        </div>
+            This is the Workspace ID: ${data.User.role}
+            </div>
     </div>
 
     <div>
@@ -41,6 +43,27 @@ const createCard = (data) => {
     <div>
     <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace" delete-Workspace-ID="${data.Workspace.id}" style="position: absolute; top: 20px; right: 10px;">Delete</button>
     <div style="display:none" id="refreshdiv">
+</div>
+<div>
+<button class="btn btn-primary btn-sm float-end ownerInfo" data-bs-toggle="modal" data-bs-target="#ownerInfo">Contact Owner</button>
+<div class="container">
+        <div class="modal fade" id="ownerInfo">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <form novalidate id="ownerInfo">
+                  <h2 class="modal-title">Renter's Contact Information</h2>
+              </div>
+              <div class="modal-body">
+                <h5>Name: ${data.User.fname}
+                ${data.User.lname} </h5>
+                <h5>Phone number: ${data.User.mobile}</h5>
+                <h5>Email Address: ${data.User.email}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
 </div>`;
     console.log(`The Availability is ${data.Workspace.availability}`);

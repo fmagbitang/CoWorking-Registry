@@ -52,9 +52,9 @@ const createProperty = async (req, res, next) => {
       property,
       workspace,
       lease
-    }
+    };
 
-    res.status(201).json(response);
+    res.status(200).json(response);
   } catch (err) {
     next(err);
     console.log('error: ' + err.message);
@@ -86,8 +86,92 @@ const getAllPropertyByOwner = async (req, res, next) => {
   }
 };
 
+// Update property of owner
+const updateProperty = async (req, res, next) => {
+  const { id } = req.params;
+  const { address, neighborhood, squarefoot, parking, smoking, transportation, user_id } = req.body;
+  try {
+    updated_at = today.toISOString();
+
+    const propertyUpdate = await Property.findOne({
+      where: {
+        id: id
+      }
+    });
+    if (!propertyUpdate) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
+    propertyUpdate.address = address;
+    propertyUpdate.neighborhood = neighborhood;
+    propertyUpdate.squarefoot = squarefoot;
+    propertyUpdate.parking = parking;
+    propertyUpdate.user_id = user_id;
+    propertyUpdate.transportation = transportation;
+    propertyUpdate.smoking = smoking;
+    propertyUpdate.created_at = today.toISOString();
+    propertyUpdate.updated_at = today.toISOString();
+    await propertyUpdate.save();
+    res.status(200).json(propertyUpdate);
+  } catch (error) {
+    console.log('error: ', error);
+    next(error);
+  }
+};
+
+// Delete a property by ID
+const deleteProperty = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const propertyDelete = await Property.findByPk(id);
+    if (!propertyDelete) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
+    const deleteWorkspace = await Workspace.findAll({
+      where: {
+        property_id: id
+      }
+    });
+    const deleteLease = await Lease.findAll({
+      where: {
+        property_id: id,
+        workspace_id: deleteWorkspace.id
+      }
+    });
+    if (!deleteWorkspace) {
+      console.log('Deleting property only.');
+      await propertyDelete.destroy();
+      console.log('Property has been deleted.');
+    } else {
+      if (deleteLease){
+          console.log('Deleting Lease.');
+          await Lease.destroy({
+            where: {
+              property_id: id
+            }
+          });
+          console.log('Lease has beend deleted.');
+      }
+      console.log('Deliting workspaces.');
+      await Workspace.destroy({
+        where: {
+          property_id: id
+        }
+      });
+      console.log('Workspace has been deleted.');
+      console.log('Deliting property.');
+      await propertyDelete.destroy();
+      console.log('Property has been deleted.');
+    }
+    res.status(200).end();
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createProperty,
   getAllProperty,
   getAllPropertyByOwner,
+  updateProperty,
+  deleteProperty,
 };

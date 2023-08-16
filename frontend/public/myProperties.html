@@ -9,7 +9,8 @@
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-        </script>
+
+    </script>
     <!-- Include jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Include Bootstrap JS -->
@@ -274,6 +275,7 @@
                     <div class="modal-body">
                         <p>Are you sure you want to delete this property?</p>
                         <br>
+
                         <button type="submit" class="btn btn-primary btn-sm float-end deleteProperty">Yes, delete
                             property</button>
                         <br><br>
@@ -333,11 +335,11 @@
 
         // Fetch data from the API server
         fetch(`http://143.198.237.154/api/myproperty/${userID}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             .then(response => response.json())
             .then(data => {
                 // Loop through the data and create cards
@@ -385,6 +387,7 @@
                 lease_term: propertiesFormData.get('lease_term'),
                 price: propertiesFormData.get('price')
             });
+
             console.log(requestBodyPr);
 
             const requestOptionsPr = {
@@ -459,7 +462,6 @@
         });
 
     </script>
-
 
     <!-- SCRIPT TO RESET AND DELETE THE PROPERTIES -->
     <script>
@@ -631,6 +633,7 @@
         if (!token1) {
             alert('Please Login to an Account');
             window.location.href = '/';
+
         } else {
             const workspaceForm = document.getElementById('createWorkspace');
             workspaceForm.addEventListener('submit', handleCreateWorkspace);
