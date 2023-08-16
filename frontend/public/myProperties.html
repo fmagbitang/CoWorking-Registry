@@ -2,37 +2,37 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HTML Card with Login Modal and Navigation Bar</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-  </script>
-  <!-- Include jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- Include Bootstrap JS -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- Include Link for rating Star Icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Card with Login Modal and Navigation Bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include Link for rating Star Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <style>
-    #create-property-container{
-        border: .5px solid black;
-        padding: 60px;
-        margin: 40px;
-        width: 800px;
-        position:relative;
-        display: block;
-        margin: 15px auto;
-    }
+    <style>
+        #create-property-container {
+            border: .5px solid black;
+            padding: 60px;
+            margin: 40px;
+            width: 800px;
+            position: relative;
+            display: block;
+            margin: 15px auto;
+        }
 
-    .addWorkSpace{
-        position: absolute;
-        top: 20px;
-        right: 10px;
-    }
+        .addWorkSpace {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
     </style>
 
 </head>
@@ -43,164 +43,170 @@
     <!-- script for navbar include -->
     <script src="/js/navbar.js"></script>
 
-<header>
-    <div class="container">
-        <h1 class="text-center">My Properties</h1>
-    </div>
-</header>
-
-
-<main>
-     <!-- Display all current Properties Structure -->
-     <div class="container" >
-        <h1></h1>
-        <div class="row row-cols-3 gy-4" id="myProperties">
-      
+    <header>
+        <div class="container">
+            <h1 class="text-center">My Properties</h1>
         </div>
-    </div>
-    <!-- FORM FOR CREATING A NEW PROPERTY -->
-    <div class="container" id="create-property-container">
-        <h1 class="modal-header text-center">Add a Property</h1><br>
-        <form novalidate id="createProperty">
-            <div class="form-floating">
-                <input type="text" name="address" id="address" class="form-control"
-                    placeholder="199 Key Drive SW, Calgary, AB , T2A 4C5" required>
-                <label for="address" class="form-label">Address</label>
-                <div class="invalid-feedback">Invalid Address</div>
-            </div>
-            <br>
-            <div class="form-floating">
-                <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Raddison"
-                    required>
-                <label for="neighborhood" class="form-label">Neighborhood</label>
-                <div class="invalid-feedback">Invalid Neighborhood</div>
-            </div>
-            <br>
-            <div class="form-floating">
-                <input type="text" name="squarefoot" id="squarefoot" class="form-control" placeholder="10sqm" required>
-                <label for="squarefoot" class="form-label">Squarefoot</label>
-                <div class="invalid-feedback">Invalid SqureFoot</div>
-            </div>
-            <br>
-            <div class="form-check">
-                <input type="checkbox" name="parking" id="parking" value="1" class="form-check-input">
-                <label for="parking" class="form-check-label">Is parking Available?</label>
-            </div>
-            <div>
-                <input type="checkbox" name="smoking" id="smoking" value="1" class="form-check-input">
-                <label for="smoking" class="form-check-label">Is smoking Available?</label>
-            </div>
-            <div>
-                <input type="checkbox" name="transpo" id="transpo" value="1" class="form-check-input">
-                <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
-            </div>
-            <br>
-            <h2>Workspace</h2>
-            <div class="form-floating">
-                <select name="name" id="name"  class="form-select" required>
-                    <option disabled selected>Type of Workspace</option>
-                    <option value="Meeting Room">Meeting Room</option>
-                    <option value="Private Office Room">Private Office Room</option>
-                    <option value="Desk">Desk</option>
-                </select>
-            </div>
-            <br>
-            <div class="form-floating">
-                <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
-                <label for="capacity" class="form-label">Maximum Capacity (number of individuals)</label>
-                <div class="invalid-feedback">Invalid input</div>
-            </div>
-            <br>
-            <select name="lease_term" id="lease_term" class="form-select" required>
-                <option value="term" disabled selected>Term Type</option>
-                <option value="1 Day">1 Day</option>
-                <option value="2 Days">2 Days</option>
-                <option value="3 Days">3 Days</option>
-            </select>
-            <br>
-            <div class="form-floating">
-                <input type="number" name="price" id="price" class="form-control" placeholder="30" required>
-                <label for="price" class="form-label">Price</label>
-                <div class="invalid-feedback">Invalid input</div>
-            </div>
-            <br>
-            <div class="form-floating">
-                <textarea class="form-control" name="description" id="description" cols="30" rows="10"
-                    required></textarea>
-                <label for="description" class="form-label">Short Descriptioin</label>
-                <div class="invalid-feedback">Please enter a short description</div>
-            </div>
-            <br>
-            <div>
-                <label for="image" class="form-label">Please Upload an image of the workspace</label>
-                <input type="file" name="image" id="image" class="form-control" accept="Image/*">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary btn-sm float-end">Add Property</button>
-        </form>
-    </div>
+    </header>
 
-    <!-- MODAL FOR ADDING WORKSPACE FOR A LISTED PROPERTY -->
-    <div class="container">
-        <div class="modal fade" id="addWorkspace">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title">Add Workspace</h2>
-                        <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form novalidate id="createWorkspace">
-                            <input type="number" name="propertyID" id="propertyID" hidden>
-                            <div class="form-floating">
-                                <select name="name" id="name"  class="form-select" required>
-                                    <option disabled selected>Type of Workspace</option>
-                                    <option value="Meeting Room">Meeting Room</option>
-                                    <option value="Private Office Room">Private Office Room</option>
-                                    <option value="Desk">Desk</option>
+
+    <main>
+        <!-- Display all current Properties Structure -->
+        <div class="container">
+            <h1></h1>
+            <div class="row row-cols-3 gy-4" id="myProperties">
+
+            </div>
+        </div>
+        <!-- FORM FOR CREATING A NEW PROPERTY -->
+        <div class="container" id="create-property-container">
+            <h1 class="modal-header text-center">Add a Property</h1><br>
+            <form novalidate id="createProperty">
+                <div class="form-floating">
+                    <input type="text" name="address" id="address" class="form-control"
+                        placeholder="199 Key Drive SW, Calgary, AB , T2A 4C5" required>
+                    <label for="address" class="form-label">Address</label>
+                    <div class="invalid-feedback">Invalid Address</div>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Raddison"
+                        required>
+                    <label for="neighborhood" class="form-label">Neighborhood</label>
+                    <div class="invalid-feedback">Invalid Neighborhood</div>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="text" name="squarefoot" id="squarefoot" class="form-control" placeholder="10sqm"
+                        required>
+                    <label for="squarefoot" class="form-label">Squarefoot</label>
+                    <div class="invalid-feedback">Invalid SqureFoot</div>
+                </div>
+                <br>
+                <div class="form-check">
+                    <input type="checkbox" name="parking" id="parking" value="1" class="form-check-input">
+                    <label for="parking" class="form-check-label">Is parking Available?</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="smoking" id="smoking" value="1" class="form-check-input">
+                    <label for="smoking" class="form-check-label">Is smoking Available?</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="transpo" id="transpo" value="1" class="form-check-input">
+                    <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
+                </div>
+                <br>
+                <h2>Workspace</h2>
+                <div class="form-floating">
+                    <select name="name" id="name" class="form-select" required>
+                        <option disabled selected>Type of Workspace</option>
+                        <option value="Meeting Room">Meeting Room</option>
+                        <option value="Private Office Room">Private Office Room</option>
+                        <option value="Desk">Desk</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
+                    <label for="capacity" class="form-label">Maximum Capacity (number of individuals)</label>
+                    <div class="invalid-feedback">Invalid input</div>
+                </div>
+                <br>
+                <select name="lease_term" id="lease_term" class="form-select" required>
+                    <option value="term" disabled selected>Term Type</option>
+                    <option value="1 Day">1 Day</option>
+                    <option value="2 Days">2 Days</option>
+                    <option value="3 Days">3 Days</option>
+                </select>
+                <br>
+                <div class="form-floating">
+                    <input type="number" name="price" id="price" class="form-control" placeholder="30" required>
+                    <label for="price" class="form-label">Price</label>
+                    <div class="invalid-feedback">Invalid input</div>
+                </div>
+                <br>
+                <div class="form-floating">
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="10"
+                        required></textarea>
+                    <label for="description" class="form-label">Short Descriptioin</label>
+                    <div class="invalid-feedback">Please enter a short description</div>
+                </div>
+                <br>
+                <div>
+                    <label for="image" class="form-label">Please Upload an image of the workspace</label>
+                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary btn-sm float-end">Add Property</button>
+            </form>
+        </div>
+
+        <!-- MODAL FOR ADDING WORKSPACE FOR A LISTED PROPERTY -->
+        <div class="container">
+            <div class="modal fade" id="addWorkspace">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Add Workspace</h2>
+                            <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form novalidate id="createWorkspace">
+                                <input type="number" name="propertyID" id="propertyID" hidden>
+                                <div class="form-floating">
+                                    <select name="name" id="name" class="form-select" required>
+                                        <option disabled selected>Type of Workspace</option>
+                                        <option value="Meeting Room">Meeting Room</option>
+                                        <option value="Private Office Room">Private Office Room</option>
+                                        <option value="Desk">Desk</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="form-floating">
+                                    <input type="number" name="capacity" id="capacity" class="form-control"
+                                        placeholder="3" required>
+                                    <label for="capacity" class="form-label">Maximum Capacity (number of
+                                        individuals)</label>
+                                    <div class="invalid-feedback">Invalid input</div>
+                                </div>
+                                <br>
+                                <select name="lease_term" id="lease_term" class="form-select" required>
+                                    <option value="term" disabled selected>Term Type</option>
+                                    <option value="1 Day">1 Day</option>
+                                    <option value="2 Days">2 Days</option>
+                                    <option value="3 Days">3 Days</option>
                                 </select>
-                            </div>
-                            <br>
-                            <div class="form-floating">
-                                <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
-                                <label for="capacity" class="form-label">Maximum Capacity (number of individuals)</label>
-                                <div class="invalid-feedback">Invalid input</div>
-                            </div>
-                            <br>
-                            <select name="lease_term" id="lease_term"  class="form-select" required>
-                                <option value="term" disabled selected>Term Type</option>
-                                <option value="1 Day">1 Day</option>
-                                <option value="2 Days">2 Days</option>
-                                <option value="3 Days">3 Days</option>
-                            </select>
-                            <br>
-                            <div class="form-floating">
-                                <input type="number" name="price" id="price" class="form-control"  placeholder="30" required>
-                                <label for="price" class="form-label">Price</label>
-                                <div class="invalid-feedback">Invalid input</div>
-                            </div>
-                            <br>
-                            <div class="form-floating">
-                                <textarea class="form-control" name="description" id="description" cols="30" rows="10" required></textarea>
-                                <label for="description" class="form-label">Short Description</label>
-                                <div class="invalid-feedback">Please enter a short description</div>
-                            </div>
-                            <br>
-                            <div>
-                                <label for="image" class="form-label">Please Upload an image of the workspace</label>
-                                <input type="file" name="image" id="image" class="form-control" accept="Image/*">
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-primary btn-sm float-end">Add Workspace</button>
-                        </form>
+                                <br>
+                                <div class="form-floating">
+                                    <input type="number" name="price" id="price" class="form-control" placeholder="30"
+                                        required>
+                                    <label for="price" class="form-label">Price</label>
+                                    <div class="invalid-feedback">Invalid input</div>
+                                </div>
+                                <br>
+                                <div class="form-floating">
+                                    <textarea class="form-control" name="description" id="description" cols="30"
+                                        rows="10" required></textarea>
+                                    <label for="description" class="form-label">Short Description</label>
+                                    <div class="invalid-feedback">Please enter a short description</div>
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="image" class="form-label">Please Upload an image of the
+                                        workspace</label>
+                                    <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-sm float-end">Add Workspace</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-     <!-- **************************MODAL EDITING A PROPERTY -->
-     <div class="container">
+    </main>
+    <!-- **************************MODAL EDITING A PROPERTY -->
+    <div class="container">
         <div class="modal fade" id="editProperty">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -212,20 +218,22 @@
                         <form novalidate id="editMyProperty">
                             <input type="number" name="edit_propertyID" id="edit_propertyID" hidden>
                             <div class="form-floating">
-                                <input type="text" name="address" id="address" class="form-control"  placeholder="199 Key Drive SW, Calgary, AB , T2A 4C5" required>
+                                <input type="text" name="address" id="address" class="form-control"
+                                    placeholder="199 Key Drive SW, Calgary, AB , T2A 4C5" required>
                                 <label for="address" class="form-label">Address</label>
                                 <div class="invalid-feedback">Invalid Workspace</div>
                             </div>
                             <br>
                             <div class="form-floating">
-                                <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Raddison"
-                                required>
+                                <input type="text" name="neighborhood" id="neighborhood" class="form-control"
+                                    placeholder="Raddison" required>
                                 <label for="neighborhood" class="form-label">Neighborhood</label>
                                 <div class="invalid-feedback">Invalid input</div>
                             </div>
                             <br>
                             <div class="form-floating">
-                                <input type="text" name="squarefoot" id="squarefoot" class="form-control" placeholder="10sqm" required>
+                                <input type="text" name="squarefoot" id="squarefoot" class="form-control"
+                                    placeholder="10sqm" required>
                                 <label for="squarefoot" class="form-label">Squarefoot</label>
                                 <div class="invalid-feedback">Invalid input</div>
                             </div>
@@ -243,7 +251,8 @@
                                 <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-primary btn-sm float-end editProperty">Edit Property</button>
+                            <button type="submit" class="btn btn-primary btn-sm float-end editProperty">Edit
+                                Property</button>
                         </form>
                     </div>
                 </div>
@@ -251,51 +260,56 @@
         </div>
     </div>
 
-         <!-- **************************MODAL FOR DELETING A PROPERTY -->
-         <div class="container">
-            <div class="modal fade" id="deleteProperty">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
+    <!-- **************************MODAL FOR DELETING A PROPERTY -->
+    <div class="container">
+        <div class="modal fade" id="deleteProperty">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <form novalidate id="deleteMyProperty">
                             <h2 class="modal-title">Delete Property</h2>
                             <input type="number" name="delete_propertyID" id="delete_propertyID" hidden>
                             <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete this property?</p>
-                            <br>
-                            <button type="submit" class="btn btn-primary btn-sm float-end ">No, don't delete</button>
-                            <br><br>
-                            <button type="submit" class="btn btn-primary btn-sm float-end deleteProperty">Yes, delete property</button>
-                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this property?</p>
+                        <br>
+
+
+                        <button type="submit" class="btn btn-primary btn-sm float-end deleteProperty">Yes, delete
+                            property</button>
+                        <br><br>
+                        </form>
+                        <button type="submit" class="btn btn-primary btn-sm float-end ">No, don't delete</button>
                     </div>
                 </div>
             </div>
         </div>
-  
-<footer class="footer bg-dark text-light py-2">
-
-    <div class="container text-center">
-        <p>&copy; Co-working Registry. All rights reserved.</p>
     </div>
 
-</footer>
+    <footer class="footer bg-dark text-light py-2">
+
+        <div class="container text-center">
+            <p>&copy; Co-working Registry. All rights reserved.</p>
+        </div>
+
+    </footer>
 
 
-<!-- SCRIPT TO GET OWNERS PROPERTIES AND DISPLAY ON MyProperties -->
-<script>
-    const cardContainer = document.getElementById('myProperties');
-    const userID = localStorage.getItem('userID');
-    const token = localStorage.getItem('token');
+    <!-- SCRIPT TO GET OWNERS PROPERTIES AND DISPLAY ON MyProperties -->
+    <script>
+        const cardContainer = document.getElementById('myProperties');
+        const userID = localStorage.getItem('userID');
+        const token = localStorage.getItem('token');
 
 
 
-    const createCard = (data) => {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'col';
+        const createCard = (data) => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'col';
 
-        const cardContent =
-            `<div class="card">
+            const cardContent =
+                `<div class="card">
                     <img src="/img/coworking.jpg" alt="Property Image" class="card-img-top">
                     <div class="card-body">
                         <h2 class="card-title">${data.address}</h2>
@@ -314,261 +328,260 @@
 </div>
                 </div>`;
 
-        cardElement.innerHTML = cardContent;
-        cardContainer.appendChild(cardElement);
-    };
+            cardElement.innerHTML = cardContent;
+            cardContainer.appendChild(cardElement);
+        };
 
-    // Fetch data from the API server
-    fetch(`http://143.198.237.154/api/myproperty/${userID}`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`
+        // Fetch data from the API server
+        fetch(`http://143.198.237.154/api/myproperty/${userID}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the data and create cards
+                data.forEach(item => {
+                    createCard(item);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        const parseBool = (a) => {
+            return a ? "Yes" : "No";
         }
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Loop through the data and create cards
-            data.forEach(item => {
-                createCard(item);
+    </script>
+
+    <!-- SCRIPT TO ADD PROPERTIES FOR OWNERS ACCOUNT-->
+    <script>
+        const convertCheckBox = (check) => {
+            if (check !== "1") {
+                return 0;
+            } else
+                return 1;
+        };
+
+        const handleCreateProperties = async (event) => {
+            event.preventDefault();
+
+            const propertiesForm = document.getElementById('createProperty');
+            const propertiesFormData = new FormData(propertiesForm);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-type", "application/json")
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const requestBodyPr = JSON.stringify({
+                address: propertiesFormData.get('address'),
+                neighborhood: propertiesFormData.get('neighborhood'),
+                squarefoot: propertiesFormData.get('squarefoot'),
+                parking: convertCheckBox(propertiesFormData.get('parking')),
+                smoking: convertCheckBox(propertiesFormData.get('smoking')),
+                transportation: convertCheckBox(propertiesFormData.get('transpo')),
+                name: propertiesFormData.get('name'),
+                capacity: propertiesFormData.get('capacity'),
+                photos: propertiesFormData.get('image') ? propertiesFormData.get('image').name : null,
+                description: propertiesFormData.get('description'),
+                lease_term: propertiesFormData.get('lease_term'),
+                price: propertiesFormData.get('price')
             });
-        })
-        .catch(error => console.error('Error fetching data:', error));
 
-    const parseBool = (a) => {
-        return a ? "Yes" : "No";
-    }
-</script>
-
-<!-- SCRIPT TO ADD PROPERTIES FOR OWNERS ACCOUNT-->
-<script>
-    const convertCheckBox = (check) => {
-        if (check !== "1") {
-            return 0;
-        } else
-            return 1;
-    };
-
-    const handleCreateProperties = async (event) => {
-        event.preventDefault();
-
-        const propertiesForm = document.getElementById('createProperty');
-        const propertiesFormData = new FormData(propertiesForm);
-
-        const myHeaders = new Headers();
-        myHeaders.append("Content-type", "application/json")
-        myHeaders.append("Authorization", `Bearer ${token}`);
-
-        const requestBodyPr = JSON.stringify({
-            address: propertiesFormData.get('address'),
-            neighborhood: propertiesFormData.get('neighborhood'),
-            squarefoot: propertiesFormData.get('squarefoot'),
-            parking: convertCheckBox(propertiesFormData.get('parking')),
-            smoking: convertCheckBox(propertiesFormData.get('smoking')),
-            transportation: convertCheckBox(propertiesFormData.get('transpo')),
-            name: propertiesFormData.get('name'),
-            capacity: propertiesFormData.get('capacity'),
-            photos: propertiesFormData.get('image') ? propertiesFormData.get('image').name : null,
-            description: propertiesFormData.get('description'),
-            lease_term : propertiesFormData.get('lease_term'),
-            price: propertiesFormData.get('price')
-        });
-
-        const requestOptionsPr = {
-            method: 'POST',
-            headers: myHeaders,
-            body: requestBodyPr,
-            redirect: 'follow'
-        }
-
-        try {
-            const responseAP = await fetch('http://143.198.237.154/api/property/create', requestOptionsPr);
-            const resultsAP = await responseAP.text();
-
-            if (responseAP.ok) {
-                console.log("succesfully added")
+            const requestOptionsPr = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBodyPr,
+                redirect: 'follow'
             }
-        } catch (err) {
-            console.log('err', err);
-            alert('An error occured, Please Try again later!');
-        }
-    };
 
+            try {
+                const responseAP = await fetch('http://143.198.237.154/api/property/create', requestOptionsPr);
+                const resultsAP = await responseAP.text();
 
-    if (!token) {
-        alert('Please Login to an Account');
-    } else {
-        const propertyForm = document.getElementById('createProperty');
-        propertyForm.addEventListener('submit', handleCreateProperties);
-    }
-</script>
-
-<!-- SCRIPT FOR STORING ID's On Forms for properties -->
-<script>
-   document.addEventListener('DOMContentLoaded', function () {
-    const cardContainer = document.getElementById('myProperties'); // Parent element for delegation
-
-    //For adding Workspace
-    cardContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains('addWorkSpace')) {
-            const propertyId = event.target.getAttribute('data-property-id');
-            const propertyIdInput = document.getElementById('propertyID');
-            propertyIdInput.value = propertyId;
-            console.log("This is the property value:" + propertyId);
-        }
-    });
-
-    // For Editing Property
-    cardContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains('editProperty')) {
-            const editPropertyId = event.target.getAttribute('edit_property_id');
-            const editPropertyInput = document.getElementById('edit_propertyID');
-            editPropertyInput.value = editPropertyId;
-        }
-    })
-
-    //For Deleting Property
-    cardContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains('deleteProperty')) {
-            const deletePropertyId = event.target.getAttribute('delete_property_id');
-            const deletePropertyInput = document.getElementById('delete_propertyID');
-            deletePropertyInput.value = deletePropertyId;
-        }
-    })
- 
-});
-
-</script>
-
-
-
-<!-- SCRIPT TO RESET AND DELETE THE PROPERTIES -->
-<script>
-    const token2 = localStorage.getItem('token');
-    const userID2 = localStorage.getItem('userID');
-
-    const editProperty = async(event) => {
-        event.preventDefault();
-
-        const editPropertyForm = document.getElementById('editMyProperty');
-        const editPropertyData = new FormData(editPropertyData);
-
-        const myHeaders = new Headers();
-        myHeaders.append("Content-type", "application/json")
-        myHeaders.append("Authorization", `Bearer ${token2}`);
-
-        const requestBody = JSON.stringify({
-            address: editPropertyData.get('address'),
-            neighborhood: editPropertyData.get('neighborhood'),
-            squarefoot: editPropertyData.get('squarefoot'),
-            parking: convertCheckBox(editPropertyData.get('parking')),
-            smoking: convertCheckBox(editPropertyData.get('smoking')),
-            transportation: convertCheckBox(editPropertyData.get('transpo')),
-            property_id: editPropertyData.get('edit_propertyID')
-        });
-
-        console.log(requestBody);
-
-        const requestOptionsAW = {
-            method: 'POST',
-            headers: myHeaders,
-            body: requestBody,
-            redirect: 'follow'
-        }
-
-        try{
-            const responseAW = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsAW);
-            const resultsAW = await responseAW.text();
-
-            if(responseAW.ok){
-                console.log("succesfully added")
+                if (responseAP.ok) {
+                    console.log("succesfully added")
+                }
+            } catch (err) {
+                console.log('err', err);
+                alert('An error occured, Please Try again later!');
             }
-        }catch (err) {
-            console.log('err', err);
+        };
 
-            alert('An error occured, Please Try again later!');
+
+        if (!token) {
+            alert('Please Login to an Account');
+        } else {
+            const propertyForm = document.getElementById('createProperty');
+            propertyForm.addEventListener('submit', handleCreateProperties);
         }
-    }
+    </script>
 
-    // const deleteProperty = async (event) => {
-    //     event.preventDefault()
+    <!-- SCRIPT FOR STORING ID's On Forms for properties -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cardContainer = document.getElementById('myProperties'); // Parent element for delegation
 
-    //     const deletePropertyForm = document.getElementById('deleteMyProperty');
-    //     const deletePropertyData = new FormData(deletePropertyData);
+            //For adding Workspace
+            cardContainer.addEventListener('click', function (event) {
+                if (event.target.classList.contains('addWorkSpace')) {
+                    const propertyId = event.target.getAttribute('data-property-id');
+                    const propertyIdInput = document.getElementById('propertyID');
+                    propertyIdInput.value = propertyId;
+                    console.log("This is the property value:" + propertyId);
+                }
+            });
 
-    //     ////PUT CODE HERE
+            // For Editing Property
+            cardContainer.addEventListener('click', function (event) {
+                if (event.target.classList.contains('editProperty')) {
+                    const editPropertyId = event.target.getAttribute('edit_property_id');
+                    const editPropertyInput = document.getElementById('edit_propertyID');
+                    editPropertyInput.value = editPropertyId;
+                }
+            })
 
-    // }
+            //For Deleting Property
+            cardContainer.addEventListener('click', function (event) {
+                if (event.target.classList.contains('deleteProperty')) {
+                    const deletePropertyId = event.target.getAttribute('delete_property_id');
+                    const deletePropertyInput = document.getElementById('delete_propertyID');
+                    deletePropertyInput.value = deletePropertyId;
+                }
+            })
 
-
-    if(!token2){
-        alert('Please Login to an Account');
-    }else{
-        const editPropertyForm = document.getElementById('editMyProperty');
-        editPropertyForm.addEventListener('submit', editProperty);
-
-        // const deletePropertyForm = document.getElementById('deleteMyProperty');
-        // deletePropertyForm.addEventListener('submit', deleteProperty)
-    }
-</script>
-
-
-
-
-
-<!-- SCRIPT TO ADD NEW WORKSPACE ON A LISTED PROPERTY -->
-<script>
-    const token1 = localStorage.getItem('token');
-
-    const handleCreateWorkspace = async(event) => {
-        event.preventDefault();
-
-        const workspaceForm = document.getElementById('createWorkspace');
-        const workspaceFormData = new FormData(workspaceForm);
-
-        const myHeaders = new Headers();
-        myHeaders.append("Content-type", "application/json")
-        myHeaders.append("Authorization", `Bearer ${token1}`);
-
-        const requestBody = JSON.stringify({
-            name:workspaceFormData.get('name'),
-            capacity:workspaceFormData.get('capacity'),
-            photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null,
-            property_id: workspaceFormData.get('propertyID'),
-            description : workspaceFormData.get('description'),
-            lease_term : workspaceFormData.get('lease_term'),
-            price: workspaceFormData.get('price')
         });
+    </script>
 
-        console.log(requestBody);
 
-        const requestOptionsAW = {
-            method: 'POST',
-            headers: myHeaders,
-            body: requestBody,
-            redirect: 'follow'
-        }
 
-        try{
-            const responseAW = await fetch('http://143.198.237.154/api/workspace/create',requestOptionsAW);
-            const resultsAW = await responseAW.text();
+    <!-- SCRIPT TO RESET AND DELETE THE PROPERTIES -->
+    <script>
+        const token2 = localStorage.getItem('token');
+        const userID2 = localStorage.getItem('userID');
 
-            if(responseAW.ok){
-                console.log("succesfully added")
+        const editProperty = async (event) => {
+            event.preventDefault();
+
+            const editPropertyForm = document.getElementById('editMyProperty');
+            const editPropertyData = new FormData(editPropertyData);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-type", "application/json")
+            myHeaders.append("Authorization", `Bearer ${token2}`);
+
+            const requestBody = JSON.stringify({
+                address: editPropertyData.get('address'),
+                neighborhood: editPropertyData.get('neighborhood'),
+                squarefoot: editPropertyData.get('squarefoot'),
+                parking: convertCheckBox(editPropertyData.get('parking')),
+                smoking: convertCheckBox(editPropertyData.get('smoking')),
+                transportation: convertCheckBox(editPropertyData.get('transpo')),
+                property_id: editPropertyData.get('edit_propertyID')
+            });
+
+            console.log(requestBody);
+
+            const requestOptionsAW = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBody,
+                redirect: 'follow'
             }
-        }catch (err) {
-            console.log('err', err);
 
-            alert('An error occured, Please Try again later!');
+            try {
+                const responseAW = await fetch('http://143.198.237.154/api/workspace/create', requestOptionsAW);
+                const resultsAW = await responseAW.text();
+
+                if (responseAW.ok) {
+                    console.log("succesfully added")
+                }
+            } catch (err) {
+                console.log('err', err);
+
+                alert('An error occured, Please Try again later!');
+            }
         }
-    };
 
-    if(!token1){
-        alert('Please Login to an Account');
-    }else{
-        const workspaceForm = document.getElementById('createWorkspace');
-        workspaceForm.addEventListener('submit', handleCreateWorkspace);
-    }
-</script>
+        // const deleteProperty = async (event) => {
+        //     event.preventDefault()
+
+        //     const deletePropertyForm = document.getElementById('deleteMyProperty');
+        //     const deletePropertyData = new FormData(deletePropertyData);
+
+        //     ////PUT CODE HERE
+
+        // }
+
+
+        if (!token2) {
+            alert('Please Login to an Account');
+        } else {
+            const editPropertyForm = document.getElementById('editMyProperty');
+            editPropertyForm.addEventListener('submit', editProperty);
+
+            // const deletePropertyForm = document.getElementById('deleteMyProperty');
+            // deletePropertyForm.addEventListener('submit', deleteProperty)
+        }
+    </script>
+
+
+
+
+
+    <!-- SCRIPT TO ADD NEW WORKSPACE ON A LISTED PROPERTY -->
+    <script>
+        const token1 = localStorage.getItem('token');
+
+        const handleCreateWorkspace = async (event) => {
+            event.preventDefault();
+
+            const workspaceForm = document.getElementById('createWorkspace');
+            const workspaceFormData = new FormData(workspaceForm);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-type", "application/json")
+            myHeaders.append("Authorization", `Bearer ${token1}`);
+
+            const requestBody = JSON.stringify({
+                name: workspaceFormData.get('name'),
+                capacity: workspaceFormData.get('capacity'),
+                photos: workspaceFormData.get('image') ? workspaceFormData.get('image').name : null,
+                property_id: workspaceFormData.get('propertyID'),
+                description: workspaceFormData.get('description'),
+                lease_term: workspaceFormData.get('lease_term'),
+                price: workspaceFormData.get('price')
+            });
+
+            console.log(requestBody);
+
+            const requestOptionsAW = {
+                method: 'POST',
+                headers: myHeaders,
+                body: requestBody,
+                redirect: 'follow'
+            }
+
+            try {
+                const responseAW = await fetch('http://143.198.237.154/api/workspace/create', requestOptionsAW);
+                const resultsAW = await responseAW.text();
+
+                if (responseAW.ok) {
+                    console.log("succesfully added")
+                }
+            } catch (err) {
+                console.log('err', err);
+
+                alert('An error occured, Please Try again later!');
+            }
+        };
+
+        if (!token1) {
+            alert('Please Login to an Account');
+        } else {
+            const workspaceForm = document.getElementById('createWorkspace');
+            workspaceForm.addEventListener('submit', handleCreateWorkspace);
+        }
+    </script>
 
 
 

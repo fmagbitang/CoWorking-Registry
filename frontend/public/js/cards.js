@@ -28,7 +28,8 @@ const createCard = (data) => {
             This is my Property ID: ${data.Workspace.property_id} <br>
             This is the User ID: ${data.Workspace.user_id} <br>
             This is the Workspace ID: ${data.Workspace.id}
-        </div>
+            This is the Workspace ID: ${data.User.role}
+            </div>
     </div>
 
     <div>
@@ -36,6 +37,27 @@ const createCard = (data) => {
     </div>
     <div>
     <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace">Delete</button>
+</div>
+<div>
+<button class="btn btn-primary btn-sm float-end ownerInfo" data-bs-toggle="modal" data-bs-target="#ownerInfo">Contact Owner</button>
+<div class="container">
+        <div class="modal fade" id="ownerInfo">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <form novalidate id="ownerInfo">
+                  <h2 class="modal-title">Renter's Contact Information</h2>
+              </div>
+              <div class="modal-body">
+                <h5>Name: ${data.User.fname}
+                ${data.User.lname} </h5>
+                <h5>Phone number: ${data.User.mobile}</h5>
+                <h5>Email Address: ${data.User.email}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
 </div>`;
 
@@ -52,6 +74,13 @@ fetch("http://143.198.237.154/api/allworkspace/")
     .then(workspacedata => {
             // Loop through the data and create cards
             workspacedata.forEach(workspaceItem => {
+                    const rolee = localStorage.getItem('role');
+                    const delWorksp = document.querySelectorAll('.deleteWorkspace');
+                    const edWorksp = document.querySelectorAll('.editWorkspace');
+                    if (rolee !== 'owner'){
+                        edWorksp.forEach(x => {x.style.display ='none'})
+                        delWorksp.forEach(x => {x.style.display ='none'})
+                    }
                     createCard(workspaceItem);
                 })
             })   
@@ -128,6 +157,13 @@ fetch("http://143.198.237.154/api/allworkspace/")
                 // const lease = JSON.parse(workspaceItem1.Leases[0])
                 // console.log(lease.price)
                 // console.log(workspaceItem1.Leases[0])
+                    const rolee = localStorage.getItem('role');
+                    const delWorksp = document.querySelectorAll('.deleteWorkspace');
+                    const edWorksp = document.querySelectorAll('.editWorkspace');
+                    if (rolee !== 'owner'){
+                        edWorksp.forEach(x => {x.style.display ='none'})
+                        delWorksp.forEach(x => {x.style.display ='none'})
+                    }
                     createModal(workspaceItem1);
                 })
             })   
