@@ -32,14 +32,14 @@ const createCard = (data) => {
     </div>
 
     <div>
-    <button class="btn btn-primary btn-sm float-end editWorkspace" data-bs-toggle="modal" data-bs-target="#editWorkspace" edit-WorkspaceL-ID=${data.id}  edit-WorkspaceP-ID=${data.Workspace.property_id} edit-Workspace-ID=${data.Workspace.id} edit-WorkspaceA-ID=${data.Workspace.availability}>Edit</button>
+    <button class="btn btn-primary btn-sm float-end editWorkspace" data-bs-toggle="modal" data-bs-target="#editWorkspace" edit-WorkspaceL-ID="${data.id}"  edit-WorkspaceP-ID="${data.Workspace.property_id}" edit-Workspace-ID="${data.Workspace.id}" edit-WorkspaceA-ID="${data.Workspace.availability}"  style="position: absolute; top: 60px; right: 10px;">Edit</button>
     </div>
     <div>
-    <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace" delete-Workspace-ID=${data.Workspace.id}>Delete ${data.Workspace.id}</button>
+    <button class="btn btn-primary btn-sm float-end deleteWorkspace" data-bs-toggle="modal" data-bs-target="#deleteWorkspace" delete-Workspace-ID="${data.Workspace.id}" style="position: absolute; top: 20px; right: 10px;">Delete</button>
     <div style="display:none" id="refreshdiv">
 </div>
 </div>`;
-
+    console.log(`The Availability is ${data.Workspace.availability}`)
     cardElement.innerHTML = cardContent;
     cardContainer.appendChild(cardElement);
     updateAvailabilityColor();
@@ -55,9 +55,12 @@ fetch("http://143.198.237.154/api/allworkspace/")
             workspacedata.forEach(workspaceItem => {
                 //const path = window.location.pathname;
                     //if(path === "/workspace" && workspaceItem.User.role === "owner"){
-                    //if(userId === workspaceItem.user_id.id)    
+                    console.log(userId);
+                    console.log(workspaceItem)
+                    if(userId === workspaceItem.Workspace.userId){
+                    console.log(workspaceItem.Workspace.userId)
                     createCard(workspaceItem);
-                    //}
+                    }
                     
                 })
             })   
