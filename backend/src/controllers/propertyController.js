@@ -131,17 +131,17 @@ const deleteProperty = async (req, res, next) => {
         property_id: id
       }
     });
-    const deleteLease = await Lease.findAll({
-      where: {
-        property_id: id,
-        workspace_id: deleteWorkspace.id
-      }
-    });
     if (!deleteWorkspace) {
       console.log('Deleting property only.');
       await propertyDelete.destroy();
       console.log('Property has been deleted.');
     } else {
+      const deleteLease = await Lease.findAll({
+        where: {
+          property_id: id,
+          workspace_id: deleteWorkspace.id
+        }
+      });
       if (deleteLease){
           console.log('Deleting Lease.');
           await Lease.destroy({
