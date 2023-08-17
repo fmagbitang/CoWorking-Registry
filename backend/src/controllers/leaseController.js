@@ -1,6 +1,7 @@
 const Lease = require('../models/leaseModel');
 const Workspace = require('../models/workspaceModel');
 const Property = require('../models/propertyModel');
+const User = require('../models/userModel');
 
 const timeElapsed = Date.now(); // get the date now
 const today = new Date(timeElapsed); // formated a date today.
@@ -59,6 +60,9 @@ Workspace.hasMany(Lease, { foreignKey: 'workspace_id' });
 Lease.belongsTo(Property, { foreignKey: 'property_id' });
 Property.hasMany(Lease, { foreignKey: 'property_id' });
 
+Lease.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Lease, { foreignKey: 'user_id' });
+
 
 // Get a workspace and property by ID
 const getAllLeaseUserID = async (req, res, next) => {
@@ -96,6 +100,9 @@ const getWPL = async (req, res, next) => {
         },
         {
           model: Workspace,
+        },
+        {
+          model: User,
         }
       ]
     })
