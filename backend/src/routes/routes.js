@@ -18,6 +18,8 @@ router.get('/workspace/', workspaceController.getAllWorkspace);
 router.get('/property/', propertyController.getAllProperty);
 // get id by post 
 router.get('/allworkspace/', leaseController.getWPL);
+router.get('/search/property/:search', propertyController.searchProperty);
+router.get('/search/workspace/:search', propertyController.searchWorkspace);
 
 // Route for user login
 router.post('/login', login);
