@@ -50,13 +50,14 @@ db.run(`
 db.run(`
 ALTER TABLE workspace
   ADD ratings VARCHAR default 5;
-  `, (err)=> {
-    if (err) {
-      console.error('Error in Alter ADD ', err.message);
-    } else {
-      console.log('Alter Table workspace successful.');
-    }
-  });
+  ADD description VARCHAR default 'no description provided';
+  `, (err) => {
+  if (err) {
+    console.error('Error in Alter ADD ', err.message);
+  } else {
+    console.log('Alter Table workspace successful.');
+  }
+});
 //  property
 db.run(`
   CREATE TABLE IF NOT EXISTS property (
@@ -89,6 +90,8 @@ db.run(`
     updated_at TEXT NOT NULL,
     user_id INTEGER,
     property_id INTEGER,
+    workspace_id INTEGER,
+    FOREIGN KEY(workspace_id) REFERENCES workspace(id),
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(property_id) REFERENCES property(id)
   )

@@ -43,6 +43,10 @@ const Workspace = sequelize.define(
       allowNull: true,
       defaultValue: 5.0,
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     created_at: {
       type: DataTypes.STRING,
       allowNull: false,

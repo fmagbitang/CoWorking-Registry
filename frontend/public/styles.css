@@ -1,0 +1,301 @@
+/*********** CSS STYLES **********/
+
+/***********************************MODAL DESIGNS (index.html)*********************/
+
+ /*Sign-up CSS*/
+ .signup-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.signup-box {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.h2 {
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.p {
+    margin-bottom: 20px;
+    color: #666;
+    text-align: center;
+}
+
+.form {
+    text-align: left;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.input1,.select1 {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    transition: border-color 0.3s;
+}
+
+.input1:focus {
+    border-bottom-color: #007bff;
+    outline: none;
+}
+
+.button1 {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+   
+}
+
+.button1:hover {
+    background-color: #0056b3;
+}
+
+.login-link p {
+    color: #888;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.login-link a:hover {
+    color: #0056b3;
+}
+
+
+/*Log-In and Forgot Password CSS */
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    padding:5px;
+}
+
+.login-box {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-h2 {
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.formLogIn {
+    text-align: left;
+}
+
+.input-container1 {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-login1 {
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    transition: border-color 0.3s;
+}
+
+.input-login1:focus {
+    border-bottom-color: #007bff;
+    outline: none;
+}
+
+.buttonLogIn {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.buttonLogIn:hover {
+    background-color: #0056b3;
+}
+
+.forgot-passwordLogIn {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.forgot-passwordLogIn a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-passwordLogIn a:hover {
+    color: #0056b3;
+}
+
+.imgLock{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/***********************************MODAL DESIGNS (workspace.html)*********************/
+
+.addWorkSpace {
+    position: absolute;bottom: 10px;left: 10px; width:100px;
+}
+
+#create-property-container {
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+  .form-titleProperty {
+    font-size: 1.5rem;
+    color: #3498db;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form-groupProperty {
+    margin-bottom: 20px;
+  }
+
+  .labelProperty {
+    font-size: 1rem;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .buttonProperty {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin:auto;
+}
+
+  .buttonProperty:hover {
+    background-color: #2980b9;
+  }
+
+/**************Profile Modal (navbar.html)*************/
+.profile-header {
+    text-align: left;
+    margin-bottom: 20px;
+}
+.profile-header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    
+}
+
+.profile-header p {
+    color: #777;
+    font-size: 1rem;
+}
+
+.profile-info p {
+    margin-bottom: 10px;
+}
+
+.h1{
+  color: blue;
+  text-align: center;
+  font-size: 20px;
+}
+
+/*Search input -NavBar */
+  .navbar-nav {
+      display: flex;
+      align-items: center;
+  }
+
+  #filterDropdown{
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  cursor: pointer;
+  }
+
+  .Txt{
+    color: #0e0e0e;
+  }
+  
+  .dropdown-menu
+  {padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color:whitesmoke;
+  cursor: pointer;
+  }
+
+
+/*Workspace*/
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px; 
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#searchInput {
+    margin-right: 10px; 
+    background-color: whitesmoke;
+}
+
+.workspace1{
+    width:200px;
+}
+
+

@@ -1,13 +1,14 @@
 const Workspace = require('../models/workspaceModel');
 const Property = require('../models/propertyModel');
 const User = require('../models/userModel');
+const Lease = require('../models/leaseModel');
 
 const timeElapsed = Date.now(); // get the date now
 const today = new Date(timeElapsed); // formated a date today.
 
 // Create a new workspace
 const createWorkspace = async (req, res, next) => {
-  const { name, photos, capacity, availability, user_id, property_id, ratings } = req.body;
+  const { name, photos, capacity, availability, user_id, property_id, ratings, description, lease_term, price } = req.body;
   const userId = req.user.userId;
   try {
     created_at = today.toISOString();
@@ -19,12 +20,28 @@ const createWorkspace = async (req, res, next) => {
         photos,
         availability,
         user_id: userId,
-        property_id,
+        property_id: property_id,
         ratings,
+        description,
         created_at,
         updated_at
     });
-    res.status(201).json(workspace);
+
+    const lease = await Lease.create({
+      lease_term,
+      price,
+      property_id: property_id,
+      workspace_id: workspace.id,
+      created_at,
+      updated_at
+    });
+
+    response = {
+      workspace,
+      lease
+    }
+  
+    res.status(201).json(response);
   } catch (err) {
     next(err);
     console.log('error: ' + err.message);
@@ -71,6 +88,21 @@ const getWorkspaceByPropertyId = async (req, res, next) => {
   }
 };
 
+// Get all property of owner
+const getAllWorkspaceByOwner = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const ownerWorkspace = await Workspace.findAll({
+      where: {
+        user_id: id
+      }
+    });
+    res.status(200).json(ownerWorkspace);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // update workspace availability
 const updateWorkspace = async (req, res, next) => {
   const { id } = req.params;
@@ -109,4 +141,5 @@ module.exports =  {
   getAllWorkspace,
   updateWorkspace,
   getWorkspaceByPropertyId,
+  getAllWorkspaceByOwner,
 }

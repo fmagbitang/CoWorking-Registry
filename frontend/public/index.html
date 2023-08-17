@@ -14,39 +14,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Include Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include Link for rating Star Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
+    <!-- Icon -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+    <!-- CSS Style -->
+    <link rel='stylesheet' href='styles.css'>
 
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-md navbar-light">
-        <div class="container">
-            <a href="#" class="navbar-brand">
-                <img src="/public/img/facebooklogo.png" alt="logo" width="30" height="24"
-                    class="d-inline-block align-top">
-                Co-Working Registry
-            </a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
-                aria-label="Expand Navagation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="nav">
-                <ul class="navbar-nav text-end ms-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link login-btn" data-bs-toggle="modal" data-bs-target="#logIn">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#signUp">Sign-up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#contactUs">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body style="margin-top: 100px;">
+    <div id="navbarContent"></div>
 
     <header>
         <div class="container">
@@ -54,58 +32,20 @@
         </div>
     </header>
 
-
     <main>
 
         <!-- Cards Landing Page Structre -->
         <div class="container">
             <div class="row row-cols-4 gy-4" id="cardContainer">
-                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                    <div class="card">
-                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                        <div class="card-body">
-                            <h2 class="card-title">Workspace Name</h2>
-                            <span class="card-subtitle">332 Covile Drive</span>
-                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-                                itaque, deleniti!
-                            </div>
-                            <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 25px 3px 3px">
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-                                </svg> -->
-                                <span class="fa fa-star checked" style="color: orange;"></span>
-                                <p style="position: absolute; top: 4px; right: 0px;" class="star-rating">5.0</p>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" data-bs-toggle="modal" data-bs-target="#modal">
-                    <div class="card">
-                        <img src="/img/coworking.jpg" alt="PRoperty imagge" class="card-img-top">
-                        <div class="card-body">
-                            <h2 class="card-title">Workspace Name</h2>
-                            <span class="card-subtitle">332 Covile Drive</span>
-                            <div class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-                                itaque, deleniti!</div>
-                            <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 25px 3px 3px">
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-                                </svg> -->
-                                <span class="fa fa-star checked" style="color: orange;"></span>
-                                <p style="position: absolute; top: 4px; right: 0px;" class="star-rating">5.0</p>
-                                </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
 
-        <!-- Modal for Properties -->
+        <!-- Modal for Properties, Modal Structure for Properties -->
         <div id="property-modals">
-            <!-- Modal Structure for Properties -->
+
             <div class="container">
-                <div class="modal fade" id="modal">
+                <!-- <div class="modal fade" id="modal">
                     <div class="modal-dialog modal-dialog-centered modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -132,44 +72,43 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
 
     </main>
 
-    <footer class="footer bg-dark text-light py-3">
+    <footer class="footer bg-dark text-light py-3" style="margin-top: 50px;">
 
         <div class="container text-center">
             <p>&copy; Co-working Registry. All rights reserved.</p>
         </div>
-
     </footer>
 
 
     <!-- Modal For Login -->
-    <div class="container">
+    <div class="container login-container">
         <div class="modal fade" id="logIn">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title">Log-in</h1>
+                        <h2 class="login-h2">Account Log-in</h2>
                         <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#logIn"></button>
                     </div>
                     <div class="modal-body">
                         <form novalidate id="loginForm">
-                            <div class="form-floating">
-                                <input type="text" id="identifier" name="identifier" required class="form-control">
-                                <label for="identifier" class="form-label">Email or Username:</label>
+                            <div class="form-floating input-container1">
+                                <input type="text" id="identifier" name="identifier" required class="form-control input-login1">
+                                <label for="identifier" class="form-label input-login1 bi bi-person-fill">&nbsp; Email or Username:</label>
                             </div>
-                            <br>
-                            <div class="form-floating">
-                                <input type="password" id="password" name="password" required class="form-control">
-                                <label for="password" class="form-label">Password:</label>
+                            <div class="form-floating input-container1">
+                                <input type="password" id="password" name="password" required class="form-control input-login1">
+                                <label for="password" class="form-label input-login1 bi bi-lock-fill"> &nbsp;Password:</label>
                             </div>
-                            <a href="#" id="forgotPassword">Forgot Password?</a>
-                            <br>
-                            <button type="submit" class="btn btn-primary btn-sm float-end">Login</button>
+                            
+                            <button type="submit" class="btn btn-primary btn-sm float-end buttonLogIn">Login</button>
+                            <br><br>
+                            <a href="#" id="forgotPassword" class="forgot-passwordLogIn">Forgot Password?</a>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -181,33 +120,42 @@
         </div>
     </div>
 
+
     <!-- Modal for forgot password -->
-    <div class="container">
+    <div class="container login-container">
         <div class="modal fade" id="modalForgotPassword">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title">Reset Password</h1>
+                        <div>
+                        <img src="img/reset_password_icon.png" class="imgLock">
+                        </div>
+                        <div>
+                        <h1 class="modal-title login-h2">Reset Password</h1>
+                        </div>
                         <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#logIn"></button>
                     </div>
                     <div class="modal-body">
                         <form novalidate id="forgotPasswordForm">
-                            <div class="form-floating">
-                                <input type="text" id="forgotPasswordIdentifier" name="forgotPasswordIdentifier" required class="form-control">
-                                <label for="forgotPasswordIdentifier" class="form-label">Username or Email</label>
+                            <div class="form-floating login-container">
+                                <input type="text" id="forgotPasswordIdentifier" name="forgotPasswordIdentifier"
+                                    required class="form-control">
+                                <label for="forgotPasswordIdentifier" class="form-label input-login1">Username or Email</label>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input type="password" id="newPassword" name="newPassword" required class="form-control">
-                                <label for="newPassword" class="form-label">New Password</label>
+                            <div class="form-floating login-container">
+                                <input type="password" id="newPassword" name="newPassword" required
+                                    class="form-control input-login1">
+                                <label for="newPassword input-login1" class="form-label input-login1">New Password</label>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input type="password" id="confirm_new_password" name="confirm_new_password" class="form-control" required>
-                                <label for="confirm_new_password" class="form-label">Confirm New Password</label>
+                            <div class="form-floating login-container">
+                                <input type="password" id="confirm_new_password" name="confirm_new_password"
+                                    class="form-control input-login1" required>
+                                <label for="confirm_new_password input-login1" class="form-label input-login1">Confirm New Password</label>
                             </div>
-
-                            <button class="btn btn-primary btn-sm float-end">Submit</button>
+    
+                            <button class="btn btn-primary btn-sm float-end buttonLogIn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -215,144 +163,80 @@
         </div>
     </div>
 
-    <!-- script for forgot password -->
-    <script>
-        let forgotPassword = document.getElementById("forgotPassword");
-
-        forgotPassword.addEventListener('click', () => {
-            $('#logIn').modal('hide')
-            $('#modalForgotPassword').modal('show')
-        });
-
-        const handleForgotPassword = async(event) => {
-            event.preventDefault();
-
-            const forgotPasswordForm = document.getElementById("forgotPasswordForm");
-            const forgotPasswordData = new FormData(forgotPasswordForm);
-
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            const requestBodyFP = JSON.stringify({
-                identifier: forgotPasswordData.get('forgotPasswordIdentifier'),
-                password: forgotPasswordData.get('newPassword')
-            });
-
-            const requestOptionsFP = {
-                method: 'POST',
-                headers: myHeaders,
-                body: requestBodyFP,
-                redirect: 'follow'
-            };
-
-            try { 
-                const responseFP = await fetch("http://143.198.237.154/api/forgot_passsword", requestOptionsFP);
-                const resultFP = await responseFP.text();
-                console.log(resultFP);
-
-                if(responseFP.ok) {
-                    alert('Password change successfully!')
-                }
-                else{
-                    alert('This email or username doesn\'t exist yet!')
-                }
-            }
-            catch(error){
-                console.log('error', error);
-                alert('An error occurred. Please try again later.');
-            }
-        }
-
-        
-
-        //Forgot Password modal --- match password
-        let new_password = document.getElementById("newPassword");
-        let confirm_new_password = document.getElementById("confirm_new_password");
-
-        function matchNewPassword() {
-            if(new_password.value === confirm_new_password.value) {
-                const forgot_password = document.getElementById('forgotPasswordForm');
-                forgot_password.addEventListener('submit', handleForgotPassword);
-            }
-            else {
-                confirm_new_password.setCustomValidity("Passwords don't match.");
-                alert('Passwords don\'t match');
-            }
-        }
-
-        new_password.onchange = matchNewPassword;
-        confirm_new_password.onkeyup = matchNewPassword;
-    </script>
-
     <!-- Modal for Sign Up -->
-    <div class="container">
+    <div class="container signup-container">
         <div class="modal fade" id="signUp">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content signup-box">
                     <div class="modal-header">
                         <h2 class="modal-title">Sign-up</h2>
                         <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body signup-box">
                         <form novalidate id="signUpForm">
-                            <div class="form-floating">
-                                <input name="fname" type="text" id="fname" placeholder="John" class="form-control" required>
-                                <label for="fname" class="form-label">First Name</label>
+                            <div class="form-floating input-container">
+                                <input name="fname" type="text" id="fname" placeholder="John" class="form-control input1"
+                                    required>
+                                <label for="fname" class="form-label input1  bi bi-person-fill">&nbsp;First Name</label>
                                 <div class="invalid-feedback">Invalid Name</div>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input name="lname" type="text" id="lname" placeholder="Doe" class="form-control" required>
-                                <label for="lname" class="form-label">Last Name</label>
+                            <div class="form-floating input-container">
+                                <input name="lname" type="text" id="lname" placeholder="Doe" class="form-control"
+                                    required>
+                                <label for="fname" class="form-label input1  bi bi-person-fill">&nbsp;Last Name</label>
                                 <div class="invalid-feedback">Invalid Name</div>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input name="username" type="text" id="username" placeholder="John234" class="form-control" required>
-                                <label for="username" class="form-label">Username</label>
+                            <div class="form-floating input-container">
+                                <input name="username" type="text" id="username" placeholder="John234" class="form-control input1" required>
+                                <label for="username" class="form-label input1 bi bi-person-fill">&nbsp; Username</label>
                                 <div class="invalid-feedback">Enter a valid Username</div>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input name="email" type="email" id="email" placeholder="example@email.com" class="form-control"
+                            <div class="form-floating input-container">
+                                <input name="email" type="email" id="email" placeholder="example@email.com" class="form-control input1"
                                     required>
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label input1 bi bi-envelope-fill"> &nbsp; Email</label>
                                 <div class="invalid-feedback">Invalid Email (eg. example@email.com) </div>
                             </div>
                             <br>
-                            <div class="form-floating">
+                            <div class="form-floating input-container">
                                 <input name="phone" type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                    placeholder="888-888-8888" class="form-control" required>
-                                <label for="phone">Phone Number</label>
+                                    placeholder="888-888-8888" class="form-control input1" required>
+                                <label for="phone" class="bi bi-phone-fill">&nbsp; Phone Number</label>
                                 <div class="invalid-feedback">Invalid Phone Number (eg: 888-888-8888)</div>
                             </div>
                             <br>
-                            <select name="role" id="role"  class="form-select">
+                            <select name="role" id="role"  class="form-select select select1">
                                 <option value="role" disabled selected>Account Type</option>
                                 <option value="owner">Owner</option>
                                 <option value="user">User</option>
                             </select>
                             <br>
-                            <div class="form-floating">
-                                <input name="password" type="password" id="signUpPassword" class="form-control" required>
-                                <label for="password" class="form-label">Password</label>
+                            <div class="form-floating input-container">
+                                <input type="password" placeholder="Password" id="signUpPassword" class="form-control input1" required>
+                                <label for="password" class="form- input1 bi bi-lock-fill"> &nbsp; Password</label>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input type="password" placeholder="Confirm Password" id="confirm_password" class="form-control" required>
-                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="form-floating input-container">
+                                <input type="password" placeholder="Confirm Password" id="confirm_password" class="form-control input1" required>
+                                <label for="confirm_password" class="form-label input1 bi bi-lock"> &nbsp; Confirm Password</label>
                             </div>
 
-                            <button class="btn btn-primary btn-sm float-end">Sign-Up</button>
+                           
+                            <button class="btn btn-primary btn-sm float-end button1">Sign-Up</button>
+                            
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <p>Want to login? <a href="#" id="switchToLogin">Login</a></p>
+                    <div class="modal-footer login-link">
+                        <p>Already have an account? <a href="#" id="switchToLogin">Login</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Verification after signing-up -->
     <div class="container">
@@ -365,7 +249,8 @@
                     </div>
                     <div class="modal-body">
                         <p>Please confirm your email to continue using CoWorking Registry</p>
-                        <p>Click <a href="https://gmail.com" target="_blank">here</a> to be redirected to your email.</p>
+                        <p>Click <a href="https://gmail.com" target="_blank">here</a> to be redirected to your email.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -394,279 +279,105 @@
         </div>
     </div>
 
-    <!-- script for signUp -->
-
-    <script>
-        let password = document.getElementById("signUpPassword");
-        let confirm_password = document.getElementById("confirm_password");
-
-        function matchPassword() {
-            if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Passwords don't match.")
-            }
-            else {
-                confirm_password.setCustomValidity('');
-            }
-        }
-
-        password.onchange = matchPassword;
-        confirm_password.onkeyup = matchPassword;
-
-        const handleSignupForm = async(event) => {
-            event.preventDefault();
-
-            const signupForm = document.getElementById("signUpForm");
-            const signUpformData = new FormData(signupForm);
-            
-
-            const myHeaders = new Headers(); //para malaman ni server na json and padala
-            myHeaders.append("Content-Type", "application/json")
-
-            const requestBodySU = JSON.stringify({
-                fname: signUpformData.get('fname'),
-                lname: signUpformData.get('lname'),
-                username: signUpformData.get('username'),
-                email: signUpformData.get('email'),
-                mobile: signUpformData.get('phone'),
-                password: signUpformData.get('password'),
-                role: signUpformData.get('role')
-            });
-
-            const requestOptionsSU = {
-                method: 'POST',
-                headers: myHeaders,
-                body: requestBodySU,
-                redirect: 'follow'
-            }
-
-            try{
-                const responseSu = await fetch('http://143.198.237.154/api/signup', requestOptionsSU);
-                const resultSu = await responseSu.text();
-
-                if(responseSu.ok) {
-                    $('#logIn').modal('hide');
-                    $('#signUp').modal('hide'); // Close the sign-up modal
-                    $('#signupVerification').modal('show'); //shows the verification message
-                }  
-            }
-            catch (error) {
-                console.log('error', error);
-                alert('An error occurred. Please try again later.');
-            }
-        };
-        
-        const signUpForm = document.getElementById('signUpForm');
-        signUpForm.addEventListener('submit', handleSignupForm);
-
-
-    </script>
-
-
-    <!-- script for checking user if logged in -->
-    <script>
-        async function checkLoggedIn() {
-            const token = localStorage.getItem('token'); // Get the stored token
-            if (!token) {
-                console.log('User is not logged in');
-                //$('#logIn').modal('show'); // Show the login modal
-                return;
-            }
-            try {
-                const response = await fetch('http://143.198.237.154/api/verify', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (response.ok) {
-                    const verificationData = await response.json();
-                    console.log('User is logged in:', verificationData);
-                } else {
-                    console.log('User verification failed:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error verifying user:', error);
-            }
-        }
-        checkLoggedIn();
-    </script>
-
-    <!-- Switch Login to Signup Modal Vice Versa-->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const switchToSignUpLink = document.getElementById("switchToSignUp");
-            const switchToLoginLink = document.getElementById("switchToLogin");
-
-            switchToSignUpLink.addEventListener("click", () => {
-                $('#logIn').modal('hide'); // Close the login modal
-                $('#signUp').modal('show'); // Open the sign-up modal
-            });
-            switchToLoginLink.addEventListener("click", () => {
-                $('#signUp').modal('hide'); // Close the sign-up modal
-                $('#logIn').modal('show'); // Open the login modal
-            });
-        });
-    </script>
-
-    <!-- Handle Errors in Forms -->
-    <script>
-        const forms = document.querySelectorAll("form");
-
-        forms.forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                }
-                form.classList.add('was-validated');
-            });
-        });
-    </script>
-
+    <!-- script for navbar include -->
+    <script src="/js/navbar.js"></script>
+    <!-- script for forgot password -->
+    <script src="/js/forgotpassword.js"></script>
+    <!-- script for login and signUp -->
+    <script src="/js/loginsignup.js"></script>
     <!-- Creates a card for every Workspace -->
+    <!-- CREATES MODALS FOR EACH WORKSPACE -->
     <script>
+
+        //SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
         const cardContainer = document.getElementById('cardContainer');
 
         const createCard = (data) => {
             const cardElement = document.createElement('div');
             cardElement.className = 'col';
             cardElement.setAttribute('data-bs-toggle', 'modal');
-            cardElement.setAttribute('data-bs-target', `#${data.id}modal`);
+            cardElement.setAttribute('data-bs-target', `#${data.Workspace.id}modal`);
 
             const cardContent =
                 `<div class="card">
-            <img src="/img/coworking.jpg" alt="Property image" class="card-img-top">
-            <div class="card-body">
-                <h2 class="card-title">${data.name}</h2>
-                <span class="card-subtitle">${data.address}</span>
-                <div class="card-text">
-                    <p>Availability: ${data.availability ? 'Available' : 'Not Available'}</p>
-                    <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 20px 3px 3px">
-                    <span class="fa fa-star checked" style="color: orange;"></span>
-                    <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${data.ratings}</p>
-                    </div>
-                </div>
-            </div>
-        </div>`;
-
+<img src="${data.Workspace.photos == "/img/" || data.Workspace.photos == "" ? `/img/coworking.jpg` : data.Workspace.photos}" alt="Property image" class="card-img-top" id="workspaceImage" style="width:300px; height:200px;">
+<div class="card-body">
+  <h2 class="card-title">${data.Workspace.name}</h2>
+  <span class="card-subtitle">${data.Property.address === undefined ? 'No Address Provided' : `${data.Property.address}`}</span>
+  <div class="card-text card-text-star" style="position: absolute; bottom: 20px; right: 20px; padding: 3px 20px 3px 3px">
+      <span class="fa fa-star checked" style="color: orange;"></span>
+      <p style="position: absolute; top: 2.5px; right: 3px;" class="star-rating">${data.Workspace.ratings}</p>
+  </div>
+  <div class="card-text">
+      ${data.Workspace.description === undefined ? 'No Description Provided' : `${data.Workspace.description}`}
+  </div>
+  <div class="card-text">
+      Price: $ ${data.price} <br>
+      Lease Term: ${data.lease_term === null ? 'No Term Chosen' : `${data.lease_term}`}
+  </div>
+  <div class="card-text" style= "padding-top: 5px">
+      <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
+  </div>
+</div>`;
+            console.log(`The Availability is ${data.Workspace.availability}`);
             cardElement.innerHTML = cardContent;
             cardContainer.appendChild(cardElement);
+            updateAvailabilityColor();
         };
+
+        const userId = localStorage.getItem('userID');
 
         // Fetch data from the API server
-        fetch('http://143.198.237.154/api/workspace/')
+        fetch("http://143.198.237.154/api/allworkspace/")
             .then(response => response.json())
-            .then(data => {
+            .then(workspacedata => {
                 // Loop through the data and create cards
-                data.forEach(item => {
-                    createCard(item);
+                workspacedata.forEach(workspaceItem => {
+                    const path = window.location.pathname;
+                    const role = localStorage.getItem('role');
+                    if (path == '/workspace' && role == 'owner') {
+                        if (userId == workspaceItem.Workspace.user_id) {
+                            createCard(workspaceItem);
+                        }
+                    }
+                    else if (path == '/myBookings' && role == 'coworker' || role == 'user') {
+                        if (userId == workspaceItem.user_id) {
+                            createCard(workspaceItem);
+                        }
+                    } else {
+                        createCard(workspaceItem);
+                    }
+
                 });
             })
-            .catch(error => console.error('Error fetching data:', error));
-    </script>
+            .catch(error => console.error('Error fetching data', error));
 
-    <!-- CREATES MODALS FOR EACH WORKSPACE -->
-    <script>
-        const propertyModal = document.getElementById('property-modals');
 
-        const createModal = (data) => {
-            const modalElement = document.createElement('div');
-            modalElement.className = "container";
-
-            const modalContent = `
-        <div class="modal fade" id="${data.id}modal">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1>${data.name}</h1>
-                            <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#${data.id}modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="${data.image}" alt="Image">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam, doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse magnam eveniet totam earum dolores libero eos accusamus eius quidem?
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam, doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse magnam eveniet totam earum dolores libero eos accusamus eius quidem?
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam, doloremque, obcaecati debitis voluptatum vel eaque iusto autem blanditiis esse magnam eveniet totam earum dolores libero eos accusamus eius quidem?
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary">Book</button>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-
-            modalElement.innerHTML = modalContent;
-            propertyModal.appendChild(modalElement);
-
-            // Fetch data from the API server
-            fetch('http://143.198.237.154/api/workspace/')
-                .then(response => response.json())
-                .then(data => {
-                    // Loop through the data and create cards
-                    data.forEach(item => {
-                        createModal(item);
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }
-
-    </script>
-
-    <!-- HANDLES FORM SUBMISSION (Login)-->
-    <script>
-
-        // Function to handle form submission
-        const handleFormSubmit = async (event) => {
-            event.preventDefault();
-
-            const form = document.getElementById('loginForm');
-            const formData = new FormData(form);
-
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            const requestBody = JSON.stringify({
-                identifier: formData.get('identifier'),
-                password: formData.get('password')
-            });
-
-            const requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: requestBody,
-                redirect: 'follow'
-            };
-
-            try { 
-                const response = await fetch("http://143.198.237.154/api/login", requestOptions);
-                const result = await response.text();
-                console.log(result);
-
-                if (response.ok) {
-                    const data = await JSON.parse(result);
-                    const token = data.token;
-                    console.log(token);
-                    // Store the token in local storage or as a cookie
-                    localStorage.setItem('token', token);
-                    // Redirect the user to the desired page
-                    console.log('redirecting to / now');
-                    window.location.href = '/homePage'; // Change to your desired URL
-                } else {
-                    alert('Invalid email or password. Please try again.');
-                }
-            } catch (error) {
-                console.log('error', error);
-                alert('An error occurred. Please try again later.');
-            }
+        const parseBool = (a) => {
+            return a ? "Yes" : "No";
         };
 
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', handleFormSubmit);
 
+        // Function to change availability text color
+        function updateAvailabilityColor() {
+            // Get all elements with the availability class
+            var availabilityElements = document.querySelectorAll('.availability');
+
+            // Loop through each element
+            availabilityElements.forEach(function (element) {
+                // Check if availability is "Available"
+                if (element.textContent.trim() === 'Available') {
+                    // Set font color to green
+                    element.style.color = 'green';
+                } else {
+                    // Set font color to red
+                    element.style.color = 'red';
+                }
+            });
+        }
+    </script>
     </script>
 
-   
 </body>
 
 </html>

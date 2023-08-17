@@ -16,6 +16,8 @@ router.post('/forgot_passsword', userController.forgotPassword);
 router.get('/workspace/', workspaceController.getAllWorkspace);
 // get all property
 router.get('/property/', propertyController.getAllProperty);
+// get id by post 
+router.get('/allworkspace/', leaseController.getWPL);
 
 // Route for user login
 router.post('/login', login);
@@ -40,21 +42,25 @@ router.delete('/users/:id', userController.deleteUser);
 // create/add workspace
 router.post('/workspace/create', isOwner, workspaceController.createWorkspace);
 // update workspace
-router.put('/workspace/update/:id', workspaceController.updateWorkspace);
+router.put('/workspace/update/:id', isOwner, workspaceController.updateWorkspace);
 // get workspace with user and property by ID
-router.get('/workspace/:id', workspaceController.getWorkspaceByPropertyId);
+router.get('/workspace/:id', isOwner, workspaceController.getWorkspaceByPropertyId);
+// get workspace with user and property by ID
+router.get('/myworkspace/:id', isOwner, workspaceController.getAllWorkspaceByOwner);
 // Route for property
 // create/add property
 router.post('/property/create', isOwner, propertyController.createProperty);
 // list all property of owner
-router.post('/property/:id', propertyController.getAllPropertyByOwner);
+router.post('/myproperty/:id', isOwner, propertyController.getAllPropertyByOwner);
 // Route for lease
 // create/add lease
-router.post('/lease/create', leaseController.createLease);
+router.post('/lease/book', leaseController.createLease);
 // get all lease
 router.get('/lease/', leaseController.getAllLease);
 // update a lease
-router.post('/lease/:id', leaseController.updateLease);
+// router.post('/lease/:id', leaseController.updateLease);
+// get all lease of login user
+router.post('/mylease/:id', leaseController.getAllLeaseUserID);
 
 // Protected route for getting user data
 router.get('/', (req, res) => {

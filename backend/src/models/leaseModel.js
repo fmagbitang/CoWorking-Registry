@@ -30,6 +30,10 @@ const Lease = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    workspace_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     created_at: {
       type: DataTypes.STRING,
       allowNull: false,
