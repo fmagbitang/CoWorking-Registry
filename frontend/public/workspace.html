@@ -104,6 +104,11 @@
                     <div class="invalid-feedback">Please enter a short description</div>
                   </div>
                   <br>
+                  <div>
+                      <label for="image" class="form-label">Please Upload an image of the workspace</label>
+                      <input type="file" name="image" id="image" class="form-control" accept="Image/*">
+                  </div>
+                  <br>
                   <button type="submit" class="btn btn-primary btn-sm float-end editWorkspace">Edit
                     Workspace</button>
                 </form>
@@ -170,7 +175,7 @@
       };
 
       try {
-        const response = await fetch('http://143.198.237.154/api/lease/book', requestOptions);
+        const response = await fetch('http://localhost:3000/api/lease/book', requestOptions);
         const results = await response.text();
         console.log(results);
 
@@ -196,6 +201,7 @@
         if (!token2) {
           alert('Please Login to an Account');
           window.location.href = '/';
+          localStorage.clear();
         } else {
           console.log("I am currently booking");
           const propertyId = target.getAttribute('data-property-id');
@@ -280,7 +286,8 @@
         //Input all info here
         name: editWorkspaceData.get('name'),
         capacity: editWorkspaceData.get('capacity'),
-        photos: imageFile == "/img/" ? `img/coworking.jpg` :`/img/${imageFile.name}`,
+        // photos: imageFile == "/img/" ? `img/coworking.jpg` :`/img/${imageFile.name}`,
+        photos: imageFile ? `/img/${imageFile.name}` : `img/coworking.jpg`,
         property_id: editWorkspaceData.get('edit_WorkspacePropertyID'),
         description: editWorkspaceData.get('description'),
         lease_term: editWorkspaceData.get('lease_term'),
@@ -301,7 +308,7 @@
       };
 
       try {
-        const responseUW = await fetch(`http://143.198.237.154/api/workspace/update/${editWorkspaceData.get('edit_WorkspaceID')}`, requestOptionsUW);
+        const responseUW = await fetch(`http://localhost:3000/api/workspace/update/${editWorkspaceData.get('edit_WorkspaceID')}`, requestOptionsUW);
         const resultsUW = await responseUW.text();
 
         if (responseUW.ok) {
@@ -336,10 +343,10 @@
 
       ////PUT CODE HERE
       try {
-        const responseDW = await fetch(`http://143.198.237.154/api/workspace/delete/${workspace}`, requestOptionsDW);
+        const responseDW = await fetch(`http://localhost:3000/api/workspace/delete/${workspace}`, requestOptionsDW);
         const resultsDW = await responseDW.text();
 
-        if (resultsDW.ok) {
+        if (responseDW.ok) {
           console.log("succesfully deleted");
           alert("succesfully deleted");
           location.reload();
@@ -356,6 +363,7 @@
     if (!token2) {
       alert('Please Login to an Account');
       window.location.href = '/';
+      localStorage.clear();
     } else {
       const editWorkspaceForm = document.getElementById('editMyWorkspace');
       editWorkspaceForm.addEventListener('submit', editWorkspace);

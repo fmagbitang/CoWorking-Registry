@@ -67,6 +67,7 @@ const createCard = (data, search) => {
     <div>
         ${deleteButtonHtml}
     </div>
+    <div style="display:none" id="refreshdiv">
         `;
     console.log(`The Availability is ${wpAvailability}`);
     cardElement.innerHTML = cardContent;
@@ -81,7 +82,7 @@ const userId = localStorage.getItem('userID');
 searchButton.addEventListener('click', async () => {
     const searchTerm = document.getElementById('searchInput').value;
     console.log(searchTerm);
-    fetch(`http://143.198.237.154/api/search/workspace/${searchTerm}`)
+    fetch(`http://localhost:3000/api/search/workspace/${searchTerm}`)
         .then(response => response.json())
         .then(workspacedata => {
             // Clear existing cards
@@ -94,7 +95,7 @@ searchButton.addEventListener('click', async () => {
 });
 
 // Fetch data from the API server
-fetch("http://143.198.237.154/api/allworkspace/")
+fetch("http://localhost:3000/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata => {
         // console.log(workspacedata.Workspace.photos);
@@ -198,7 +199,7 @@ const createModal = (data) => {
     updateAvailabilityColor();
 };
 
-fetch("http://143.198.237.154/api/allworkspace/")
+fetch("http://localhost:3000/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata1 => {
         // Loop through the data and create card
