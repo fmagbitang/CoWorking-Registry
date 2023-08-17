@@ -299,37 +299,16 @@
                         <div class="card-text">Squarefoot: ${data.squarefoot} <br>Parking: ${parseBool(data.parking)} <br> Smoking:${parseBool(data.smoking)} <br> Public Transportation Accessible: ${parseBool(data.transportation)} </div>
                         
                     </div>
-                    <div style="color:#777; font-size:1rem;">&nbsp;&nbsp;
-                        This is my Property ID :${data.id} <br>
-                    </div>
-
-                    <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <button class="btn btn-primary btn-sm w-100 mb-2 addWorkSpace"
-                    data-bs-toggle="modal" data-bs-target="#addWorkspace" data-property-id="${data.id}">
-                Add WorkSpace
-            </button>
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-primary btn-sm w-100 mb-2 editProperty"
-                    data-bs-toggle="modal" data-bs-target="#editProperty" edit_property_id="${data.id}">
-                Edit Property
-            </button>
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-primary btn-sm w-100 mb-2 deleteProperty"
-                    data-bs-toggle="modal" data-bs-target="#deleteProperty" delete_property_id="${data.id}">
-                Delete Property
-            </button>
-        </div>
+                    <div>
+    <button class="btn btn-primary btn-sm float-end editProperty" data-bs-toggle="modal" data-bs-target="#editProperty" edit_property_id=${data.id}>Edit Property</button>
     </div>
 </div>
 
 
 <div style="display:none" id="refreshdiv">
                 </div>`;
-
+            
+                console.log(data);
             cardElement.innerHTML = cardContent;
             cardContainer.appendChild(cardElement);
         };
@@ -397,7 +376,7 @@
                 transportation: convertCheckBox(propertiesFormData.get('transpo')),
                 name: propertiesFormData.get('name'),
                 capacity: propertiesFormData.get('capacity'),
-                photos: imageFile ? `/img/${imageFile.name}` : null,
+                photos: imageFile == "/img/" ? `img/coworking.jpg` :`/img/${imageFile.name}`,
                 description: propertiesFormData.get('description'),
                 lease_term: propertiesFormData.get('lease_term'),
                 price: propertiesFormData.get('price')
@@ -614,7 +593,7 @@
             const requestBody = JSON.stringify({
                 name: workspaceFormData.get('name'),
                 capacity: workspaceFormData.get('capacity'),
-                photos: workspaceFormData.get('image') ? `/img/${imageFile.name}` : null,
+                photos: imageFile == "/img/" ? `img/coworking.jpg` :`/img/${imageFile.name}`,
                 property_id: workspaceFormData.get('propertyID'),
                 description: workspaceFormData.get('description'),
                 lease_term: workspaceFormData.get('lease_term'),

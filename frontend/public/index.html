@@ -45,7 +45,7 @@
         <div id="property-modals">
 
             <div class="container">
-                <div class="modal fade" id="modal">
+                <!-- <div class="modal fade" id="modal">
                     <div class="modal-dialog modal-dialog-centered modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
 
@@ -300,7 +300,7 @@
 
             const cardContent =
                 `<div class="card">
-<img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
+<img src="${data.Workspace.photos == "/img/" || data.Workspace.photos == "" ? `/img/coworking.jpg` : data.Workspace.photos}" alt="Property image" class="card-img-top" id="workspaceImage"">
 <div class="card-body">
   <h2 class="card-title">${data.Workspace.name}</h2>
   <span class="card-subtitle">${data.Property.address === undefined ? 'No Address Provided' : `${data.Property.address}`}</span>
@@ -317,11 +317,6 @@
   </div>
   <div class="card-text" style= "padding-top: 5px">
       <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
-  </div>
-  <div class=""card-text>
-      This is my Property ID: ${data.Workspace.property_id} <br>
-      This is the User ID: ${data.Workspace.user_id} <br>
-      This is the Workspace ID: ${data.Workspace.id}
   </div>
 </div>`;
             console.log(`The Availability is ${data.Workspace.availability}`);

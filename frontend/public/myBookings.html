@@ -14,6 +14,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- Include Bootstrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <!-- Include Link for rating Star Icon -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -52,7 +54,7 @@
 
         const cardContent =
           `<div class="card">
-    <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
+    <img src="${data.Workspace.photos == "/img/" || data.Workspace.photos == "" ? `/img/coworking.jpg` : data.Workspace.photos}" alt="Property image" class="card-img-top" id="workspaceImage"">
     <div class="card-body">
         <h2 class="card-title">${data.Workspace.name}</h2>
         <span class="card-subtitle">${data.Property.address === undefined ? 'No Address Provided' : `${data.Property.address}`}</span>
@@ -69,11 +71,6 @@
         </div>
         <div class="card-text" style= "padding-top: 5px">
             <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
-        </div>
-        <div class=""card-text>
-            This is my Property ID: ${data.Workspace.property_id} <br>
-            This is the User ID: ${data.Workspace.user_id} <br>
-            This is the Workspace ID: ${data.Workspace.id}
         </div>
     </div>`;
         console.log(`The Availability is ${data.Workspace.availability}`);
@@ -125,7 +122,7 @@
                     <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#${data.Workspace.id}modal"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="${data.Workspace.photos !== null ? '/img/coworking.jpg' : `${data.Workspace.photos}`}" alt="Image" style="display: block; margin: 0 auto;"">
+                    <img src="${data.Workspace.photos == "/img/" || data.Workspace.photos == "" ? `/img/coworking.jpg` : data.Workspace.photos}" alt="Image" style="display: block; margin: 0 auto;"">
                     <hr>
 
                     <span>${data.Property.address === undefined ? 'No Address Provided' : `${data.Property.address}`}</span>
