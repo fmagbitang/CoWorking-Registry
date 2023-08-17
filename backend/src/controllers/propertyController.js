@@ -126,17 +126,18 @@ const deleteProperty = async (req, res, next) => {
     if (!propertyDelete) {
       return res.status(404).json({ message: 'Property not found' });
     }
-    const deleteWorkspace = await Workspace.findAll({
+    const deleteWorkspace = await Workspace.findOne({
       where: {
         property_id: id
       }
     });
+    console.log(deleteWorkspace);
     if (!deleteWorkspace) {
       console.log('Deleting property only.');
       await propertyDelete.destroy();
       console.log('Property has been deleted.');
     } else {
-      const deleteLease = await Lease.findAll({
+      const deleteLease = await Lease.findOne({
         where: {
           property_id: id,
           workspace_id: deleteWorkspace.id
