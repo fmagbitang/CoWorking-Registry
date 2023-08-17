@@ -252,8 +252,8 @@
                     <div class="modal-header">
                         <form novalidate id="deleteMyProperty">
                             <h2 class="modal-title">Delete Property</h2>
-                            <input type="number" name="delete_propertyID" id="delete_propertyID" hidden>
                             <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
+                            <input type="number" name="delete_propertyID" id="delete_propertyID" hidden>
                     </div>
                     <div class="modal-body">
                         <p>Are you sure you want to delete this property?</p>
@@ -306,10 +306,9 @@
                     <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <button class="btn btn-primary btn-sm w-100 mb-2 addWorkSpace"
-                    data-bs-toggle="modal" data-bs-target="#addWorkspace" data-property-id="${data.id}">
-                Add WorkSpace
-            </button>
+            <button class="btn btn-primary btn-sm mb-2 addWorkSpace"
+                    data-bs-toggle="modal" data-bs-target="#addWorkspace" data-property-id="${data.id}">Add WorkSpace
+</button>
         </div>
         <div class="col-md-4">
             <button class="btn btn-primary btn-sm w-100 mb-2 editProperty"
@@ -655,6 +654,19 @@
         }
     </script>
 
+<!-- Handle Errors in Forms -->
+<script>
+    const forms = document.querySelectorAll("form");
+
+    forms.forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+            }
+            form.classList.add('was-validated');
+        });
+    });
+</script>
 </body>
 
 </html>

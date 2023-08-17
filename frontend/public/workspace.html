@@ -30,6 +30,9 @@
 
   <header>
     <div class="container">
+      <br>
+      <br>
+      <br>
       <h1 class="text-center">Workspaces</h1>
     </div>
   </header>
@@ -371,6 +374,21 @@
   <!-- Creates a card for every Workspace -->
   <!-- CREATES MODALS FOR EACH WORKSPACE -->
   <script src="/js/cards.js"></script>
+
+  <!-- Handle Errors in Forms -->
+<script>
+  const forms = document.querySelectorAll("form");
+
+  forms.forEach(form => {
+      form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+              event.preventDefault();
+          }
+          form.classList.add('was-validated');
+      });
+  });
+</script>
+
 </body>
 
 </html>

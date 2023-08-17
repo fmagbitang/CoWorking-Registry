@@ -170,9 +170,7 @@
 /***********************************MODAL DESIGNS (workspace.html)*********************/
 
 .addWorkSpace {
-    position: absolute;
-    top: 0px;
-    right: 10px;
+    position: absolute;top: 20px;right: 10px; width:100px;
 }
 
 #create-property-container {
