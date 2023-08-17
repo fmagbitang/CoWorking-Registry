@@ -3,7 +3,7 @@
 const cardContainer = document.getElementById('cardContainer');
 
 const createCard = (data, search) => {
-    var wpName, wpDescription, wpAvailability, wpUserID, wpRatings, wpID, wpPropertyID, pAddress , wpPhotos;
+    var wpName, wpDescription, wpAvailability, wpUserID, wpRatings, wpID, wpPropertyID, pAddress , wpPhotos, wpUser, wpEmail, wpMobile;
 
     if (search == 1) {
         wpName = data.Workspace.name;
@@ -15,8 +15,10 @@ const createCard = (data, search) => {
         wpID = data.Workspace.id;
         pAddress = data.Property.address;
         wpPhotos = data.Workspace.photos;
+        wpUser = '';
+        wpEmail = '';
+        wpMobile = '';
     } else {
-
         wpName = data.name;
         wpRatings = data.ratings;
         wpDescription = data.description;
@@ -26,6 +28,9 @@ const createCard = (data, search) => {
         wpID = data.id;
         pAddress = data.Property.address; 
         wpPhotos = data.photos;
+        wpUser = '';
+        wpEmail = '';
+        wpMobile = '';
     }
     const cardElement = document.createElement('div');
     cardElement.className = 'col d-flex align-items-stretch';
@@ -70,7 +75,27 @@ const createCard = (data, search) => {
     <div>
         ${deleteButtonHtml}
     </div>
+    <button class="btn btn-primary btn-sm float-end ownerInfo" data-bs-toggle="modal" data-bs-target="#ownerInfo">Contact Owner</button>
+    <div class="container">
+    <div class="modal fade" id="ownerInfo">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <form novalidate id="ownerInfo">
+              <h2 class="modal-title">Renter's Contact Information</h2>
+          </div>
+          <div class="modal-body">
+            <h5>Name: ${wpUser} </h5>
+            <h5>Phone number: ${wpMobile} </h5>
+            <h5>Email Address: ${wpEmail}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     <div style="display:none" id="refreshdiv">
+    
         `;
     console.log(`The Availability is ${wpAvailability}`);
     cardElement.innerHTML = cardContent;
@@ -140,6 +165,7 @@ fetch("http://143.198.237.154/api/allworkspace/")
             } else {
                 createCard(workspaceItem, 1);
             }
+            
         });
     })
     .catch(error => console.error('Error fetching data', error));
