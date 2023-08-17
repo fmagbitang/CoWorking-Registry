@@ -48,20 +48,44 @@ const handleForgotPassword = async (event) => {
 
 
 //Forgot Password modal --- match password
+// let new_password = document.getElementById("newPassword");
+// let confirm_new_password = document.getElementById("confirm_new_password");
+
+// function matchNewPassword() {
+//     try {
+//         if (new_password.value === confirm_new_password.value) {
+//             const forgot_password = document.getElementById('forgotPasswordForm');
+//             forgot_password.addEventListener('submit', handleForgotPassword);
+//         }
+//         else {
+//             confirm_new_password.setCustomValidity("Passwords don't match.");
+//             // alert('Passwords don\'t match');
+//         }
+//     } catch (error) {
+//         location.reload();
+//         $('.modalForgotPassword').modal('show');
+//     }
+// }
+
+// new_password.onchange = matchNewPassword;
+// confirm_new_password.onkeyup = matchNewPassword;
 let new_password = document.getElementById("newPassword");
 let confirm_new_password = document.getElementById("confirm_new_password");
 
 function matchNewPassword() {
-    if (new_password.value === confirm_new_password.value) {
-        const forgot_password = document.getElementById('forgotPasswordForm');
-        forgot_password.addEventListener('submit', handleForgotPassword);
-    }
-    else {
-        confirm_new_password.setCustomValidity("Passwords don't match.");
-        alert('Passwords don\'t match');
+    try {
+        if (new_password.value === confirm_new_password.value) {
+            confirm_new_password.setCustomValidity("");
+        } else {
+            confirm_new_password.setCustomValidity("Passwords don't match.");
+        }
+    } catch (error) {
+                location.reload();
+                $('.modalForgotPassword').modal('show');
+
     }
 }
 
-new_password.onchange = matchNewPassword;
-confirm_new_password.onkeyup = matchNewPassword;
+new_password.addEventListener('input', matchNewPassword);
+confirm_new_password.addEventListener('input', matchNewPassword);
 // end of forgot password
