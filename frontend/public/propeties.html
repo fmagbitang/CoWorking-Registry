@@ -19,13 +19,11 @@
 
     <style>
         #create-property-container {
-            border: .5px solid black;
-            padding: 60px;
-            margin: 40px;
-            width: 800px;
-            position: relative;
-            display: block;
-            margin: 15px auto;
+        max-width: 400px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
         }
 
         .addWorkSpace {
@@ -53,7 +51,7 @@
     <main>
         <!-- Display all current Properties Structure -->
         <div class="container">
-            <h1>Property Listings</h1>
+            <h1 style="text-align: center; margin-top: 50px;">Property Listings</h1>
             <div class="row row-cols-3 gy-4" id="property-listings">
             </div>
         </div>
@@ -108,10 +106,10 @@
             cardElement.className = 'col';
 
             const cardContent =
-                `<div class="card">
+                `<div class="card" style="width:370px; padding:10px;">
                     <img src="/img/coworking.jpg" alt="Property Image" class="card-img-top">
                     <div class="card-body">
-                        <h2 class="card-title">${data.address}</h2>
+                        <h2 style="color:#777; font-size:1.2rem;" class="card-title">${data.address}</h2>
                         <span class="card-subtitle">${data.neighborhood} \</span>
                         <div class="card-text">Squarefoot: ${data.squarefoot} <br>Parking: ${parseBool(data.parking)} <br> Smoking:${parseBool(data.smoking)} <br> Public Transportation Accessible: ${parseBool(data.transportation)} </div>
                     </div>

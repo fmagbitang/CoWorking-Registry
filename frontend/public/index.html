@@ -16,12 +16,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Include Link for rating Star Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
+    <!-- Icon -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+    <!-- CSS Style -->
+    <link rel='stylesheet' href='styles.css'>
 
 </head>
 
-<body>
+<body style="margin-top: 100px;">
     <div id="navbarContent"></div>
 
     <header>
@@ -85,28 +87,28 @@
 
 
     <!-- Modal For Login -->
-    <div class="container">
+    <div class="container login-container">
         <div class="modal fade" id="logIn">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title">Log-in</h1>
+                        <h2 class="login-h2">Account Log-in</h2>
                         <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#logIn"></button>
                     </div>
                     <div class="modal-body">
                         <form novalidate id="loginForm">
-                            <div class="form-floating">
-                                <input type="text" id="identifier" name="identifier" required class="form-control">
-                                <label for="identifier" class="form-label">Email or Username:</label>
+                            <div class="form-floating input-container1">
+                                <input type="text" id="identifier" name="identifier" required class="form-control input-login1">
+                                <label for="identifier" class="form-label input-login1 bi bi-person-fill">&nbsp; Email or Username:</label>
                             </div>
-                            <br>
-                            <div class="form-floating">
-                                <input type="password" id="password" name="password" required class="form-control">
-                                <label for="password" class="form-label">Password:</label>
+                            <div class="form-floating input-container1">
+                                <input type="password" id="password" name="password" required class="form-control input-login1">
+                                <label for="password" class="form-label input-login1 bi bi-lock-fill"> &nbsp;Password:</label>
                             </div>
-                            <a href="#" id="forgotPassword">Forgot Password?</a>
-                            <br>
-                            <button type="submit" class="btn btn-primary btn-sm float-end">Login</button>
+                            
+                            <button type="submit" class="btn btn-primary btn-sm float-end buttonLogIn">Login</button>
+                            <br><br>
+                            <a href="#" id="forgotPassword" class="forgot-passwordLogIn">Forgot Password?</a>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -118,36 +120,42 @@
         </div>
     </div>
 
+
     <!-- Modal for forgot password -->
-    <div class="container">
+    <div class="container login-container">
         <div class="modal fade" id="modalForgotPassword">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title">Reset Password</h1>
+                        <div>
+                        <img src="img/reset_password_icon.png" class="imgLock">
+                        </div>
+                        <div>
+                        <h1 class="modal-title login-h2">Reset Password</h1>
+                        </div>
                         <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#logIn"></button>
                     </div>
                     <div class="modal-body">
                         <form novalidate id="forgotPasswordForm">
-                            <div class="form-floating">
+                            <div class="form-floating login-container">
                                 <input type="text" id="forgotPasswordIdentifier" name="forgotPasswordIdentifier"
                                     required class="form-control">
-                                <label for="forgotPasswordIdentifier" class="form-label">Username or Email</label>
+                                <label for="forgotPasswordIdentifier" class="form-label input-login1">Username or Email</label>
                             </div>
                             <br>
-                            <div class="form-floating">
+                            <div class="form-floating login-container">
                                 <input type="password" id="newPassword" name="newPassword" required
-                                    class="form-control">
-                                <label for="newPassword" class="form-label">New Password</label>
+                                    class="form-control input-login1">
+                                <label for="newPassword input-login1" class="form-label input-login1">New Password</label>
                             </div>
                             <br>
-                            <div class="form-floating">
+                            <div class="form-floating login-container">
                                 <input type="password" id="confirm_new_password" name="confirm_new_password"
-                                    class="form-control" required>
-                                <label for="confirm_new_password" class="form-label">Confirm New Password</label>
+                                    class="form-control input-login1" required>
+                                <label for="confirm_new_password input-login1" class="form-label input-login1">Confirm New Password</label>
                             </div>
-
-                            <button class="btn btn-primary btn-sm float-end">Submit</button>
+    
+                            <button class="btn btn-primary btn-sm float-end buttonLogIn">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -156,79 +164,79 @@
     </div>
 
     <!-- Modal for Sign Up -->
-    <div class="container">
+    <div class="container signup-container">
         <div class="modal fade" id="signUp">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content signup-box">
                     <div class="modal-header">
                         <h2 class="modal-title">Sign-up</h2>
                         <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#signUp"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body signup-box">
                         <form novalidate id="signUpForm">
-                            <div class="form-floating">
-                                <input name="fname" type="text" id="fname" placeholder="John" class="form-control"
+                            <div class="form-floating input-container">
+                                <input name="fname" type="text" id="fname" placeholder="John" class="form-control input1"
                                     required>
-                                <label for="fname" class="form-label">First Name</label>
+                                <label for="fname" class="form-label input1  bi bi-person-fill">&nbsp;First Name</label>
                                 <div class="invalid-feedback">Invalid Name</div>
                             </div>
                             <br>
-                            <div class="form-floating">
+                            <div class="form-floating input-container">
                                 <input name="lname" type="text" id="lname" placeholder="Doe" class="form-control"
                                     required>
-                                <label for="lname" class="form-label">Last Name</label>
+                                <label for="fname" class="form-label input1  bi bi-person-fill">&nbsp;Last Name</label>
                                 <div class="invalid-feedback">Invalid Name</div>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input name="username" type="text" id="username" placeholder="John234"
-                                    class="form-control" required>
-                                <label for="username" class="form-label">Username</label>
+                            <div class="form-floating input-container">
+                                <input name="username" type="text" id="username" placeholder="John234" class="form-control input1" required>
+                                <label for="username" class="form-label input1 bi bi-person-fill">&nbsp; Username</label>
                                 <div class="invalid-feedback">Enter a valid Username</div>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input name="email" type="email" id="email" placeholder="example@email.com"
-                                    class="form-control" required>
-                                <label for="email" class="form-label">Email</label>
+                            <div class="form-floating input-container">
+                                <input name="email" type="email" id="email" placeholder="example@email.com" class="form-control input1"
+                                    required>
+                                <label for="email" class="form-label input1 bi bi-envelope-fill"> &nbsp; Email</label>
                                 <div class="invalid-feedback">Invalid Email (eg. example@email.com) </div>
                             </div>
                             <br>
-                            <div class="form-floating">
+                            <div class="form-floating input-container">
                                 <input name="phone" type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                    placeholder="888-888-8888" class="form-control" required>
-                                <label for="phone">Phone Number</label>
+                                    placeholder="888-888-8888" class="form-control input1" required>
+                                <label for="phone" class="bi bi-phone-fill">&nbsp; Phone Number</label>
                                 <div class="invalid-feedback">Invalid Phone Number (eg: 888-888-8888)</div>
                             </div>
                             <br>
-                            <select name="role" id="role" class="form-select">
+                            <select name="role" id="role"  class="form-select select select1">
                                 <option value="role" disabled selected>Account Type</option>
                                 <option value="owner">Owner</option>
                                 <option value="user">User</option>
                             </select>
                             <br>
-                            <div class="form-floating">
-                                <input name="password" type="password" id="signUpPassword" class="form-control"
-                                    required>
-                                <label for="password" class="form-label">Password</label>
+                            <div class="form-floating input-container">
+                                <input type="password" placeholder="Password" id="signUpPassword" class="form-control input1" required>
+                                <label for="password" class="form- input1 bi bi-lock-fill"> &nbsp; Password</label>
                             </div>
                             <br>
-                            <div class="form-floating">
-                                <input type="password" placeholder="Confirm Password" id="confirm_password"
-                                    class="form-control" required>
-                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="form-floating input-container">
+                                <input type="password" placeholder="Confirm Password" id="confirm_password" class="form-control input1" required>
+                                <label for="confirm_password" class="form-label input1 bi bi-lock"> &nbsp; Confirm Password</label>
                             </div>
 
-                            <button class="btn btn-primary btn-sm float-end">Sign-Up</button>
+                           
+                            <button class="btn btn-primary btn-sm float-end button1">Sign-Up</button>
+                            
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <p>Want to login? <a href="#" id="switchToLogin">Login</a></p>
+                    <div class="modal-footer login-link">
+                        <p>Already have an account? <a href="#" id="switchToLogin">Login</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Verification after signing-up -->
     <div class="container">

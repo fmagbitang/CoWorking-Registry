@@ -231,3 +231,13 @@ function updateAvailabilityColor() {
         }
     });
 }
+//Zoom In and OUT
+const card = document.getElementById('zoomCard');
+
+card.addEventListener('click', () => {
+  if (card.style.transform === 'scale(1)') {
+    card.style.transform = 'scale(1.2)';
+  } else {
+    card.style.transform = 'scale(1)';
+  }
+});

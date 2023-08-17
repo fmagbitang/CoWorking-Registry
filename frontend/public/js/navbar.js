@@ -31,10 +31,10 @@ fetch('/navbar.html')
                     profileBody.innerHTML = `
             <html>
             <body>
-                <h5>First name: ${verificationData.fname}</h5>
-                <h5>Last name: ${verificationData.lname}</h5>
-                <h5>Username: ${verificationData.UserOrEmail}</h5>
-                <h5>Mobile: ${verificationData.mobile}</h5>
+            <h5 style="color:#777; font-size:1rem;">First name: ${verificationData.fname}</h5>
+            <h5 style="color:#777; font-size:1rem;">Last name: ${verificationData.lname}</h5>
+            <h5 style="color:#777; font-size:1rem;">Username: ${verificationData.UserOrEmail}</h5>
+            <h5 style="color:#777; font-size:1rem;">Mobile: ${verificationData.mobile}</h5>
             </body>
             </html>
         `;

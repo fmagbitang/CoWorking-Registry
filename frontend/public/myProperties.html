@@ -16,28 +16,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Include Link for rating Star Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-        #create-property-container {
-            border: .5px solid black;
-            padding: 60px;
-            margin: 40px;
-            width: 800px;
-            position: relative;
-            display: block;
-            margin: 15px auto;
-        }
-
-        .addWorkSpace {
-            position: absolute;
-            top: 20px;
-            right: 10px;
-        }
-    </style>
-
+    
+    <!-- CSS Design -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body style="margin-top: 100px;">
 
     <div id="navbarContent"></div>
     <!-- script for navbar include -->
@@ -60,24 +44,24 @@
         </div>
         <!-- FORM FOR CREATING A NEW PROPERTY -->
         <div class="container" id="create-property-container">
-            <h1 class="modal-header text-center">Add a Property</h1><br>
-            <form novalidate id="createProperty">
+            <h1 class="modal-header text-center form-titleProperty">Add a Property</h1><br>
+            <form novalidate id="createProperty" class="form-groupProperty">
                 <div class="form-floating">
-                    <input type="text" name="address" id="address" class="form-control"
+                    <input type="text" name="address" id="address" class="form-control input1"
                         placeholder="199 Key Drive SW, Calgary, AB , T2A 4C5" required>
-                    <label for="address" class="form-label">Address</label>
+                    <label for="address" class="form-label labelProperty">Address</label>
                     <div class="invalid-feedback">Invalid Address</div>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Raddison"
+                    <input type="text" name="neighborhood" id="neighborhood" class="form-control input1" placeholder="Raddison"
                         required>
                     <label for="neighborhood" class="form-label">Neighborhood</label>
                     <div class="invalid-feedback">Invalid Neighborhood</div>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="text" name="squarefoot" id="squarefoot" class="form-control" placeholder="10sqm"
+                    <input type="text" name="squarefoot" id="squarefoot" class="form-control input1" placeholder="10sqm"
                         required>
                     <label for="squarefoot" class="form-label">Squarefoot</label>
                     <div class="invalid-feedback">Invalid SqureFoot</div>
@@ -96,9 +80,9 @@
                     <label for="transpo" class="form-check-label">Is transportation Asccessible?</label>
                 </div>
                 <br>
-                <h2>Workspace</h2>
+                <h2 class="form-titleProperty">Workspace</h2>
                 <div class="form-floating">
-                    <select name="name" id="name" class="form-select" required>
+                    <select name="name" id="name" class="form-select form-groupProperty" required>
                         <option disabled selected>Type of Workspace</option>
                         <option value="Meeting Room">Meeting Room</option>
                         <option value="Private Office Room">Private Office Room</option>
@@ -107,7 +91,7 @@
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="number" name="capacity" id="capacity" class="form-control" placeholder="3" required>
+                    <input type="number" name="capacity" id="capacity" class="form-control input1" placeholder="3" required>
                     <label for="capacity" class="form-label">Maximum Capacity (number of individuals)</label>
                     <div class="invalid-feedback">Invalid input</div>
                 </div>
@@ -137,7 +121,7 @@
                     <input type="file" name="image" id="image" class="form-control" accept="Image/*">
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary btn-sm float-end">Add Property</button>
+                <button type="submit" class="btn btn-primary btn-sm float-end buttonProperty">Add Property</button>
             </form>
         </div>
 
@@ -197,7 +181,7 @@
                                     <input type="file" name="image" id="image" class="form-control" accept="image/*">
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary btn-sm float-end">Add Workspace</button>
+                                <button type="submit" class="btn btn-primary btn-sm float-end buttonProperty">Add Workspace</button>
                             </form>
                         </div>
                     </div>
@@ -307,20 +291,20 @@
             cardElement.className = 'col';
 
             const cardContent =
-                `<div class="card">
+                `<div class="card" style="width:370px; padding:10px;">
                     <img src="/img/coworking.jpg" alt="Property Image" class="card-img-top">
                     <div class="card-body">
-                        <h2 class="card-title">${data.address}</h2>
+                        <h2 style="color:#777; font-size:1.2rem;" class="card-title">${data.address}</h2>
                         <span class="card-subtitle">${data.neighborhood} \</span>
                         <div class="card-text">Squarefoot: ${data.squarefoot} <br>Parking: ${parseBool(data.parking)} <br> Smoking:${parseBool(data.smoking)} <br> Public Transportation Accessible: ${parseBool(data.transportation)} </div>
-                        <button class="btn btn-primary btn-sm float-end addWorkSpace" data-bs-toggle="modal" data-bs-target="#addWorkspace" data-property-id="${data.id}">Add WorkSpace</button>
+                        
                     </div>
                     <div>
     <button class="btn btn-primary btn-sm float-end editProperty" data-bs-toggle="modal" data-bs-target="#editProperty" edit_property_id=${data.id}>Edit Property</button>
     </div>
-    <div>
-    <button class="btn btn-primary btn-sm float-end deleteProperty" data-bs-toggle="modal" data-bs-target="#deleteProperty" delete_property_id=${data.id}>Delete Property</button>
 </div>
+
+
 <div style="display:none" id="refreshdiv">
                 </div>`;
             
