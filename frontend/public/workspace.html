@@ -28,24 +28,22 @@
 
 
   <header>
-    <div class="container">
-      <br>
-      <br>
-      <br>
+    <div class="container" style="margin-top: 100px;">
       <h1 class="text-center">Workspaces</h1>
     </div>
   </header>
 
   <main>
     <!-- search section -->
-    <input type="text" id="searchInput" placeholder="Search...">
-    <button id="searchButton" class="btn btn-primary btn-sm">Search</button>
-    <!-- sort section -->
-    <select id="sortSelect" class="searchContainer form-select" style="width:150px">
-      <option value="nameAsc">Ascending</option>
-      <option value="nameDesc">Descending</option>
-    </select>
-    
+    <div class="div searchContainer">
+      <input type="text" id="searchInput" placeholder="Search..." class="form-control" style="width:150px;">
+      <button id="searchButton" class="btn btn-primary btn-sm">Search</button>
+      <!-- sort section -->
+      <select id="sortSelect" class="searchContainer form-select" style="width:150px">
+        <option value="nameAsc">Ascending</option>
+        <option value="nameDesc">Descending</option>
+      </select>
+    </div>
     <!-- Cards Landing Page Structre -->
     <div class="container">
       <div class="row row-cols-4 gy-4" id="cardContainer">
