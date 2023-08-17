@@ -23,7 +23,7 @@ const handleFormSubmit = async (event) => {
     };
 
     try {
-        const response = await fetch("http://143.198.237.154/api/login", requestOptions);
+        const response = await fetch("http://localhost:3000/api/login", requestOptions);
         const result = await response.text();
         console.log(result);
 
@@ -34,7 +34,7 @@ const handleFormSubmit = async (event) => {
             localStorage.clear();
             // Store the token in local storage or as a cookie
             localStorage.setItem('token', token);// fetch data for role Owner and User
-            fetch('http://143.198.237.154/api/verify', {
+            fetch('http://localhost:3000/api/verify', {
                 method: 'GET',
                 headers: {
                     'Authorization': `${token}`
@@ -131,7 +131,7 @@ const handleSignupForm = async (event) => {
     };
 
     try {
-        const responseSu = await fetch('http://143.198.237.154/api/signup', requestOptionsSU);
+        const responseSu = await fetch('http://localhost:3000/api/signup', requestOptionsSU);
         const resultSu = await responseSu.text();
 
         if (responseSu.ok) {
