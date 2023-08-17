@@ -39,8 +39,8 @@ const createCard = (data, search) => {
         : '';
     const cardContent =
         `
-    <div class="card">
-    <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
+    <div class="card" id="zoomCard" style="width: 400px; transition: transform 0.5s; transform: scale(1.2);">
+    <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage" style="width:100%">
     <div class="card-body">
         <h2 class="card-title">${wpName}</h2>
         <span class="card-subtitle">${pAddress === undefined ? 'No Address Provided' : `${pAddress}`}</span>
@@ -54,7 +54,7 @@ const createCard = (data, search) => {
         <div class="card-text" style= "padding-top: 5px">
             <p class="availability">${wpAvailability ? 'Available' : 'Not Available'}</p>
         </div>
-        <div class=""card-text">
+        <div class="card-text">
             This is my Property ID: ${wpPropertyID} <br>
             This is the User ID: ${wpUserID} <br>
             This is the Workspace ID: ${wpID}
@@ -228,3 +228,13 @@ function updateAvailabilityColor() {
         }
     });
 }
+//Zoom In and OUT
+const card = document.getElementById('zoomCard');
+
+card.addEventListener('click', () => {
+  if (card.style.transform === 'scale(1)') {
+    card.style.transform = 'scale(1.2)';
+  } else {
+    card.style.transform = 'scale(1)';
+  }
+});

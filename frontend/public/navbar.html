@@ -1,5 +1,8 @@
-<nav class="navbar navbar-expand-md navbar-light">
-  <div class="container">
+<link rel="stylesheet" href="styles.css">
+
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
     <a href="#" class="navbar-brand">
       <img src="img/coworking.jpg" alt="logo" width="54" height="50" class="d-inline-block align-top" />
       Co-Working Registry
@@ -33,8 +36,8 @@
             Account <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li><a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#profile">Profile</a></li>
-            <li><a href="#" class="nav-link" id="logout">Logout</a></li>
+            <li><a href="#" class="nav-link" style="color: black;" data-bs-toggle="modal" data-bs-target="#profile">Profile</a></li>
+            <li><a href="#" class="nav-link" id="logout" style="color: black;">Logout</a></li>
           </ul>
         </div>
       </ul>
@@ -43,22 +46,25 @@
 </nav>
 
 
-<!-- Modal for Viewing Profile -->
-<div class="container">
-  <div class="modal fade" id="profile">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1>My Profile</h1>
+  <!-- Modal for Viewing Profile -->
+  <div class="container">
+    <div class="modal fade profile_card" id="profile">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
           <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#profile"></button>
-        </div>
-        <div class="modal-body">
-          <div class="profile" id="profileBody">
+          <div class="modal-header profile-header">
+            <div>
+              <img src="img/profile.png" alt="User Profile">
+              <h1 class="h1">My Profile</h1>
           </div>
-        </div>
-        <div class="modal-footer">
+          <div class="modal-body profile-info">
+            <div class="profile" id="profileBody">
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
