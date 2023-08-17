@@ -25,6 +25,10 @@
 
   <header>
     <div class="container">
+      <br>
+      <br>
+      <br>
+      <br>
       <h1 class="text-center" id="myBookings">My Bookings</h1>
     </div>
   </header>
@@ -48,7 +52,7 @@
 
       const createCard = (data) => {
         const cardElement = document.createElement('div');
-        cardElement.className = 'col';
+        cardElement.className = 'col d-flex align-items-stretch';
         cardElement.setAttribute('data-bs-toggle', 'modal');
         cardElement.setAttribute('data-bs-target', `#${data.Workspace.id}modal`);
 

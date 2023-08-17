@@ -28,7 +28,7 @@ const createCard = (data, search) => {
         wpPhotos = data.photos;
     }
     const cardElement = document.createElement('div');
-    cardElement.className = 'col';
+    cardElement.className = 'col d-flex align-items-stretch';
     cardElement.setAttribute('data-bs-toggle', 'modal');
     cardElement.setAttribute('data-bs-target', `#${wpID}modal`);
     const role = localStorage.getItem('role');
