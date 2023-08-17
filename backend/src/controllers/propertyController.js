@@ -168,10 +168,77 @@ const deleteProperty = async (req, res, next) => {
   }
 };
 
+const { Op } = require('sequelize');
+const User = require('../models/userModel');
+
+Workspace.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Workspace, { foreignKey: 'user_id' });
+
+Workspace.belongsTo(Property, { foreignKey: 'property_id' });
+Property.hasMany(Workspace, { foreignKey: 'property_id' });
+
+const searchProperty = async (req, res, next) => {
+    const { search } = req.params;
+    try {
+      const searchProperty = await Property.findAll({
+        where: {
+          [Op.or]: [
+            { address: { [Op.like]: `%${search}%` } },
+            { squarefoot: { [Op.like]: `%${search}%` } },
+            { neighborhood: { [Op.like]: `%${search}%` } }
+          ]
+        }
+      })
+      if (!searchProperty) {
+        return res.status(404).json({ message: 'Nothing found.' });
+      }
+      res.status(200).json(searchProperty);
+    } catch (error) {
+       console.log(error);
+       next(error);
+    }
+};
+
+const searchWorkspace = async (req, res, next) => {
+    const { search } = req.params;
+    try {
+      var status;
+      if (search == 'available'){
+        status = 1;
+      } else {
+        status = 0;
+      }
+      const searchWorkspace = await Workspace.findAll({
+        where: {
+          [Op.or]: [
+            { name: { [Op.like]: `%${search}%` } },
+            { capacity: { [Op.like]: `%${search}%` } },
+            { availability: { [Op.like]: `%${status}%` } },
+            { ratings: { [Op.like]: `%${search}%` } }
+          ]
+        },
+        include: [
+          {
+            model: Property,
+          },
+        ],
+      })
+      if (!searchWorkspace) {
+        return res.status(404).json({ message: 'Nothing found.' });
+      }
+      res.status(200).json(searchWorkspace);
+    } catch (error) {
+       console.log(error);
+       next(error);
+    }
+};
+
 module.exports = {
   createProperty,
   getAllProperty,
   getAllPropertyByOwner,
   updateProperty,
   deleteProperty,
+  searchProperty,
+  searchWorkspace,
 };

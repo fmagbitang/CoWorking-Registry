@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Op } = require('sequelize');
 const dbConfig = require('../config/dbConfig');
 
 // Connect to the SQLite database
