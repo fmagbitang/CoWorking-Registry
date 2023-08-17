@@ -280,7 +280,7 @@
         //Input all info here
         name: editWorkspaceData.get('name'),
         capacity: editWorkspaceData.get('capacity'),
-        photos: editWorkspaceData.get('image') ? `/img/${imageFile.name}` : null,
+        photos: imageFile == "/img/" ? `img/coworking.jpg` :`/img/${imageFile.name}`,
         property_id: editWorkspaceData.get('edit_WorkspacePropertyID'),
         description: editWorkspaceData.get('description'),
         lease_term: editWorkspaceData.get('lease_term'),

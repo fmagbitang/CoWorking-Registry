@@ -316,9 +316,6 @@
                         <button class="btn btn-primary btn-sm float-end addWorkSpace" data-bs-toggle="modal" data-bs-target="#addWorkspace" data-property-id="${data.id}">Add WorkSpace</button>
                     </div>
                     <div>
-                        This is my Property ID :${data.id} <br>
-                    </div>
-                    <div>
     <button class="btn btn-primary btn-sm float-end editProperty" data-bs-toggle="modal" data-bs-target="#editProperty" edit_property_id=${data.id}>Edit Property</button>
     </div>
     <div>
@@ -326,7 +323,8 @@
 </div>
 <div style="display:none" id="refreshdiv">
                 </div>`;
-
+            
+                console.log(data);
             cardElement.innerHTML = cardContent;
             cardContainer.appendChild(cardElement);
         };
@@ -394,7 +392,7 @@
                 transportation: convertCheckBox(propertiesFormData.get('transpo')),
                 name: propertiesFormData.get('name'),
                 capacity: propertiesFormData.get('capacity'),
-                photos: imageFile ? `/img/${imageFile.name}` : null,
+                photos: imageFile == "/img/" ? `img/coworking.jpg` :`/img/${imageFile.name}`,
                 description: propertiesFormData.get('description'),
                 lease_term: propertiesFormData.get('lease_term'),
                 price: propertiesFormData.get('price')
@@ -611,7 +609,7 @@
             const requestBody = JSON.stringify({
                 name: workspaceFormData.get('name'),
                 capacity: workspaceFormData.get('capacity'),
-                photos: workspaceFormData.get('image') ? `/img/${imageFile.name}` : null,
+                photos: imageFile == "/img/" ? `img/coworking.jpg` :`/img/${imageFile.name}`,
                 property_id: workspaceFormData.get('propertyID'),
                 description: workspaceFormData.get('description'),
                 lease_term: workspaceFormData.get('lease_term'),

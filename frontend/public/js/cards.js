@@ -3,7 +3,7 @@
 const cardContainer = document.getElementById('cardContainer');
 
 const createCard = (data, search) => {
-    var wpName, wpDescription, wpAvailability, wpUserID, wpRatings, wpID, wpPropertyID, pAddress;
+    var wpName, wpDescription, wpAvailability, wpUserID, wpRatings, wpID, wpPropertyID, pAddress , wpPhotos;
 
     if (search == 1) {
         wpName = data.Workspace.name;
@@ -14,6 +14,7 @@ const createCard = (data, search) => {
         wpUserID = data.Workspace.user_id;
         wpID = data.Workspace.id;
         pAddress = data.Property.address;
+        wpPhotos = data.Workspace.photos;
     } else {
 
         wpName = data.name;
@@ -23,7 +24,8 @@ const createCard = (data, search) => {
         wpPropertyID = data.property_id;
         wpUserID = data.user_id;
         wpID = data.id;
-        pAddress = data.Property.address;
+        pAddress = data.Property.address; 
+        wpPhotos = data.photos;
     }
     const cardElement = document.createElement('div');
     cardElement.className = 'col';
@@ -40,7 +42,7 @@ const createCard = (data, search) => {
     const cardContent =
         `
     <div class="card">
-    <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
+    <img src="${wpPhotos == "/img/" || wpPhotos == "" ? `/img/coworking.jpg` : wpPhotos}" alt="Property image" class="card-img-top" id="workspaceImage"">
     <div class="card-body">
         <h2 class="card-title">${wpName}</h2>
         <span class="card-subtitle">${pAddress === undefined ? 'No Address Provided' : `${pAddress}`}</span>
@@ -51,13 +53,12 @@ const createCard = (data, search) => {
         <div class="card-text">
             ${wpDescription === undefined ? 'No Description Provided' : `${wpDescription}`}
         </div>
+        <div class="card-text">
+            Price: $ ${data.price} <br>
+            Lease Term: ${data.lease_term === null ? 'No Term Chosen' : `${data.lease_term}`}
+        </div>
         <div class="card-text" style= "padding-top: 5px">
             <p class="availability">${wpAvailability ? 'Available' : 'Not Available'}</p>
-        </div>
-        <div class=""card-text">
-            This is my Property ID: ${wpPropertyID} <br>
-            This is the User ID: ${wpUserID} <br>
-            This is the Workspace ID: ${wpID}
         </div>
     </div>
     <div>
@@ -96,6 +97,7 @@ searchButton.addEventListener('click', async () => {
 fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata => {
+        // console.log(workspacedata.Workspace.photos);
         console.log(workspacedata);
         //  sort data
         const sortAndDisplayCards = (sortBy) => {
@@ -155,7 +157,7 @@ const createModal = (data) => {
                     <button class="btn-close" data-bs-dismiss="modal" data-bs-target="#${data.Workspace.id}modal"></button>
                 </div>
                 <div class="modal-body">
-                <img src="${data.Workspace.photos !== null ? `/img/coworking.jpg` : data.Workspace.photos}" alt="Image" style="display: block; margin: 0 auto;">
+                <img src="${data.Workspace.photos == "/img/" || data.Workspace.photos == "" ? `/img/coworking.jpg` : data.Workspace.photos}" alt="Image" style="display: block; margin: 0 auto;">
 
                     <hr>
 
@@ -166,7 +168,7 @@ const createModal = (data) => {
                     </div>
                     <div class="card-text">Squarefoot: ${data.Property.squarefoot} <br>Parking: ${parseBool(data.Property.parking)} <br> Smoking:${parseBool(data.Property.smoking)} <br> Public Transportation Accessible: ${parseBool(data.Property.transportation)} 
                     </div>
-                    <div class="card-text">Price: ${data.price} <br>Lease Term: ${data.lease_term}
+                    <div class="card-text">Price: $ ${data.price} <br>Lease Term: ${data.lease_term}
                     <br> Lease Id : ${data.id}
                     </div>
                     <div style="padding-top: 5px">
@@ -200,6 +202,7 @@ fetch("http://143.198.237.154/api/allworkspace/")
     .then(response => response.json())
     .then(workspacedata1 => {
         // Loop through the data and create card
+        // console.log(workspacedata1.Workspace.photos);
         workspacedata1.forEach(workspaceItem1 => {
             createModal(workspaceItem1);
         });
