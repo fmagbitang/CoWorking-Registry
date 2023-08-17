@@ -40,18 +40,18 @@
     </div>
     <!-- <script src="/js/cards.js"></script> -->
     <script>
-    
-//SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
-const cardContainer = document.getElementById('cardContainer');
 
-const createCard = (data) => {
-    const cardElement = document.createElement('div');
-    cardElement.className = 'col';
-    cardElement.setAttribute('data-bs-toggle', 'modal');
-    cardElement.setAttribute('data-bs-target', `#${data.Workspace.id}modal`);
+      //SELECTING ALL VALID WORKSPACE THAT HAS A PROPERTY_ID KEY
+      const cardContainer = document.getElementById('cardContainer');
 
-    const cardContent =
-        `<div class="card">
+      const createCard = (data) => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'col';
+        cardElement.setAttribute('data-bs-toggle', 'modal');
+        cardElement.setAttribute('data-bs-target', `#${data.Workspace.id}modal`);
+
+        const cardContent =
+          `<div class="card">
     <img src="/img/coworking.jpg" alt="Property image" class="card-img-top" id="workspaceImage"">
     <div class="card-body">
         <h2 class="card-title">${data.Workspace.name}</h2>
@@ -65,7 +65,7 @@ const createCard = (data) => {
         </div>
         <div class="card-text">
             Price: $ ${data.price} <br>
-            Lease Term: ${data.lease_term === null ? 'No Term Chosen': `${data.lease_term}`}
+            Lease Term: ${data.lease_term === null ? 'No Term Chosen' : `${data.lease_term}`}
         </div>
         <div class="card-text" style= "padding-top: 5px">
             <p class="availability">${data.Workspace.availability ? 'Available' : 'Not Available'}</p>
@@ -76,48 +76,47 @@ const createCard = (data) => {
             This is the Workspace ID: ${data.Workspace.id}
         </div>
     </div>`;
-    console.log(`The Availability is ${data.Workspace.availability}`);
-    cardElement.innerHTML = cardContent;
-    cardContainer.appendChild(cardElement);
-    updateAvailabilityColor();
-};
+        console.log(`The Availability is ${data.Workspace.availability}`);
+        cardElement.innerHTML = cardContent;
+        cardContainer.appendChild(cardElement);
+        updateAvailabilityColor();
+      };
 
-const userId = localStorage.getItem('userID');
+      const userId = localStorage.getItem('userID');
 
-// Fetch data from the API server
-fetch("http://143.198.237.154/api/allworkspace/")
-    .then(response => response.json())
-    .then(workspacedata => {
-        // Loop through the data and create cards
-        workspacedata.forEach(workspaceItem => {
+      // Fetch data from the API server
+      fetch("http://143.198.237.154/api/allworkspace/")
+        .then(response => response.json())
+        .then(workspacedata => {
+          // Loop through the data and create cards
+          workspacedata.forEach(workspaceItem => {
             const path = window.location.pathname;
             const role = localStorage.getItem('role');
             if (path == '/workspace' && role == 'owner') {
-                if (userId == workspaceItem.Workspace.user_id) {
-                    createCard(workspaceItem);
-                } 
-            }
-            else if(path == '/myBookings' && role == 'coworker' || role == 'user')
-            {   
-                if(userId == workspaceItem.user_id){
-                 createCard(workspaceItem);
-                }
-            } else {
+              if (userId == workspaceItem.Workspace.user_id) {
                 createCard(workspaceItem);
+              }
+            }
+            else if (path == '/myBookings' && role == 'coworker' || role == 'user') {
+              if (userId == workspaceItem.user_id) {
+                createCard(workspaceItem);
+              }
+            } else {
+              createCard(workspaceItem);
             }
 
-        });
-    })
-    .catch(error => console.error('Error fetching data', error));
-//SELECTING ALL VALID WORKSPACE FOR MODEL
+          });
+        })
+        .catch(error => console.error('Error fetching data', error));
+      //SELECTING ALL VALID WORKSPACE FOR MODEL
 
-const propertyModal = document.getElementById('property-modals');
+      const propertyModal = document.getElementById('property-modals');
 
-const createModal = (data) => {
-    const modalElement = document.createElement('div');
-    modalElement.className = "container";
+      const createModal = (data) => {
+        const modalElement = document.createElement('div');
+        modalElement.className = "container";
 
-    const modalContent = `
+        const modalContent = `
 <div class="modal fade" id="${data.Workspace.id}modal">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -136,7 +135,7 @@ const createModal = (data) => {
                     </div>
                     <div class="card-text">Squarefoot: ${data.Property.squarefoot} <br>Parking: ${parseBool(data.Property.parking)} <br> Smoking:${parseBool(data.Property.smoking)} <br> Public Transportation Accessible: ${parseBool(data.Property.transportation)} 
                     </div>
-                    <div class="card-text">Price:$ ${data.price} <br> Lease Term: ${data.lease_term === null ? 'No Term Chosen': `${data.lease_term}`}
+                    <div class="card-text">Price:$ ${data.price} <br> Lease Term: ${data.lease_term === null ? 'No Term Chosen' : `${data.lease_term}`}
                     <br> Lease Id : ${data.id}
                     </div>
                     <div style="padding-top: 5px">
@@ -160,44 +159,44 @@ const createModal = (data) => {
         </div>
     </div>`;
 
-    modalElement.innerHTML = modalContent;
-    propertyModal.appendChild(modalElement);
-    updateAvailabilityColor();
-};
+        modalElement.innerHTML = modalContent;
+        propertyModal.appendChild(modalElement);
+        updateAvailabilityColor();
+      };
 
-// Fetch data from the API server
-fetch("http://143.198.237.154/api/allworkspace/")
-    .then(response => response.json())
-    .then(workspacedata1 => {
-        // Loop through the data and create card
-        workspacedata1.forEach(workspaceItem1 => {
+      // Fetch data from the API server
+      fetch("http://143.198.237.154/api/allworkspace/")
+        .then(response => response.json())
+        .then(workspacedata1 => {
+          // Loop through the data and create card
+          workspacedata1.forEach(workspaceItem1 => {
             createModal(workspaceItem1);
-        });
-    })
-    .catch(error => console.error('Error fetching data', error));
+          });
+        })
+        .catch(error => console.error('Error fetching data', error));
 
-const parseBool = (a) => {
-    return a ? "Yes" : "No";
-};
+      const parseBool = (a) => {
+        return a ? "Yes" : "No";
+      };
 
 
-// Function to change availability text color
-function updateAvailabilityColor() {
-    // Get all elements with the availability class
-    var availabilityElements = document.querySelectorAll('.availability');
+      // Function to change availability text color
+      function updateAvailabilityColor() {
+        // Get all elements with the availability class
+        var availabilityElements = document.querySelectorAll('.availability');
 
-    // Loop through each element
-    availabilityElements.forEach(function (element) {
-        // Check if availability is "Available"
-        if (element.textContent.trim() === 'Available') {
+        // Loop through each element
+        availabilityElements.forEach(function (element) {
+          // Check if availability is "Available"
+          if (element.textContent.trim() === 'Available') {
             // Set font color to green
             element.style.color = 'green';
-        } else {
+          } else {
             // Set font color to red
             element.style.color = 'red';
-        }
-    });
-}
+          }
+        });
+      }
     </script>
   </main>
 </body>

@@ -26,12 +26,12 @@ router.get('/', (req, res) => {
 });
 
 //Route for the create properties fot the owner
-router.get('/properties', (req,res) => {
+router.get('/properties', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/propeties.html'));
 });
 
 //Route for the create workspace fot the owner
-router.get('/workspace', (req,res) => {
+router.get('/workspace', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/workspace.html'));
 });
 
@@ -40,11 +40,11 @@ router.get('/workspace', (req,res) => {
 // });
 
 router.get('/myProperties', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/myProperties.html'))
+  res.sendFile(path.join(__dirname, '../public/myProperties.html'));
 });
 
 router.get('/myBookings', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/myBookings.html'))
+  res.sendFile(path.join(__dirname, '../public/myBookings.html'));
 });
 
 module.exports = router;
