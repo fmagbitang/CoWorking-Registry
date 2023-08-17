@@ -42,7 +42,7 @@ const createCard = (data, search) => {
     const cardContent =
         `
     <div class="card">
-    <img src="${wpPhotos == "/img/" || wpPhotos == "" ? `/img/coworking.jpg` : wpPhotos}" alt="Property image" class="card-img-top" id="workspaceImage"">
+    <img src="${wpPhotos == "/img/" || wpPhotos == "" ? `/img/coworking.jpg` : wpPhotos}" alt="Property image" class="card-img-top" id="workspaceImage" style="width:300px; height:200px;">
     <div class="card-body">
         <h2 class="card-title">${wpName}</h2>
         <span class="card-subtitle">${pAddress === undefined ? 'No Address Provided' : `${pAddress}`}</span>
