@@ -60,6 +60,9 @@ const createCard = (data, search) => {
         <div class="card-text" style= "padding-top: 5px">
             <p class="availability">${wpAvailability ? 'Available' : 'Not Available'}</p>
         </div>
+        <div class="card-text" style= "padding-top: 5px">
+            <p >Workspace ID: ${wpID}</p>
+        </div>
     </div>
     <div>
         ${editButtonHtml}
