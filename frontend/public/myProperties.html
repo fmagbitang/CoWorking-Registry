@@ -299,8 +299,30 @@
                         <div class="card-text">Squarefoot: ${data.squarefoot} <br>Parking: ${parseBool(data.parking)} <br> Smoking:${parseBool(data.smoking)} <br> Public Transportation Accessible: ${parseBool(data.transportation)} </div>
                         
                     </div>
-                    <div>
-    <button class="btn btn-primary btn-sm float-end editProperty" data-bs-toggle="modal" data-bs-target="#editProperty" edit_property_id=${data.id}>Edit Property</button>
+                    <div style="color:#777; font-size:1rem;">&nbsp;&nbsp;
+                        This is my Property ID :${data.id} <br>
+                    </div>
+
+                    <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm w-100 mb-2 addWorkSpace"
+                    data-bs-toggle="modal" data-bs-target="#addWorkspace" data-property-id="${data.id}">
+                Add WorkSpace
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm w-100 mb-2 editProperty"
+                    data-bs-toggle="modal" data-bs-target="#editProperty" edit_property_id="${data.id}">
+                Edit Property
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm w-100 mb-2 deleteProperty"
+                    data-bs-toggle="modal" data-bs-target="#deleteProperty" delete_property_id="${data.id}">
+                Delete Property
+            </button>
+        </div>
     </div>
 </div>
 
@@ -308,13 +330,12 @@
 <div style="display:none" id="refreshdiv">
                 </div>`;
 
-            console.log(data);
             cardElement.innerHTML = cardContent;
             cardContainer.appendChild(cardElement);
         };
 
         // Fetch data from the API server
-        fetch(`http://localhost:3000/api/myproperty/${userID}`, {
+        fetch(`http://143.198.237.154/api/myproperty/${userID}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -376,7 +397,7 @@
                 transportation: convertCheckBox(propertiesFormData.get('transpo')),
                 name: propertiesFormData.get('name'),
                 capacity: propertiesFormData.get('capacity'),
-                photos: imageFile == "/img/" ? `img/coworking.jpg` : `/img/${imageFile.name}`,
+                photos: imageFile ? `/img/${imageFile.name}` : null,
                 description: propertiesFormData.get('description'),
                 lease_term: propertiesFormData.get('lease_term'),
                 price: propertiesFormData.get('price')
@@ -391,7 +412,7 @@
             };
 
             try {
-                const responseAP = await fetch('http://localhost:3000/api/property/create', requestOptionsPr);
+                const responseAP = await fetch('http://143.198.237.154/api/property/create', requestOptionsPr);
                 const resultsAP = await responseAP.text();
 
                 if (responseAP.ok) {
@@ -410,7 +431,6 @@
         if (!token) {
             alert('Please Login to an Account');
             window.location.href = '/';
-            localStorage.clear();
         } else {
             const propertyForm = document.getElementById('createProperty');
             propertyForm.addEventListener('submit', handleCreateProperties);
@@ -492,7 +512,7 @@
             };
 
             try {
-                const responseUP = await fetch(`http://localhost:3000/api/property/update/${editPropertyData.get('edit_propertyID')}`, requestOptionsUP);
+                const responseUP = await fetch(`http://143.198.237.154/api/property/update/${editPropertyData.get('edit_propertyID')}`, requestOptionsUP);
                 const resultsUP = await responseUP.text();
 
                 if (responseUP.ok) {
@@ -528,7 +548,7 @@
 
             ////PUT CODE HERE
             try {
-                const responseDP = await fetch(`http://localhost:3000/api/property/delete/${proprtyID}`, requestOptionsDP);
+                const responseDP = await fetch(`http://143.198.237.154/api/property/delete/${proprtyID}`, requestOptionsDP);
                 const resultsDP = await responseDP.text();
 
                 if (responseDP.ok) {
@@ -549,7 +569,6 @@
         if (!token2) {
             alert('Please Login to an Account');
             window.location.href = '/';
-            localStorage.clear();
         } else {
             const editPropertyForm = document.getElementById('editMyProperty');
             editPropertyForm.addEventListener('submit', editProperty);
@@ -595,7 +614,7 @@
             const requestBody = JSON.stringify({
                 name: workspaceFormData.get('name'),
                 capacity: workspaceFormData.get('capacity'),
-                photos: imageFile == "/img/" ? `img/coworking.jpg` : `/img/${imageFile.name}`,
+                photos: workspaceFormData.get('image') ? `/img/${imageFile.name}` : null,
                 property_id: workspaceFormData.get('propertyID'),
                 description: workspaceFormData.get('description'),
                 lease_term: workspaceFormData.get('lease_term'),
@@ -612,7 +631,7 @@
             };
 
             try {
-                const responseAW = await fetch('http://localhost:3000/api/workspace/create', requestOptionsAW);
+                const responseAW = await fetch('http://143.198.237.154/api/workspace/create', requestOptionsAW);
                 const resultsAW = await responseAW.text();
 
                 if (responseAW.ok) {
@@ -630,7 +649,6 @@
         if (!token1) {
             alert('Please Login to an Account');
             window.location.href = '/';
-            localStorage.clear();
         } else {
             const workspaceForm = document.getElementById('createWorkspace');
             workspaceForm.addEventListener('submit', handleCreateWorkspace);

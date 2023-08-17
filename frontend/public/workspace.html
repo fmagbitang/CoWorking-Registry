@@ -16,16 +16,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Include Link for rating Star Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- CSS Style 
+  <link rel="stylesheet" href="styles.css">-->
+
 </head>
-
-
 
 <body>
 
   <div id="navbarContent"></div>
   <!-- script for navbar include -->
   <script src="/js/navbar.js"></script>
-
 
 
   <header>
@@ -39,10 +39,11 @@
     <input type="text" id="searchInput" placeholder="Search...">
     <button id="searchButton">Search</button>
     <!-- sort section -->
-    <select id="sortSelect">
+    <select id="sortSelect" class="searchContainer">
       <option value="nameAsc">Ascending</option>
       <option value="nameDesc">Descending</option>
     </select>
+    
     <!-- Cards Landing Page Structre -->
     <div class="container">
       <div class="row row-cols-4 gy-4" id="cardContainer">
@@ -102,11 +103,6 @@
                       required></textarea>
                     <label for="description" class="form-label">Short Description</label>
                     <div class="invalid-feedback">Please enter a short description</div>
-                  </div>
-                  <br>
-                  <div>
-                      <label for="image" class="form-label">Please Upload an image of the workspace</label>
-                      <input type="file" name="image" id="image" class="form-control" accept="Image/*">
                   </div>
                   <br>
                   <button type="submit" class="btn btn-primary btn-sm float-end editWorkspace">Edit
@@ -175,7 +171,7 @@
       };
 
       try {
-        const response = await fetch('http://localhost:3000/api/lease/book', requestOptions);
+        const response = await fetch('http://143.198.237.154/api/lease/book', requestOptions);
         const results = await response.text();
         console.log(results);
 
@@ -201,7 +197,6 @@
         if (!token2) {
           alert('Please Login to an Account');
           window.location.href = '/';
-          localStorage.clear();
         } else {
           console.log("I am currently booking");
           const propertyId = target.getAttribute('data-property-id');
@@ -308,7 +303,7 @@
       };
 
       try {
-        const responseUW = await fetch(`http://localhost:3000/api/workspace/update/${editWorkspaceData.get('edit_WorkspaceID')}`, requestOptionsUW);
+        const responseUW = await fetch(`http://143.198.237.154/api/workspace/update/${editWorkspaceData.get('edit_WorkspaceID')}`, requestOptionsUW);
         const resultsUW = await responseUW.text();
 
         if (responseUW.ok) {
@@ -343,7 +338,7 @@
 
       ////PUT CODE HERE
       try {
-        const responseDW = await fetch(`http://localhost:3000/api/workspace/delete/${workspace}`, requestOptionsDW);
+        const responseDW = await fetch(`http://143.198.237.154/api/workspace/delete/${workspace}`, requestOptionsDW);
         const resultsDW = await responseDW.text();
 
         if (responseDW.ok) {
@@ -363,7 +358,6 @@
     if (!token2) {
       alert('Please Login to an Account');
       window.location.href = '/';
-      localStorage.clear();
     } else {
       const editWorkspaceForm = document.getElementById('editMyWorkspace');
       editWorkspaceForm.addEventListener('submit', editWorkspace);

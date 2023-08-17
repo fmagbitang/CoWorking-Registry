@@ -14,7 +14,7 @@ fetch('/navbar.html')
                 return;
             }
             try {
-                const responseProfile = await fetch('http://localhost:3000/api/verify', {
+                const responseProfile = await fetch('http://143.198.237.154/api/verify', {
                     method: 'GET',
                     headers: {
                         'Authorization': tokenProfile
@@ -59,7 +59,7 @@ fetch('/navbar.html')
                 redirect: 'follow'
             };
 
-            const response = await fetch("http://localhost:3000/api/logout", requestOptionsLO);
+            const response = await fetch("http://143.198.237.154/api/logout", requestOptionsLO);
 
             try {
                 if (response.ok) {
@@ -94,7 +94,7 @@ fetch('/navbar.html')
         }
 
         // fetch data for role Owner and User
-        fetch('http://localhost:3000/api/verify', {
+        fetch('http://143.198.237.154/api/verify', {
             method: 'GET',
             headers: {
                 'Authorization': `${tokenNav}`
