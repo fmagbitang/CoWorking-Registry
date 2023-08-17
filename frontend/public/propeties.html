@@ -18,17 +18,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        #create-property-container{
+        #create-property-container {
             border: .5px solid black;
             padding: 60px;
             margin: 40px;
             width: 800px;
-            position:relative;
+            position: relative;
             display: block;
             margin: 15px auto;
         }
 
-        .addWorkSpace{
+        .addWorkSpace {
             position: absolute;
             top: 20px;
             right: 10px;
@@ -52,7 +52,7 @@
 
     <main>
         <!-- Display all current Properties Structure -->
-        <div class="container" >
+        <div class="container">
             <h1>Property Listings</h1>
             <div class="row row-cols-3 gy-4" id="property-listings">
             </div>
@@ -69,46 +69,46 @@
     </footer>
 
 
-<!-- SCRIPT FOR CREATING A NEW WORKSPACE BASED ON THE EXISTING PROPERTY ID -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const addWorkSpaceButtons = document.querySelectorAll('.addWorkSpace');
-    
-        addWorkSpaceButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            const propertyId = this.getAttribute('data-property-id');
-            const propertyIdInput = document.getElementById('property-id');
-            propertyIdInput.value = propertyId;
+    <!-- SCRIPT FOR CREATING A NEW WORKSPACE BASED ON THE EXISTING PROPERTY ID -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addWorkSpaceButtons = document.querySelectorAll('.addWorkSpace');
+
+            addWorkSpaceButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const propertyId = this.getAttribute('data-property-id');
+                    const propertyIdInput = document.getElementById('property-id');
+                    propertyIdInput.value = propertyId;
+                });
+            });
         });
+    </script>
+
+
+    <!-- Handle Errors in Forms -->
+    <script>
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                }
+                form.classList.add('was-validated');
+            });
         });
-    });
-</script>
+    </script>
 
+    <!-- SCRIPT TO GET OWNERS PROPERTIES AND DISPLAY ON THE APP -->
+    <script>
+        const cardContainer = document.getElementById('property-listings');
 
-<!-- Handle Errors in Forms -->
-<script>
-    const forms = document.querySelectorAll("form");
+        const createCard = (data) => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'col';
 
-    forms.forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-                event.preventDefault();
-            }
-            form.classList.add('was-validated');
-        });
-    });
-</script>
-
-<!-- SCRIPT TO GET OWNERS PROPERTIES AND DISPLAY ON THE APP -->
-<script>
-    const cardContainer = document.getElementById('property-listings');
-
-    const createCard = (data) => {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'col';
-
-        const cardContent =
-            `<div class="card">
+            const cardContent =
+                `<div class="card">
                     <img src="/img/coworking.jpg" alt="Property Image" class="card-img-top">
                     <div class="card-body">
                         <h2 class="card-title">${data.address}</h2>
@@ -120,26 +120,27 @@
                     </div>
                 </div>`;
 
-        cardElement.innerHTML = cardContent;
-        cardContainer.appendChild(cardElement);
-    };
+            cardElement.innerHTML = cardContent;
+            cardContainer.appendChild(cardElement);
+        };
 
-    // Fetch data from the API server
-    fetch('http://143.198.237.154/api/property/')
-        .then(response => response.json())
-        .then(data => {
-            // Loop through the data and create cards
-            data.forEach(item => {
-                createCard(item);
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
+        // Fetch data from the API server
+        fetch('http://143.198.237.154/api/property/')
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the data and create cards
+                data.forEach(item => {
+                    createCard(item);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
 
-    const parseBool = (a) => {
-        return a ? "Yes" : "No";
-    }
+        const parseBool = (a) => {
+            return a ? "Yes" : "No";
+        }
 
-</script>
+    </script>
 
 </body>
+
 </html>

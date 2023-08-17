@@ -45,34 +45,34 @@ const handleFormSubmit = async (event) => {
                     console.log(body);
                     const bodyParse = JSON.parse(body);
                     const message = bodyParse.message;
-                    console.log(message)
-                    if(message === "jwt expired"){
+                    console.log(message);
+                    if (message === "jwt expired") {
                         localStorage.clear();
-                    }else{
-                    const role = bodyParse.role;
-                    const userID = bodyParse.userId;
-                    localStorage.setItem('role', role);
-                    localStorage.setItem('userID', userID);
-                    const logen = document.getElementById("logen");
-                    const signep = document.getElementById("signep");
-                    logen.style.display = 'none';
-                    signep.style.display = 'none';
-                    console.log(role === 'owner');
-                    if (role === 'owner') {
-                        const bookings = document.getElementById("bookings");
-                        bookings.style.display = 'none';
                     } else {
-                        const proper = document.getElementById("proper");
-                        proper.style.display = 'none';
-                        const myproper = document.getElementById("myProper");
-                        myproper.style.display = 'none';
-                        const worksp = document.getElementById("worksp");
-                        worksp.innerHTML = "Workspaces";
-                    } 
-                    // Redirect the user to the desired page
-                    console.log('redirecting to /workspace now');
-                    window.location.href = '/workspace'; // Change to your desired URL
-                }
+                        const role = bodyParse.role;
+                        const userID = bodyParse.userId;
+                        localStorage.setItem('role', role);
+                        localStorage.setItem('userID', userID);
+                        const logen = document.getElementById("logen");
+                        const signep = document.getElementById("signep");
+                        logen.style.display = 'none';
+                        signep.style.display = 'none';
+                        console.log(role === 'owner');
+                        if (role === 'owner') {
+                            const bookings = document.getElementById("bookings");
+                            bookings.style.display = 'none';
+                        } else {
+                            const proper = document.getElementById("proper");
+                            proper.style.display = 'none';
+                            const myproper = document.getElementById("myProper");
+                            myproper.style.display = 'none';
+                            const worksp = document.getElementById("worksp");
+                            worksp.innerHTML = "Workspaces";
+                        }
+                        // Redirect the user to the desired page
+                        console.log('redirecting to /workspace now');
+                        window.location.href = '/workspace'; // Change to your desired URL
+                    }
                 })
                 .catch(error => console.error('error: ', error));
         } else {

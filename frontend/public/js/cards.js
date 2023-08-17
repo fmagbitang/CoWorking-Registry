@@ -4,7 +4,7 @@ const cardContainer = document.getElementById('cardContainer');
 
 const createCard = (data, search) => {
     var wpName, wpDescription, wpAvailability, wpUserID, wpRatings, wpID, wpPropertyID, pAddress;
-    
+
     if (search == 1) {
         wpName = data.Workspace.name;
         wpRatings = data.Workspace.ratings;
@@ -101,11 +101,11 @@ fetch("http://143.198.237.154/api/allworkspace/")
         const sortAndDisplayCards = (sortBy) => {
             // Sort the cardData array based on the selected sorting option
             if (sortBy === 'nameAsc') {
-                workspacedata.sort((a, b) =>  a.id - b.id);
+                workspacedata.sort((a, b) => a.id - b.id);
             } else if (sortBy === 'nameDesc') {
                 workspacedata.sort((a, b) => b.id - a.id);
             }
-        
+
             // Clear the existing card container
             cardContainer.innerHTML = '';
             // Re-create and display cards in the updated order
@@ -127,10 +127,9 @@ fetch("http://143.198.237.154/api/allworkspace/")
                 if (userId == workspaceItem.Workspace.user_id) {
                     createCard(workspaceItem, 1);
                 }
-            } else if(path == '/myBookings' && role == 'coworker' || role == 'user')
-            {   
-                if(userId == workspaceItem.user_id){
-                 createCard(workspaceItem);
+            } else if (path == '/myBookings' && role == 'coworker' || role == 'user') {
+                if (userId == workspaceItem.user_id) {
+                    createCard(workspaceItem);
                 }
             } else {
                 createCard(workspaceItem, 1);
@@ -145,6 +144,7 @@ const propertyModal = document.getElementById('property-modals');
 const createModal = (data) => {
     const modalElement = document.createElement('div');
     modalElement.className = "container";
+    const role = localStorage.getItem('role');
 
     const modalContent = `
 <div class="modal fade" id="${data.Workspace.id}modal">
@@ -182,9 +182,10 @@ const createModal = (data) => {
                     </div>
                 </div>
                 <div class="modal-footer">
-                ${data.Workspace.availability ? 
-                    `<button class="btn btn-primary book-workspace" data-workspace-id="${data.Workspace.id}" data-property-id="${parseInt(data.Workspace.property_id)}">Book</button>` : 
-                    `<button class="btn btn-danger">Rented</button>`}
+                ${role === 'owner' ? '' :
+            data.Workspace.availability ?
+                `<button class="btn btn-primary book-workspace" data-workspace-id="${data.Workspace.id}" data-property-id="${parseInt(data.Workspace.property_id)}">Book</button>` :
+                `<button class="btn btn-danger">Rented</button>`}
                 </div>
             </div>
         </div>
