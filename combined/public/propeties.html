@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Card with Login Modal and Navigation Bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include Link for rating Star Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        #create-property-container {
+        max-width: 400px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        }
+
+        .addWorkSpace {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="navbarContent"></div>
+    <!-- script for navbar include -->
+    <script src="/js/navbar.js"></script>
+
+    <header>
+        <div class="container">
+            <h1 class="text-center">Workspace for Everyone</h1>
+        </div>
+    </header>
+
+    <main>
+        <!-- Display all current Properties Structure -->
+        <div class="container">
+            <h1 style="text-align: center; margin-top: 50px;">Property Listings</h1>
+            <div class="row row-cols-3 gy-4" id="property-listings">
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer bg-dark text-light py-2" style="margin-top: 50px;">
+
+        <div class="container text-center">
+            <p>&copy; Co-working Registry. All rights reserved.</p>
+        </div>
+
+    </footer>
+
+
+    <!-- SCRIPT FOR CREATING A NEW WORKSPACE BASED ON THE EXISTING PROPERTY ID -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addWorkSpaceButtons = document.querySelectorAll('.addWorkSpace');
+
+            addWorkSpaceButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const propertyId = this.getAttribute('data-property-id');
+                    const propertyIdInput = document.getElementById('property-id');
+                    propertyIdInput.value = propertyId;
+                });
+            });
+        });
+    </script>
+
+
+    <!-- Handle Errors in Forms -->
+    <script>
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+    </script>
+
+    <!-- SCRIPT TO GET OWNERS PROPERTIES AND DISPLAY ON THE APP -->
+    <script>
+        const cardContainer = document.getElementById('property-listings');
+
+        const createCard = (data) => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'col';
+
+            const cardContent =
+                `<div class="card" style="width:370px; padding:10px;">
+                    <img src="/img/coworking.jpg" alt="Property Image" class="card-img-top">
+                    <div class="card-body">
+                        <h2 style="color:#777; font-size:1.2rem;" class="card-title">${data.address}</h2>
+                        <span class="card-subtitle">${data.neighborhood} \</span>
+                        <div class="card-text">Squarefoot: ${data.squarefoot} <br>Parking: ${parseBool(data.parking)} <br> Smoking:${parseBool(data.smoking)} <br> Public Transportation Accessible: ${parseBool(data.transportation)} </div>
+                    </div>
+                </div>`;
+
+            cardElement.innerHTML = cardContent;
+            cardContainer.appendChild(cardElement);
+        };
+
+        // Fetch data from the API server
+        fetch('/api/property/')
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the data and create cards
+                data.forEach(item => {
+                    createCard(item);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        const parseBool = (a) => {
+            return a ? "Yes" : "No";
+        }
+
+    </script>
+
+</body>
+
+</html>
