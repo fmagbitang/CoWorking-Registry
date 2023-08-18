@@ -1,15 +1,32 @@
 # CoWorking-Registry
+### We are excited to share our project, the coworking registry, with you. Please find a link to a recorded video walk-through showcasing the website’s functionality and design.
+
+### Link: https://bowvalley-my.sharepoint.com/:v:/g/personal/f_magbitang867_mybvc_ca/EXkm9MyLBUZEsUQnC2DBDK0Byu6x4rZUDL8DAnCXJnqy-g?e=vhDJ33
+
+### Team member:
+### Allegria, Mary Cris
+### Apellido, Joanna
+### Magbitang, Fairbanks
+### Surro, Jozel
+
+### Our project is divided into two folders. The first folder contains the backend side, which is written in NodeJS and uses SQLite as a database. The second folder contains the frontend side, which is a combination of NodeJS, HTML, CSS, and JS. Our aim is to create an API that can manipulate the data and send it to the frontend, which will display all the relevant details.
+
+### If you have any questions about our project, please don't hesitate to ask.
+
+### Thank you.
+
 ### CRUD (Create, Read, Update, Delete) for a User
 <details>
 <summary>Backend contents of `code`</summary>
 
 ## Project Structure
 ```css
-crud/
+CoWorking-Registry/
   ├── package.json
   ├── Dockerfile
   ├── docker-compose.yaml
   ├── createdb.js
+  ├── .env
   ├── coworking_registry.db
   ├── src/
   │    ├── app.js
@@ -21,6 +38,9 @@ crud/
   │    │    ├── workspaceController.js
   │    │    ├── leaseController.js
   │    │    ├── propertyController.js
+  │    ├── middleware/
+  │    │    ├── authenticateToken.js
+  │    │    ├── isOwner.js
   │    ├── models/
   │    │    ├── userModel.js
   │    │    ├── workspaceModel.js
@@ -28,6 +48,7 @@ crud/
   │    │    ├── propertyModel.js
   │    ├── config/
   │    │    ├── dbConfig.js
+  │    │    ├── mailerConfig.js
 ```
 
 ## API Endpoints
@@ -48,6 +69,9 @@ crud/
 | GET         | api/property/        | Get all workspace       |
 | POST        | api/lease/create     | Create a lease          |
 | GET         | api/lease/           | Get all lease           |
+| GET         | api/verify/          | verify logged in user   |
+| GET         |api/verify_email/email| verify email            |
+| POST        | api/forgot_password  | forgot password of user |
 
 
 **1. Signup a User**
@@ -447,13 +471,49 @@ crud/
 ]
 ```
 
+
+Route: /api/verify
+ - expected results will be. This will ensure the user are still logged in.
+```json	{
+    "message": "User is still logged in.",
+    "data": {
+        "userId": 1,
+        "UserOrEmail": "gjedoe",
+        "role": "coworker",
+        "fname": "Anna",
+        "lname": "Doe",
+        "mobile": "777888999",
+        "iat": 1691731587,
+        "exp": 1691749587
+    },
+    "loggedIn": true
+}
+```
+Route: /api/verify_email/email
+ - response will be the user detail.
+```json {
+    "id": 1,
+    "fname": "Anna",
+    "lname": "Doe",
+    "email": "e777c888h999o@gmail.com",
+    "email_verification": true,
+    "username": "gjedoe",
+    "mobile": "777888999",
+    "role": "coworker",
+    "password": "$2b$10$4OTIpvxUYf4TRnJn/uMtqeXqrgDFZcfdTsKkbJA9MxOA4GmGLOJFK",
+    "created_at": "2023-08-11T05:10:17.141Z",
+    "updated_at": "2023-08-11T05:10:17.141Z"
+}
+```
+
+Route: /api/forgot_password
+- server response
+```json
+{
+    "message": "Password successfully changes."
+}
+```
 </details>
 
 <details>
 
-<summary>Frontend contents of `code`</summary>
-
-```
-SAMPLE CODE!
-```
-</details>
