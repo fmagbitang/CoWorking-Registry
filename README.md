@@ -4,7 +4,7 @@
 ### Link: https://bowvalley-my.sharepoint.com/:v:/g/personal/f_magbitang867_mybvc_ca/EXkm9MyLBUZEsUQnC2DBDK0Byu6x4rZUDL8DAnCXJnqy-g?e=vhDJ33
 
 ### Team member:
-### Allegria, Mary Cris
+### Alegria, Mary Cris
 ### Apellido, Joanna
 ### Magbitang, Fairbanks
 ### Surro, Jozel
